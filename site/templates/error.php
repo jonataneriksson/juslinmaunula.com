@@ -73,6 +73,6 @@ footer {
 		c0-0.7-0.5-1.7-0.7-2.1H392.9z"/>
 <rect x="146.2" y="15.5" width="34.9" height="0.7"/>
 </svg>
-<footer>Opens during the Paris Fashion Week Sep 29th &#8211; Oct 6th 2015</footer>
+<footer>Opens during the Paris Fashion Week Sep 29th &#8211; Oct 6th 2015. The page could not be found.</footer>
 </body>
 </html>

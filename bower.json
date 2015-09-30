@@ -1,0 +1,33 @@
+{
+  "name": "santtumustonen.com",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular-picture": "*",
+	"angular-animate": "*",
+	"angular-ui-router": "*", 
+	"normalize.css": "*",
+    "angular": "*",
+    "bourbon": "*",
+    "datalib": "*",
+    "modernizr": "*",
+    "vega-lite": "*"
+  },
+  "homepage": "https://github.com/jonataneriksson/santtumustonen.com",
+  "authors": [
+    "Jonatan Eriksson <jonatan@projectprojects.com>"
+  ],
+  "description": "Website for Santtu Mustonen",
+  "main": "index.php",
+  "keywords": [
+    "personal"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/assets/",
+    "test",
+    "tests"
+  ]
+}
