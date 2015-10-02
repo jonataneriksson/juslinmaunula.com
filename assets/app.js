@@ -8,9 +8,22 @@ var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize']); //'ng
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.config(function ($stateProvider, $locationProvider) {
+app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
 
-  $stateProvider
+    /* !Fix the trailing slash */
+    $urlRouterProvider.rule(function($injector, $location) {
+        var path = $location.path();
+        var hasTrailingSlash = path[path.length-1] === '/';
+        if(hasTrailingSlash) {
+            return path.substr(0, path.length - 1); 
+        } 
+    });
+    
+    /* !Clean permalinks */
+    $locationProvider.html5Mode(true);    
+
+    /* !States */
+    $stateProvider
     .state('root', {
       url: '/',
       views: {
@@ -40,8 +53,6 @@ app.config(function ($stateProvider, $locationProvider) {
         ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}                
       }
     });
-    
-  $locationProvider.html5Mode(true);
     
 });
 
