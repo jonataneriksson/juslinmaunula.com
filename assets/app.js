@@ -13,8 +13,7 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
     /* !Fix the trailing slash */
     $urlRouterProvider.rule(function($injector, $location) {
         var path = $location.path();
-        var hasTrailingSlash = path[path.length-1] === '/';
-        if(hasTrailingSlash) {
+        if(path[path.length-1] === '/') {
             return path.substr(0, path.length - 1); 
         } 
     });
