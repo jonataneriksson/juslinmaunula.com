@@ -1,0 +1,356 @@
+@import "components/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "components/normalize.css/normalize.css";
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+main:before,
+main:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+main:after {
+    clear: both;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Typography */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+@include font-face('Maison Neue Bold', "fonts/maisonneue-bold-web", bold);
+@include font-face('Maison Neue Light', "fonts/maisonneue-light-web", light);
+
+
+body {
+	font: normal 13px/16px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
+    text-rendering: optimizeLegibility;	
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;    
+}
+
+body:not(.Cover) {
+    color: white;
+}
+
+dl {
+    margin: 0 0 1em;
+}
+
+dt {
+    float: left;
+    clear: left;
+    min-width: 4em;
+}
+
+h1 {
+    font: normal 30px/36px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
+}
+
+h2, h3, h4 {
+    font: inherit;
+    margin: 0 0 1em;
+}
+
+a, a:link, a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    opacity: 0.6;
+}
+
+.cover a:hover, #Logo:hover {
+    opacity: 1;
+}
+
+ol { 
+    counter-reset: item;
+    list-style-type: none;
+    text-align: left;
+    margin: 2em 0 0 -3em;
+    padding: 0;
+}
+
+ol li {
+    padding: 0 3em;
+    text-indent: -3em;
+}
+
+ol li:before { 
+    content: counter(item) "  ";
+    counter-increment: item;
+    width: 3em;
+    display: inline-block;
+    text-indent: 0em;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Composition */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+footer {
+    pointer-events: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10% 12% 3%;
+}
+
+body:not(.Cover) footer {
+    @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));   
+}
+
+body:not(.Cover) #Logo {
+    fill: white;
+}
+
+main {
+    margin: 0% 12% 18%;
+    padding-top: 6%;
+}
+
+header {
+    margin: 0 12% 0;
+    padding-top: 5.5%;
+    text-align: center;
+}
+
+header:empty {
+   display: none;
+}
+
+article {
+    display: inline-block;
+}
+
+#Logo {
+    pointer-events: all;
+    position: absolute;
+    width: 405px;
+    height: 35px;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding-bottom: 7%;
+}
+
+#Navigation {
+    margin-left: 0em;
+	float: left;
+    pointer-events: all;
+}
+
+#Back {
+	float: left;
+}
+
+main.Cover {
+    margin: 0%;
+    overflow: hidden;
+}
+
+main.Project {
+    margin: 0% 6% 18%;
+    padding-top: 6%;
+}
+
+main.Archive {
+    margin: 0% 18% 18%;
+    padding-top: 6%;
+}
+
+main.About {
+    margin: 0% 6% 12%;
+    padding-top: 6%;
+}
+
+
+body {
+    background-color: black;
+}
+
+body.Cover {
+    background-color: white;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Components */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+
+.portrait {
+    width: 48%;
+}
+
+.landscape {
+    width: 100%;
+}
+
+.two-columns {
+    @include columns(2);
+    @include column-gap(3rem);
+}
+
+/* Cover */
+
+.cover.composition {
+    word-spacing: -0.3em;
+}
+
+.cover.composition .item {
+    display: inline-block;
+    vertical-align: top;    
+}
+
+.cover.composition .item:nth-child(odd) {
+    /*@include transform(translate(0, -50%));*/
+    position: relative;
+    margin-top: -30%;
+}
+
+.cover.composition .vertical {
+    width: 50vw;
+    height: 75vw;
+}
+
+.shadow {
+    height: 100vh !important;
+    overflow: visible;
+    position: relative;
+    top: 0;
+}
+
+.shadow .composition{
+    position: absolute;
+    top: 0;
+}
+
+.cover.composition .large a {
+    padding: 10%;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cover.composition .small a {
+    padding: 27%;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* Archive */
+
+.menu.composition {
+    word-spacing: 0;
+    text-align: justify;
+}
+
+.menu.composition .item {
+    display: inline-block;
+    margin-bottom: 3.5em;
+}
+
+.menu.composition .item .title {
+    display: block;
+    margin-bottom: 1em;
+    word-spacing: 0.1em;
+}
+
+.composition {
+  @include display(flex);
+  @include flex-direction(row);
+  @include justify-content(space-between);
+  flex-wrap: wrap;  
+}
+
+
+/* Project */
+
+aside {
+    width: 18%;
+    float: right;
+}
+
+.gallery.composition {
+    width: 74%;
+    word-spacing: 2vw;
+    float: left;
+}
+
+.gallery.composition .item {
+    display: inline-block;
+    margin-bottom: 3.5em;
+}
+
+/* About */
+
+.bio {
+    display: inline-block;
+}
+
+.description {
+    font: normal 21px/28px 'Maison Neue Light', Verdana, Arial, sans-serif;
+    padding-right: 2em;
+    margin-bottom: 2em;
+}
+
+.contact {
+    font: normal 21px/28px 'Maison Neue Light', Verdana, Arial, sans-serif;
+    padding-right: 2em;
+}
+
+/* About */
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Animations */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+main.ng-enter {
+  animation: fadeIn 1s;
+}
+
+main.ng-leave {
+  animation: fadeOut 1s;
+}
+
+a {
+  @include transition(opacity 0.2s ease-in);
+}

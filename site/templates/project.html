@@ -1,0 +1,6 @@
+            <ul class="gallery composition">
+                <li class="item {{media.orientation}}" data-ng-repeat="media in project.media">
+                    <img ng-src="{{media.url}}">
+                </li>
+            </ul>
+            <aside><h4>{{project.title}}</h4><div ng-bind-html="project.description"></div></aside>
