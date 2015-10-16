@@ -6,7 +6,5 @@ Description:
 
 Installations for Lookbook SS/AW 2016
 
-1. Photography Ville Varumo
-2. Set Design Lilli Maunula
-
-
+Photography Ville Varumo
+Set Design Lilli Maunula

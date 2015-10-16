@@ -1,12 +1,12 @@
 <?php echo $topbar ?>
 
-<div class="section">
+<div class="bars bars-with-sidebar-left cf">
 
-  <div class="dashboard">
+<aside class="sidebar">
 
     <?php foreach($widgets as $widget): ?>
     <?php if(!$widget) continue; ?>
-    <div class="section white dashboard-section">
+    <div class="sidebar-content section">
 
       <h2 class="hgroup<?php e(@$widget['title']['compressed'] == true, ' hgroup-compressed') ?> hgroup-single-line cf">
         <?php if(is_array($widget['title']) and $title = $widget['title']): ?>
@@ -46,6 +46,6 @@
     </div>
     <?php endforeach ?>
 
-  </div>
+</div>
 
 </div>

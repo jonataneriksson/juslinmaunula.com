@@ -2,9 +2,7 @@ Title: About
 
 ----
 
-Description: 
-
-Juslin Maunula is a Helsinki based brand and creative collaboration between Fashion Designer Laura Juslin and Architect Lilli Maunula. Juslin Maunula focuses on clothing, accessories and spatial installations. Alongside their own collection Juslin Maunula offers design services and creative consulting. Laura has the main responsibility of womenswear collections while Lilli focuses on spatial design, and accessories. The designers believe in collaborative decision making and support each other throughout the design process.
+Description: Juslin Maunula is a Helsinki based brand and creative collaboration between Fashion Designer Laura Juslin and Architect Lilli Maunula. Juslin Maunula focuses on clothing, accessories and spatial installations. Alongside their own collection Juslin Maunula offers design services and creative consulting. Laura has the main responsibility of womenswear collections while Lilli focuses on spatial design, and accessories. The designers believe in collaborative decision making and support each other throughout the design process.
 
 ----
 
@@ -18,7 +16,9 @@ T   +358 50 573 8283
 
 ----
 
-LauraBio: ####Laura Juslin
+Laurabio: 
+
+####Laura Juslin
 
 Laura Juslin graduated from the Aalto University School of Art, Design and Architecture in 2012. 
 
@@ -32,7 +32,9 @@ In 2015 she presented her first collection in collaboration with architect Lilli
 
 ----
 
-LilliBio: ####Lilli Maunula
+Lillibio: 
+
+####Lilli Maunula
 
 Lilli Maunula has a multidiciplinary background and approach to her work, combining the fields of both Architecture and Fashion. Lilli holds a Master’s Degree in Architecture from Aalto University (2013) and has in addition to this completed studies at the Aalto University, Department of Fashion and Textile Design. She has a professional background in Fashion Styling, having worked in London for publications such as Dazed&Confused, AnOther Magazine and Harper’s Bazaar. Most recently she widened her experience into luxury retail architecture by working in Stockholm for the architectural practice Bozarthfornell on retail projects for clients such as Kenzo, Acne and Robert Clergerie. Lilli has great appreciation for clean and minimal architecture and  a deep interest for how space is experienced. With her work she seeks to turn a simple structural solution into a complex and surprising space. 
 

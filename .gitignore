@@ -1,0 +1,5 @@
+*.scssc
+.sass-cache
+.sass-cache/*
+thumbs
+thumbs/*

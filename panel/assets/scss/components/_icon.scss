@@ -1,11 +1,12 @@
 .icon {
-  font-size: 14px;
+  /* font-size: 14px;
   position: relative;
   top: -1px;
   display: inline-block;
   font-style: normal;
   font-weight: bold;
-  text-align: center;
+  text-align: center;*/
+  display: none;
 }
 .icon-left {
   body.ltr & {

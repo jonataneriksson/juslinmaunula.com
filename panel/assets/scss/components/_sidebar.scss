@@ -111,13 +111,14 @@
 }
 .sidebar-list > li > a {
   body.ltr & {
-    padding: .25em 0 .25em 1.75em;
+    padding: .25em 0 .25em 0;
   }
   body.rtl & {
-    padding: .25em 1.75em .25em 0;
+    padding: .25em 0 .25em 0;
   }
 }
 .sidebar-list .icon {
+  display: none;
   position: absolute;
   top: .4em;
   body.ltr & {
