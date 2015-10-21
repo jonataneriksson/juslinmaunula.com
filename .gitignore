@@ -1,5 +1,10 @@
 *.scssc
 .sass-cache
 .sass-cache/*
+assets/.sass-cache
+assets/.sass-cache/*
 thumbs
 thumbs/*
+*.scssc
+
+*.scssc

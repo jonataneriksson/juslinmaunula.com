@@ -19,6 +19,10 @@ main:after {
 main:after {
   clear: both; }
 
+main {
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden; }
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Typography */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -33,13 +37,10 @@ main:after {
   font-weight: light;
   src: url("fonts/maisonneue-light-web.eot?#iefix") format("embedded-opentype"), url("fonts/maisonneue-light-web.woff2") format("woff2"), url("fonts/maisonneue-light-web.woff") format("woff"), url("fonts/maisonneue-light-web.ttf") format("truetype"), url("fonts/maisonneue-light-web.svg#Maison Neue Light") format("svg"); }
 body {
-  font: normal 13px/16px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
+  font: normal 14px/18px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
-
-body:not(.Cover) {
-  color: white; }
 
 dl {
   margin: 0 0 1em; }
@@ -108,25 +109,17 @@ footer {
   text-align: center;
   padding: 10% 12% 3%; }
 
-body:not(.Cover) footer {
+main.black ~ footer {
   background-color: transparent;
   background-image: -webkit-linear-gradient(transparent, black);
-  background-image: linear-gradient(transparent, black); }
+  background-image: linear-gradient(transparent, black);
+  color: white; }
 
-body:not(.Cover) #Logo {
+main.black ~ footer #Logo {
   fill: white; }
 
-main {
-  margin: 0% 12% 18%;
-  padding-top: 6%; }
-
-header {
-  margin: 0 12% 0;
-  padding-top: 5.5%;
-  text-align: center; }
-
-header:empty {
-  display: none; }
+main:not(.Cover) {
+  padding: 6% 12% 18%; }
 
 article {
   display: inline-block; }
@@ -140,7 +133,7 @@ article {
   left: 0;
   right: 0;
   bottom: 0;
-  padding-bottom: 7%; }
+  padding-bottom: 5.6em; }
 
 #Navigation {
   margin-left: 0em;
@@ -155,22 +148,17 @@ main.Cover {
   overflow: hidden; }
 
 main.Project {
-  margin: 0% 6% 18%;
-  padding-top: 6%; }
+  padding: 6% 6% 18%;
+  background-color: black;
+  color: white; }
 
 main.Archive {
-  margin: 0% 18% 18%;
-  padding-top: 6%; }
+  padding: 6% 6% 18%;
+  background-color: black;
+  color: white; }
 
 main.About {
-  margin: 0% 6% 12%;
-  padding-top: 6%; }
-
-body {
-  background-color: black; }
-
-body.Cover {
-  background-color: white; }
+  padding: 6% 6% 12%; }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Components */
@@ -202,9 +190,12 @@ img {
   vertical-align: top; }
 
 .cover.composition .item:nth-child(odd) {
-  /*@include transform(translate(0, -50%));*/
-  position: relative;
-  margin-top: -30%; }
+  -webkit-transform: translate(0, -60%);
+  -moz-transform: translate(0, -60%);
+  -ms-transform: translate(0, -60%);
+  -o-transform: translate(0, -60%);
+  transform: translate(0, -60%);
+  position: relative; }
 
 .cover.composition .vertical {
   width: 50vw;
@@ -306,15 +297,34 @@ aside {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Animations */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*a {
+  @include transition(opacity 0.0.25s ease-in);
+}*/
 main.ng-enter {
-  animation: fadeIn 1s; }
+  display: none; }
+
+main.ng-enter-active {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  animation: fadeIn 0.25s linear 0.25s; }
 
 main.ng-leave {
-  animation: fadeOut 1s; }
+  display: block;
+  position: relative;
+  animation: fadeOut 0.25s linear 0s; }
 
-a {
-  -webkit-transition: opacity 0.2s ease-in;
-  -moz-transition: opacity 0.2s ease-in;
-  transition: opacity 0.2s ease-in; }
+footer {
+  opacity: 1; }
+
+main.black-add ~ footer {
+  opacity: 0; }
+
+main.black-add-active ~ footer {
+  opacity: 1;
+  -webkit-transition: opacity 1s ease-in;
+  -moz-transition: opacity 1s ease-in;
+  transition: opacity 1s ease-in; }
 
 /*# sourceMappingURL=stylesheets.css.map */

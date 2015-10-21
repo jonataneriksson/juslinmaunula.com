@@ -24,6 +24,11 @@ main:after {
     clear: both;
 }
 
+main {
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Typography */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -33,14 +38,10 @@ main:after {
 
 
 body {
-	font: normal 13px/16px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
+	font: normal 14px/18px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
     text-rendering: optimizeLegibility;	
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;    
-}
-
-body:not(.Cover) {
-    color: white;
 }
 
 dl {
@@ -125,27 +126,17 @@ footer {
     padding: 10% 12% 3%;
 }
 
-body:not(.Cover) footer {
-    @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));   
+main.black ~ footer {
+    @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    color: white;
 }
 
-body:not(.Cover) #Logo {
-    fill: white;
+main.black ~ footer #Logo {
+    fill: white;    
 }
 
-main {
-    margin: 0% 12% 18%;
-    padding-top: 6%;
-}
-
-header {
-    margin: 0 12% 0;
-    padding-top: 5.5%;
-    text-align: center;
-}
-
-header:empty {
-   display: none;
+main:not(.Cover) {
+    padding: 6% 12% 18%;
 }
 
 article {
@@ -161,7 +152,7 @@ article {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	padding-bottom: 7%;
+	padding-bottom: 5.6em;
 }
 
 #Navigation {
@@ -180,27 +171,19 @@ main.Cover {
 }
 
 main.Project {
-    margin: 0% 6% 18%;
-    padding-top: 6%;
+    padding: 6% 6% 18%;
+    background-color: black;
+    color: white;    
 }
 
 main.Archive {
-    margin: 0% 18% 18%;
-    padding-top: 6%;
+    padding: 6% 6% 18%;
+    background-color: black;
+    color: white;        
 }
 
 main.About {
-    margin: 0% 6% 12%;
-    padding-top: 6%;
-}
-
-
-body {
-    background-color: black;
-}
-
-body.Cover {
-    background-color: white;
+    padding: 6% 6% 12%;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -238,9 +221,8 @@ img {
 }
 
 .cover.composition .item:nth-child(odd) {
-    /*@include transform(translate(0, -50%));*/
+    @include transform(translate(0, -60%));
     position: relative;
-    margin-top: -30%;
 }
 
 .cover.composition .vertical {
@@ -343,14 +325,37 @@ aside {
 /* !Animations */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+/*a {
+  @include transition(opacity 0.0.25s ease-in);
+}*/
+
 main.ng-enter {
-  animation: fadeIn 1s;
+  display: none;
+}
+
+main.ng-enter-active {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 0;  
+  animation: fadeIn 0.25s linear 0.25s;
 }
 
 main.ng-leave {
-  animation: fadeOut 1s;
+  display: block;
+  position: relative;
+  animation: fadeOut 0.25s linear 0s;
 }
 
-a {
-  @include transition(opacity 0.2s ease-in);
+footer {
+  opacity: 1;
+}
+
+main.black-add ~ footer {
+  opacity: 0;
+}
+
+main.black-add-active ~ footer {
+  opacity: 1;
+  @include transition(opacity 1s ease-in);    
 }

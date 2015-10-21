@@ -2,7 +2,7 @@
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize']); //'ngAnimate'
+var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize', 'ngAnimate']); //
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
@@ -64,7 +64,6 @@ app.factory('api', function($http, $q){
   api = {};
   api.load = function(url){
     var waiter = $q.defer();
-    console.log(url);
       $http.get(url).success(function(data) {
         waiter.resolve(api);
         api.loaded = data;
@@ -80,38 +79,38 @@ app.factory('api', function($http, $q){
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 app.controller('cover-controller', function ($scope, $window, $document, $rootScope) {
-    $rootScope.bodyClass = 'Cover';
     $scope.mainClass = 'Cover';
     angular.element($document).bind("scroll", function(){
-        zero = this.scrollingElement.scrollTop;
-        one = this.scrollingElement.scrollTop + angular.element($window)[0].innerHeight;
-        two = this.height;
+        zero = this.body.scrollTop;
+        one = this.body.scrollTop + angular.element($window)[0].innerHeight;
+        two = this.body.offsetHeight;
         if(one >= two){
-            this.scrollingElement.scrollTop = 1;
-        } else if(zero <= 0){
-            this.scrollingElement.scrollTop = this.height - angular.element($window)[0].innerHeight-2;
+            this.body.scrollTop = 1;
+        } else if(zero < 0){
+            this.body.scrollTop = this.height - angular.element($window)[0].innerHeight-2;
         }
     });
-        
 });
 
-app.controller('about-controller', function ($scope, api) {
+app.controller('about-controller', function ($scope, api, $anchorScroll) {
+    $anchorScroll();
     $scope.mainClass = 'About two-columns';
     api.load('/api/').then(function(){
         $scope.about = api.loaded.pages.about;
     });
 });
 
-app.controller('archive-controller', function ($scope, api) {
-    $scope.mainClass = 'Archive';
+app.controller('archive-controller', function ($scope, api, $anchorScroll) {
+    $anchorScroll();
+    $scope.mainClass = 'Archive black';
     api.load('/api/').then(function(){
         $scope.archive = api.loaded.pages.archive;
-        //console.log($scope);
     });    
 });
 
-app.controller('project-controller', function ($scope, api, $state, $rootScope, $stateParams) {
-    $scope.mainClass = 'Project';
+app.controller('project-controller', function ($scope, api, $state, $stateParams, $anchorScroll) {
+    $anchorScroll();
+    $scope.mainClass = 'Project black';
     api.load('/api/?name='+$stateParams.project).then(function(){
         $scope.project = api.loaded.project;
         console.log($scope);

@@ -2,6 +2,7 @@
 <html data-ng-app="juslinmaunulacom">
     <head>
     <title>Juslin&#8211;Maunula</title>
+    <meta charset="utf-8">
     <base href="/">    
     <!-- bower:css -->
     <link rel="stylesheet" href="../../assets/components/normalize.css/normalize.css" />
@@ -10,8 +11,8 @@
     <link rel="stylesheet" href="assets/stylesheets.css" />    
     </head>
     <body ng-class="bodyClass">
-        <!--<header data-ui-view="header" ></header>-->
-        <main data-ui-view="main" data-ng-class="mainClass" autoscroll="true"></main>
+
+        <main data-ui-view="main" data-ng-class="mainClass" autoscroll="false"></main>
         <footer data-ui-view="footer"></footer>
            
         <!-- bower:js -->
@@ -21,6 +22,8 @@
         <script src="../../assets/components/angular-animate/angular-animate.js"></script>
         <script src="../../assets/components/angular-sanitize/angular-sanitize.js"></script>
         <script src="../../assets/components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="../../assets/components/datalib/datalib.js"></script>
+        <script src="../../assets/components/vega-lite/vega-lite.js"></script>
         <!-- endbower -->
         <script src="assets/app.js"></script>        
     </body>
