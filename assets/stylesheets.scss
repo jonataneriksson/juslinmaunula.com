@@ -279,7 +279,7 @@ img {
   @include display(flex);
   @include flex-direction(row);
   @include justify-content(space-between);
-  flex-wrap: wrap;  
+  @include flex-wrap(wrap);
 }
 
 
