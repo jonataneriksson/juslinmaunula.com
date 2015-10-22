@@ -157,6 +157,11 @@ main.Archive {
   background-color: black;
   color: white; }
 
+main.Products {
+  padding: 6% 6% 18%;
+  background-color: white;
+  color: black; }
+
 main.About {
   padding: 6% 6% 12%; }
 
