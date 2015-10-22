@@ -176,6 +176,12 @@ main.Project {
     color: white;    
 }
 
+main.Product {
+    padding: 6% 6% 18%;
+    background-color: white;
+    color: black;    
+}
+
 main.Archive {
     padding: 6% 6% 18%;
     background-color: black;
@@ -195,6 +201,22 @@ main.About {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Components */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+button {
+  background-color: transparent;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 0.3em;
+}
+
+select {
+  display: block;
+  width: 100%;
+  padding: 1em;
+}
 
 img {
     width: 100%;
