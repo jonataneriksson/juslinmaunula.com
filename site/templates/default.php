@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <html data-ng-app="juslinmaunulacom">
     <head>
-    <title>Juslin&#8211;Maunula</title>
+    <title>Juslin Maunula</title>
     <meta charset="utf-8">
     <base href="/">    
     <!-- bower:css -->

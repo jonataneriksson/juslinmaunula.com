@@ -109,6 +109,10 @@ footer {
   text-align: center;
   padding: 10% 12% 3%; }
 
+main {
+  min-width: 100vw;
+  min-height: 100vh; }
+
 main.black ~ footer {
   background-color: transparent;
   background-image: -webkit-linear-gradient(transparent, black);

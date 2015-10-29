@@ -29,7 +29,7 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
         'main' : { templateUrl: 'site/templates/cover.html', controller: 'cover-controller'}
         ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}           
       },
-      onExit: function($document, $rootScope){angular.element($document).unbind('scroll'); $rootScope.bodyClass = '';}
+      onExit: function($document, $rootScope){angular.element($document).unbind('scroll');}
     }).state('about', {
       url: '/about',
       views: {
