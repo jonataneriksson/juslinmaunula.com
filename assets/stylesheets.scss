@@ -422,12 +422,16 @@ main.black-add-active ~ footer {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 @media only screen and (max-width : 479px) {
-    footer {top: 0; bottom: auto; padding: 6%;}
+    footer {top: 0; bottom: auto; padding: 6%; background-image: none !important; color: black !important;}
     main {margin-top: 7em !important;}
-    ol {margin: 0 !important; float: right !important;}
-    #Logo {position: static; float: left !important;}
-    .portrait {width: 100%;}
+    ol {margin: 0 !important; float: left !important;}
+    #Logo {position: static; width: 100% !important; margin-bottom: 4rem;}
+    #Logo svg {position: static; width: 100% !important; fill: black !important;}
+    .portrait {width: 100% !important;}
     .two-columns { @include columns(1);}
     .gallery.composition {width: 100%;}
     aside {width: 100%; margin-bottom: 2rem;}
+    .cover.composition .large a, .cover.composition .small a {padding: 12%; width: 100%;}
+    .cover.composition .item {@include transform(translate(0%, 0%) !important);}
+    .black {color: black !important; background-color: white !important;}
 }

@@ -359,21 +359,29 @@ main.black-add-active ~ footer {
   footer {
     top: 0;
     bottom: auto;
-    padding: 6%; }
+    padding: 6%;
+    background-image: none !important;
+    color: black !important; }
 
   main {
     margin-top: 7em !important; }
 
   ol {
     margin: 0 !important;
-    float: right !important; }
+    float: left !important; }
 
   #Logo {
     position: static;
-    float: left !important; }
+    width: 100% !important;
+    margin-bottom: 4rem; }
+
+  #Logo svg {
+    position: static;
+    width: 100% !important;
+    fill: black !important; }
 
   .portrait {
-    width: 100%; }
+    width: 100% !important; }
 
   .two-columns {
     -webkit-columns: 1;
@@ -385,6 +393,21 @@ main.black-add-active ~ footer {
 
   aside {
     width: 100%;
-    margin-bottom: 2rem; } }
+    margin-bottom: 2rem; }
+
+  .cover.composition .large a, .cover.composition .small a {
+    padding: 12%;
+    width: 100%; }
+
+  .cover.composition .item {
+    -webkit-transform: translate(0%, 0%) !important;
+    -moz-transform: translate(0%, 0%) !important;
+    -ms-transform: translate(0%, 0%) !important;
+    -o-transform: translate(0%, 0%) !important;
+    transform: translate(0%, 0%) !important; }
+
+  .black {
+    color: black !important;
+    background-color: white !important; } }
 
 /*# sourceMappingURL=stylesheets.css.map */
