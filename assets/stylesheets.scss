@@ -234,17 +234,21 @@ img {
 }
 
 
+.two-columns {
+    @include columns(2);
+    @include column-gap(3rem);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 .portrait {
     width: 48%;
 }
 
 .landscape {
     width: 100%;
-}
-
-.two-columns {
-    @include columns(2);
-    @include column-gap(3rem);
 }
 
 /* Cover */
@@ -264,7 +268,7 @@ img {
 }
 
 .cover.composition .vertical {
-    width: 50vw;
+    width: 50%;
     height: 75vw;
 }
 
@@ -276,12 +280,12 @@ img {
 }
 
 .shadow .composition{
-    position: absolute;
+    position: relative;
     top: 0;
 }
 
 .cover.composition .large a {
-    padding: 10%;
+    padding: 12%;
     width: 100%;
     height: auto;
     display: block;
@@ -305,6 +309,15 @@ img {
 .menu.composition .item {
     display: inline-block;
     margin-bottom: 3.5em;
+    width: 45%;
+}
+
+.menu.composition .item:nth-child(2n-1), {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 3.5em;
+    margin-right: 4%;    
+    width: 48%;
 }
 
 .menu.composition .item .title {
@@ -313,12 +326,13 @@ img {
     word-spacing: 0.1em;
 }
 
+/*
 .composition {
   @include display(flex);
   @include flex-direction(row);
   @include justify-content(space-between);
   @include flex-wrap(wrap);
-}
+}*/
 
 
 /* Project */
@@ -330,13 +344,18 @@ aside {
 
 .gallery.composition {
     width: 74%;
-    word-spacing: 2vw;
+    word-spacing: 0;
     float: left;
 }
 
 .gallery.composition .item {
     display: inline-block;
     margin-bottom: 3.5em;
+    width: 48%;    
+}
+
+.gallery.composition .item:nth-child(2n-1), {
+    margin-right: 4%;    
 }
 
 /* About */
