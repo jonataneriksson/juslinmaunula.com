@@ -127,8 +127,7 @@ footer {
 }
 
 main {
-    min-width: 100vw;
-    min-height: 100vh;    
+    min-width: 100%;
 }
 
 main.black ~ footer {
@@ -397,4 +396,19 @@ main.black-add ~ footer {
 main.black-add-active ~ footer {
   opacity: 1;
   @include transition(opacity 1s ease-in);    
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+@media only screen and (max-width : 479px) {
+    footer {top: 0; bottom: auto; padding: 6%;}
+    main {margin-top: 7em !important;}
+    ol {margin: 0 !important; float: right !important;}
+    #Logo {position: static; float: left !important;}
+    .portrait {width: 100%;}
+    .two-columns { @include columns(1);}
+    .gallery.composition {width: 100%;}
+    aside {width: 100%; margin-bottom: 2rem;}
 }

@@ -22,8 +22,6 @@
         <script src="../../assets/components/angular-animate/angular-animate.js"></script>
         <script src="../../assets/components/angular-sanitize/angular-sanitize.js"></script>
         <script src="../../assets/components/angular-ui-router/release/angular-ui-router.js"></script>
-        <script src="../../assets/components/datalib/datalib.js"></script>
-        <script src="../../assets/components/vega-lite/vega-lite.js"></script>
         <!-- endbower -->
         <script src="assets/app.js"></script>        
     </body>

@@ -110,8 +110,7 @@ footer {
   padding: 10% 12% 3%; }
 
 main {
-  min-width: 100vw;
-  min-height: 100vh; }
+  min-width: 100%; }
 
 main.black ~ footer {
   background-color: transparent;
@@ -365,5 +364,40 @@ main.black-add-active ~ footer {
   -webkit-transition: opacity 1s ease-in;
   -moz-transition: opacity 1s ease-in;
   transition: opacity 1s ease-in; }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+@media only screen and (max-width: 479px) {
+  footer {
+    top: 0;
+    bottom: auto;
+    padding: 6%; }
+
+  main {
+    margin-top: 7em !important; }
+
+  ol {
+    margin: 0 !important;
+    float: right !important; }
+
+  #Logo {
+    position: static;
+    float: left !important; }
+
+  .portrait {
+    width: 100%; }
+
+  .two-columns {
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1; }
+
+  .gallery.composition {
+    width: 100%; }
+
+  aside {
+    width: 100%;
+    margin-bottom: 2rem; } }
 
 /*# sourceMappingURL=stylesheets.css.map */
