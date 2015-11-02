@@ -7,6 +7,7 @@ password: >
 language: en
 role: admin
 history:
+  - archive
   - archive/installations
   - archive/collection
   - about
