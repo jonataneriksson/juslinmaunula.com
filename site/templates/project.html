@@ -1,6 +1,16 @@
             <aside><h4>{{project.title}}</h4><div ng-bind-html="project.description"></div></aside>            
             <ul class="gallery composition">
-                <li class="item {{media.orientation}}" data-ng-repeat="media in project.media">
-                    <img ng-src="{{media.url}}">
+                <li class="item {{media.orientation}}" data-ng-repeat="item in project.media">
+                    <ng-switch on="item.type">
+                            <video preload="auto" poster="{{item.thumbnail}}" controls="true">
+                                <source ng-src="{{item.mp4}}" type="video/mp4">
+                                <source ng-src="{{item.webm}}" type="video/webm">                           
+                                Your browser does not support the video tag.
+                                <img ng-src="{{item.tumbnail}}"/>                                
+				            </video>
+                            <img  data-ng-switch-when="image" ng-src="{{item.tumbnail}}"/>
+                        </ng-switch>
+
+
                 </li>
             </ul>

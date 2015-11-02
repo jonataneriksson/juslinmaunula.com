@@ -10,12 +10,16 @@ if($name = get('name')):
 	$object->uid = (string)$project->uid();
     $object->description = (string)$project->description()->markdown();	
     foreach($project->files() as $file):
-        $media[] = array(
-            'url'  => (string)$file->url(),
-            'title'  => (string)$file->title(),
-            'orientation'  => (string)$file->orientation(),
-            'type'  => (string)$file->type()                        
-        );
+        $media[$file->name()]['url'] = (string)$file->url();
+        $media[$file->name()]['name'] = (string)$file->name();
+        if($file->type() == 'image'):
+            $media[$file->name()]['orientation'] = (string)$file->orientation();
+            $media[$file->name()]['thumbnail'] = (string)$file->url();           
+        endif;
+        if($media[$file->name()]['type'] != 'video'):
+            $media[$file->name()]['type'] = (string)$file->type();
+        endif;        
+        $media[$file->name()][$file->extension()] = (string)$file->url();        
     endforeach;
     $object->media = $media;    
 endif;
