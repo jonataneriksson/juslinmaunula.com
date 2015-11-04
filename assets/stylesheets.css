@@ -356,6 +356,9 @@ main.black-add-active ~ footer {
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 @media only screen and (max-width: 667px) {
+  body {
+    font: normal 16px/21px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif; }
+
   footer {
     top: 0;
     bottom: auto;
