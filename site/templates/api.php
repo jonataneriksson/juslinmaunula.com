@@ -14,7 +14,9 @@ if($name = get('name')):
         $media[$file->name()]['name'] = (string)$file->name();
         if($file->type() == 'image'):
             $media[$file->name()]['orientation'] = (string)$file->orientation();
-            $media[$file->name()]['thumbnail'] = (string)$file->url();           
+            $media[$file->name()]['thumbnail'] = (string)$file->url();
+            $media[$file->name()]['width'] = (string)$file->width(); 
+            $media[$file->name()]['height'] = (string)$file->height();                                                   
         endif;
         if($media[$file->name()]['type'] != 'video'):
             $media[$file->name()]['type'] = (string)$file->type();
@@ -33,6 +35,8 @@ endif;
 		      'url'  => (string)$child->url(),
 		      'title'  => (string)$child->title(),
 		      'thumbnail'  => (string)$child->images()->first()->url(),
+		      'width'  => (string)$child->images()->first()->width(),		      
+		      'height'  => (string)$child->images()->first()->height(),		      		      
 		      'orientation'  => (string)$child->images()->first()->orientation()		            
 		    );
 	   endforeach;

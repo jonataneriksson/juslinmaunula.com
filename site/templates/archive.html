@@ -1,6 +1,8 @@
             <ul class="menu composition">        
                 <li class="item {{item.orientation}}" data-ng-repeat="item in archive.items">
                     <a href="{{item.url}}" class="title">{{item.title}}</a>
-                    <a href="{{item.url}}"><img ng-src="{{item.thumbnail}}"></a>
+                    <a href="{{item.url}}">
+                        <img ng-src="{{item.thumbnail}}" width="{{item.height}}" height="{{item.width}}">
+                    </a>
                 </li>                             
             </ul>

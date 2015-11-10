@@ -4,6 +4,8 @@
 assets/.sass-cache
 assets/fonts/*
 assets/.sass-cache/*
+content/*
+content
 thumbs
 thumbs/*
 *.scssc
