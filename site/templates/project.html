@@ -1,6 +1,6 @@
             <aside><h4>{{project.title}}</h4><div ng-bind-html="project.description"></div></aside>            
             <ul class="gallery composition">
-                <li class="item {{item.orientation}}" data-ng-repeat="item in project.media">
+                <li class="item {{item.orientation}}" data-ng-repeat="item in project.gallery">
                         <ng-switch on="item.type">
                             <img data-ng-switch-when="image" ng-src="{{item.url}}"/>                    
                             <video data-ng-switch-when="video" preload="auto" poster="{{item.thumbnail}}" controls="true">

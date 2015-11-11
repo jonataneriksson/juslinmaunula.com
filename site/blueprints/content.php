@@ -8,3 +8,6 @@ fields:
   description:
     label: Description
     type:  textarea
+  gallery:
+    label: Media Gallery
+    type:  gallery   

@@ -9,7 +9,8 @@ if($name = get('name')):
 	$object->url = (string)$project->url();
 	$object->uid = (string)$project->uid();
     $object->description = (string)$project->description()->markdown();	
-    foreach($project->files() as $file):
+	$object->gallery = json_decode($project->gallery());    
+    /* foreach($project->files() as $file):
         $media[$file->name()]['url'] = (string)$file->url();
         $media[$file->name()]['name'] = (string)$file->name();
         if($file->type() == 'image'):
@@ -23,7 +24,7 @@ if($name = get('name')):
         endif;        
         $media[$file->name()][$file->extension()] = (string)$file->url();        
     endforeach;
-    $object->media = $media;    
+    $object->media = $media;*/
 endif;
 	foreach($pages->visible() as $current):
        $item = (object) '';
@@ -55,6 +56,5 @@ endif;
 $json->pages = $items;
 $json->project = $object;
 
-echo json_encode($json); //JSON_FORCE_OBJECT*/
-
+echo json_encode($json);
 ?>
