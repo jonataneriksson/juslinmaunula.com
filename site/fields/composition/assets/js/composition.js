@@ -68,7 +68,6 @@
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
         self.update = function(event, ui) {
-            ui.helper.removeClass('item-template').addClass('item');        
             self.order = [];
             $.each(self.composition[0].children, function(order) {
                 data = JSON.parse(this.dataset.item);
