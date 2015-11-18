@@ -1,4 +1,4 @@
-title: About
+title: About Template
 pages: true
 files: true
 fields:

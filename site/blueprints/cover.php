@@ -1,4 +1,4 @@
-title: Cover
+title: Cover Template
 pages: false
 files: true
 fields:

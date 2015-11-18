@@ -1,4 +1,4 @@
-title: Index
+title: Index Template
 pages: true
 files: false
 fields:

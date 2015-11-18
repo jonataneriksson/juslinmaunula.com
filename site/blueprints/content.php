@@ -1,4 +1,4 @@
-title: Project
+title: Project Template
 pages: true
 files: true
 fields:

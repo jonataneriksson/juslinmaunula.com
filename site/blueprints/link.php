@@ -1,4 +1,4 @@
-title: Link
+title: Link Template
 pages: false
 files: false
 fields:
