@@ -1,8 +1,9 @@
-            <ul class="menu composition">        
-                <li class="item {{item.orientation}}" data-ng-repeat="item in archive.items">
-                    <a href="{{item.url}}" class="title">{{item.title}}</a>
+            <div class="menu composition" hj-columnify="item in items" data-columns="2">        
+                <div class="item {{item.orientation}}">
                     <a href="{{item.url}}">
+                        <h4 class="title">{{item.title}}</h4>
                         <img ng-src="{{item.thumbnail}}" width="{{item.height}}" height="{{item.width}}">
                     </a>
-                </li>                             
-            </ul>
+                </div>                             
+            </div>
+            

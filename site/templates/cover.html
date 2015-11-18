@@ -1,68 +1,18 @@
             <div>
-            <ul class="cover composition">
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19486.tif-optimized.jpg"></a>
-                </li>
-                <li class="item portrait small">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/_44J9484-1.tif-optimized.jpg"></a>                
-                </li>
-                <li class="item portrait large">
-                    <a href="/archive/installations/"><img src="archive/installations/IMG_1964.tif-optimized.jpg"></a>
-                </li>
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19858-1_flat.tif-optimized.jpg"></a>                
-                </li>
-                <li class="item portrait large">
-                    <a href="/archive/installations/"><img src="archive/installations/IMG_1407.tif-optimized.jpg"></a>
-                </li>
-                <li class="item portrait small">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19899.tif-optimized.jpg"></a>                
-                </li> 
-                <li class="item portrait small">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19892_flat.tif-optimized.jpg"></a>                
-                </li>  
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/_44J9244.tif-optimized.jpg"></a>                
-                </li>  
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/_44J9530.tif-optimized.jpg"></a>                
-                </li>   
-                <li class="item portrait small">
-                    <a href="/archive/installations/"><img src="archive/installations/IMG_1432_2.tif-optimized.jpg"></a>                
-                </li>                                                                                                                                                                                                                                                       
+            <ul class="cover composition">        
+                <li class="item {{item.className}}" data-ng-repeat="item in cover">
+                    <a href="{{item.permalink}}">
+                        <img ng-src="{{item.url}}">
+                    </a>
+                </li>                             
             </ul>
-            </div>
+            </div>           
             <div class="shadow">
-            <ul class="cover composition">
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19486.tif-optimized.jpg"></a>
-                </li>
-                <li class="item portrait small">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/_44J9484-1.tif-optimized.jpg"></a>                
-                </li>
-                <li class="item portrait large">
-                    <a href="/archive/installations/"><img src="archive/installations/IMG_1964.tif-optimized.jpg"></a>
-                </li>
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19858-1_flat.tif-optimized.jpg"></a>                
-                </li>
-                <li class="item portrait large">
-                    <a href="/archive/installations/"><img src="archive/installations/IMG_1407.tif-optimized.jpg"></a>
-                </li>
-                <li class="item portrait small">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19899.tif-optimized.jpg"></a>                
-                </li> 
-                <li class="item portrait small">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/2015_06_15_Juslin19892_flat.tif-optimized.jpg"></a>                
-                </li>  
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/_44J9244.tif-optimized.jpg"></a>                
-                </li>  
-                <li class="item portrait large">
-                    <a href="archive/lookbook/"><img src="archive/lookbook/_44J9530.tif-optimized.jpg"></a>                
-                </li>   
-                <li class="item portrait small">
-                    <a href="/archive/installations/"><img src="archive/installations/IMG_1432_2.tif-optimized.jpg"></a>                
-                </li>                                                                                                                           
-            </ul>
+            <ul class="cover composition">        
+                <li class="item {{item.className}}" data-ng-repeat="item in cover">
+                    <a href="{{item.permalink}}">
+                        <img ng-src="{{item.url}}">
+                    </a>
+                </li>                             
+            </ul>            
             </div>          

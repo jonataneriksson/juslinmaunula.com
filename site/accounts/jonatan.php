@@ -7,9 +7,9 @@ password: >
 language: en
 role: admin
 history:
+  - cover
   - archive/collection
   - archive/pre-helsinki
   - >
     archive/pre-helsinki-paris-fashion-week-2015
   - archive/laura-juslin-x-if
-  - archive/lookbook

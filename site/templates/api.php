@@ -2,7 +2,7 @@
 
 $json = (object) '';
 
-if($name = get('name')):
+    if($name = get('name')):
     $object = (object) '';	
 	$project = $pages->find('archive')->find($name);
 	$object->title = (string)$project->title();
@@ -25,7 +25,8 @@ if($name = get('name')):
         $media[$file->name()][$file->extension()] = (string)$file->url();        
     endforeach;
     $object->media = $media;*/
-endif;
+    endif;
+
 	foreach($pages->visible() as $current):
        $item = (object) '';
 	   $item->title = (string)$current->title();
@@ -44,6 +45,12 @@ endif;
 	   $item->items = $children;
 	   $items[$current->uid()] = $item;
 	   
+	   if($current->link()):
+            $item->link = (string)$current->link();
+       else:
+            $item->link = 'none';
+	   endif;
+	   
 	   if($current->uid() == 'about'):
             $item->description = (string)$current->description()->markdown();            
             $item->contact = (string)$current->contact()->markdown();
@@ -52,7 +59,10 @@ endif;
 	   endif;
 	   
 	endforeach;
-
+    if($cover = $pages->find('cover')):
+        $json->cover = json_decode($cover->cover());
+    endif;
+    
 $json->pages = $items;
 $json->project = $object;
 

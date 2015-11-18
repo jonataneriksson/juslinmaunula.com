@@ -27,7 +27,7 @@ class GalleryField extends InputField {
                 $media[$file->name()]['orientation'] = (string)$file->orientation();
                 $media[$file->name()]['thumbnail'] = (string)$file->url();
                 $media[$file->name()]['width'] = (string)$file->width(); 
-                $media[$file->name()]['height'] = (string)$file->height();                                                   
+                $media[$file->name()]['height'] = (string)$file->height();
             endif;
             
             if($media[$file->name()]['type'] != 'video'):

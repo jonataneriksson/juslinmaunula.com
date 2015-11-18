@@ -6,5 +6,5 @@ fields:
     label: Title
     type:  text
   cover:
-    label: Cover Gallery
-    type:  gallery
+    label: Cover Composition
+    type:  composition

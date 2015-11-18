@@ -2,7 +2,7 @@
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize', 'ngAnimate']); //
+var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize', 'hj.columnify']); //, 'ngAnimate'
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
@@ -33,22 +33,19 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
     }).state('about', {
       url: '/about',
       views: {
-        'header' : { template: '<h1>About</h1>'}
-        ,'main' : { templateUrl: 'site/templates/about.html', controller: 'about-controller'}
+        'main' : { templateUrl: 'site/templates/about.html', controller: 'about-controller'}
         ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}        
       }
     }).state('archive', {
       url: '/archive',
       views: {
-        'header' : { template: '<h1>Archive</h1>'}      
-        ,'main' : { templateUrl: 'site/templates/archive.html', controller: 'archive-controller'}
+        'main' : { templateUrl: 'site/templates/archive.html', controller: 'archive-controller'}
         ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}        
       }
     }).state('project', {
       url: '/archive/:project',
       views: {
-        'header' : { template: '<h1>{{title}}</h1>', controller: 'project-header-controller'}     
-        ,'main' : { templateUrl: 'site/templates/project.html', controller: 'project-controller'}
+        'main' : { templateUrl: 'site/templates/project.html', controller: 'project-controller'}
         ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}                
       }
     });
@@ -73,13 +70,61 @@ app.factory('api', function($http, $q){
   return api
 });
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Transitions */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/*app.run(function($rootScope, $state, $urlRouter, $timeout){
+    
+    $rootScope.readyToLoad = false
+    
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {        
+        if(fromState.name && !$rootScope.readyToLoad){
+            event.preventDefault();
+            event.targetScope.wrapperClass = 'exit';
+            $timeout(function(){
+                $rootScope.readyToLoad = true;
+                $rootScope.wrapperClass = '';
+                $state.go(toState.name)
+            },1000)
+        }
+    });   
+
+});*/
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ! */
+/* !Image loader */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('cover-controller', function ($scope, $window, $document, $rootScope) {
-    $scope.mainClass = 'Cover';
+app.directive('img', function ($rootScope) { return function ($scope, $element) {
+    
+    //Hide first
+    $element.addClass('hidden-until-loaded');
+    
+    //Reserve space first
+    var ratio = 0.5//$scope.item.height / $scope.item.width * 100;
+    $element.attr('style', 'padding-bottom: '+ratio+'%;height:0 !important;');
+    
+    //Show when loaded
+	$element.bind("load", function (event){
+		if(event.target.complete){
+		    $element.removeAttr('style');
+			$element.removeClass('hidden-until-loaded');
+		}
+	});
+
+}});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Cover controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('cover-controller', function ($scope, $window, $document, $rootScope, api) {
+    $rootScope.bodyClass = 'White';
+    $scope.wrapperClass = 'Cover';
+    api.load('/api/').then(function(){
+        $scope.cover = api.loaded.cover;
+    });    
     angular.element($document).bind("scroll", function(){
         zero = this.body.scrollTop;
         one = this.body.scrollTop + angular.element($window)[0].innerHeight;
@@ -92,25 +137,43 @@ app.controller('cover-controller', function ($scope, $window, $document, $rootSc
     });
 });
 
-app.controller('about-controller', function ($scope, api, $anchorScroll) {
-    $anchorScroll();
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !About controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('about-controller', function ($scope, $rootScope, api, $anchorScroll) {
+    //$anchorScroll();
     $scope.mainClass = 'About two-columns';
+    $rootScope.bodyClass = 'White';
     api.load('/api/').then(function(){
         $scope.about = api.loaded.pages.about;
     });
 });
 
-app.controller('archive-controller', function ($scope, api, $anchorScroll) {
-    $anchorScroll();
-    $scope.mainClass = 'Archive black';
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Archive controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('archive-controller', function ($scope, $rootScope, api, $anchorScroll) {
+    //$anchorScroll();
+    $scope.mainClass = 'Archive';    
+    $rootScope.bodyClass = 'Black';
+    $scope.items = [];    
     api.load('/api/').then(function(){
-        $scope.archive = api.loaded.pages.archive;
-    });    
+        $scope.items = api.loaded.pages.archive.items;  
+    });
+    //$scope.items = api.loaded.pages.archive.items;     
 });
 
-app.controller('project-controller', function ($scope, api, $state, $stateParams, $anchorScroll) {
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Project controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('project-controller', function ($scope, $rootScope, api, $state, $stateParams, $anchorScroll) {
     $anchorScroll();
-    $scope.mainClass = 'Project black';
+    $scope.mainClass = 'Project';
+    $scope.back = function(){window.history.back();}
+    $rootScope.bodyClass = 'Black';
     api.load('/api/?name='+$stateParams.project).then(function(){
         $scope.project = api.loaded.project;
         console.log($scope);
@@ -118,10 +181,10 @@ app.controller('project-controller', function ($scope, api, $state, $stateParams
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ! */
+/* !Footer controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('footer-controller', function (api, $scope, $state, $rootScope, $stateParams) {
+app.controller('footer-controller', function (api, $rootScope, $scope, $state, $stateParams) {
     if(Object.keys($stateParams).length > 0){
         api.load('/api/?name='+$stateParams.project).then(function(){
             $scope.pages = api.loaded.pages;

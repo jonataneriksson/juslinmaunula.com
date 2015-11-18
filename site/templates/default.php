@@ -11,17 +11,18 @@
     <link rel="stylesheet" href="assets/stylesheets.css" />    
     </head>
     <body ng-class="bodyClass">
-
-        <main data-ui-view="main" data-ng-class="mainClass" autoscroll="false"></main>
+    
+        <main data-ui-view="main" data-ng-class="wrapperClass" autoscroll="false"></main>
+        
         <footer data-ui-view="footer"></footer>
            
         <!-- bower:js -->
-        <script src="../../assets/components/picturefill/dist/picturefill.js"></script>
-        <script src="../../assets/components/angular/angular.js"></script>
-        <script src="../../assets/components/angular-picture/src/angular-picture.js"></script>
-        <script src="../../assets/components/angular-animate/angular-animate.js"></script>
-        <script src="../../assets/components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="../../assets/components/angular/angular.min.js"></script>
         <script src="../../assets/components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="../../assets/components/angular-sanitize/angular-sanitize.min.js"></script>          
+        <script src="../../assets/components/picturefill/dist/picturefill.js"></script>        
+        <script src="../../assets/components/angular-picture/src/angular-picture.js"></script>
+        <script src="../../assets/components/angular-columnify/angular-columnify.js"></script>        
         <!-- endbower -->
         <script src="assets/app.js"></script>
         <script>
@@ -31,6 +32,6 @@
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
             ga('create', 'UA-53633146-2', 'auto');
             ga('send', 'pageview');
-        </script>     
+        </script>
     </body>
 </html>
