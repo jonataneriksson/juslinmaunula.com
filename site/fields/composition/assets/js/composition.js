@@ -76,17 +76,9 @@
                 data.order = order;
                 self.order.push(data);
             });
-            //console.log(self.order);
+            console.log(self.order);
             self.source.val(JSON.stringify(self.order));
-        }
-        
-        self.start = function(event, ui) {
-            event.target.firstChild.addClass('active');
-        }
-        
-        self.stop = function(event, ui) {
-            //event.target.removeClass('dragging');
-        }        
+        }     
 
         self.mediainspector.attr('class', 'composition');
         self.mediainspector.attr('id', 'Mediainspector');
