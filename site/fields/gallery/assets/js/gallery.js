@@ -1,10 +1,13 @@
 (function($) {
 
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    /* !This function get's called (see below) */
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
     var Gallery = function(element) {
     
-        var self = this;
-
         // basic elements and stuff
+        var self = this;        
         this.source       = $(element);
         this.element      = $('<ul />');
         this.input        = $('<input class="gallery-input" type="text"/>');
@@ -17,6 +20,7 @@
         
         self.init = function() {
             
+            //TODO: not bulletproof yet
             media = self.source.val() ? JSON.parse(self.source.val()) : self.media;
             
             if(media){   
@@ -95,17 +99,21 @@
     /* !Change */
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   
-    
+    //TODO: Figure out what this means.
     $.fn.gallery = function() {
 
         return this.each(function() {
         
           if($(this).data('gallery')) {
+            
             return $(this).data('gallery');
+          
           } else {
+          
             var gallery = new Gallery(this);
             $(this).data('gallery', gallery);
             return gallery;
+          
           }
           
         });
