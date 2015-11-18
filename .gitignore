@@ -1,4 +1,3 @@
-*.scss
 .sass-cache
 .sass-cache/*
 assets/.sass-cache
@@ -8,5 +7,6 @@ content/*
 content
 thumbs
 thumbs/*
-*.scssc
 assets/.sass-cache/*
+panel/assets/scss/*
+assets/components/bourbon/app/assets/stylesheets/*
