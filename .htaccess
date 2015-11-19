@@ -69,19 +69,19 @@ RewriteRule ^(.*) index.php [L]
 
 # Compressing
 
-# <IfModule mod_deflate.c>
+<IfModule mod_deflate.c>
 # Compress HTML, CSS, JavaScript, Text, XML and fonts
-# AddOutputFilterByType DEFLATE application/javascript
-# AddOutputFilterByType DEFLATE application/x-font
-# AddOutputFilterByType DEFLATE font/woff
-# AddOutputFilterByType DEFLATE text/css
-# AddOutputFilterByType DEFLATE text/html
-# AddOutputFilterByType DEFLATE text/javascript
-# AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-font
+AddOutputFilterByType DEFLATE font/woff
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE text/plain
 
 # Remove browser bugs (only needed for really old browsers)
 # BrowserMatch ^Mozilla/4 gzip-only-text/html
 # BrowserMatch ^Mozilla/4\.0[678] no-gzip
 # BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 # Header append Vary User-Agent
-# </IfModule>
+</IfModule>
