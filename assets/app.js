@@ -48,6 +48,11 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
         'main' : { templateUrl: 'site/templates/project.html', controller: 'project-controller'}
         ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}                
       }
+    }).state('project.image', {
+      params: { item : null },
+      views: {
+        'overlay@' : { templateUrl: 'site/templates/image.html', controller: 'image-controller'}
+      }
     });
     
 });
@@ -171,13 +176,29 @@ app.controller('archive-controller', function ($scope, $rootScope, api, $anchorS
 
 app.controller('project-controller', function ($scope, $rootScope, api, $state, $stateParams, $anchorScroll) {
     $anchorScroll();
+    $rootScope.bodyClass = 'Black';    
     $scope.mainClass = 'Project';
+    $scope.currentUrl = window.location.pathname;
     $scope.back = function(){window.history.back();}
-    $rootScope.bodyClass = 'Black';
+    $scope.image = function(){
+        $state.go('project.image' , { item : this.$parent.item });
+    };
     api.load('/api/?name='+$stateParams.project).then(function(){
         $scope.project = api.loaded.project;
         console.log($scope);
     });     
+});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Image controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('image-controller', function ($scope, $rootScope, $state, $stateParams) {
+    $scope.overlayClass = 'Overlay';
+    $scope.item = $state.params.item;
+    $scope.back = function(){
+        $state.go('project');
+    }    
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

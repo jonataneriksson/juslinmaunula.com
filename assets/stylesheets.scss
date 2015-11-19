@@ -84,7 +84,7 @@ ol {
     counter-reset: item;
     list-style-type: none;
     text-align: left;
-    margin: 2em 0 0 -3em;
+    margin: 0;
     padding: 0;
 }
 
@@ -126,7 +126,10 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
-    text-align: center;
+}
+
+footer nav {
+    position: relative;
     padding: 10% 12% 3%;
 }
 
@@ -137,7 +140,7 @@ header {
     left: 0;
     right: 0;
     text-align: left;
-    padding: 4% 12% 0;
+    padding: 3% 12% 0;
 }
 
 article {
@@ -157,9 +160,26 @@ article {
 }
 
 #Navigation {
-    margin-left: 0em;
-	float: left;
     pointer-events: all;
+    display: inline-block;
+}
+
+#Shadow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.Black footer #Shadow {
+    @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    opacity: 1;
+}
+
+.White footer #Shadow {
+    @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    opacity: 0;    
 }
 
 #Sub-Navigation {
@@ -174,7 +194,7 @@ article {
 
 main {
     min-width: 100%;
-    padding: 4% 6% 12%;    
+    padding: 3% 6% 12%;    
 }
 
 main.Cover {
@@ -328,11 +348,14 @@ img {
   font-size: 0;
 }
 
-/* Project */
+/* !Project */
 
-aside {
+.product aside {
     width: 18%;
     float: right;
+    position: fixed;
+    top: 4em;
+    right: 6%;
 }
 
 .gallery.composition {
@@ -357,11 +380,49 @@ aside {
     margin-right: 4%;    
 }
 
-.back-button {
+.back-button, .close-button {
     cursor: pointer; 
     float: left;
     clear: both;
     margin-bottom: 1em;
+    margin-left: 3em;
+    padding: 0;
+    position: relative;
+}
+.back-button:before {
+    content: '←';
+    position: absolute;
+    left: -3em;
+}
+
+.close-button:before {
+    content: '×';
+    position: absolute;
+    left: -3em;    
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  z-index: 1;
+}
+
+.Overlay img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  max-height: 90%;
+  margin: auto;
+  background-color: black;
+  z-index: 1
 }
 
 /* About */
@@ -410,26 +471,16 @@ body.White #Logo #Graphic {
   fill: #000;
 }
 
-#Graphic {
-  @include transition(fill 4s ease);
-}
-
 main {
   animation: fadeIn 1000ms ease 0s;
 }
 
-
-.hidden-until-loaded {
+img.hidden-until-loaded {
   opacity: 0;
 }
 
 img {
   @include transition(opacity 0.5s ease);    
-}
-
-
-footer {
-  opacity: 1;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -449,7 +500,11 @@ footer {
     .gallery.composition {width: 100%;}
     aside {width: 100%; margin-bottom: 2rem;}
     .cover.composition .large a, .cover.composition .small a {padding: 12%; width: 100%;}
-    .cover.composition .item {@include transform(translate(0%, 0%) !important);}
+    /*.cover.composition .item {@include transform(translate(0%, 0%) !important);}*/
     .black {color: black !important; background-color: white !important;}
     header {display: none;}
+    #Shadow {display: none;}
+    footer nav {padding: 0;}
+    .column {width: 100%; float: none;}
+    .menu.composition .item {padding: 5% 0;}
 }

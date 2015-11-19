@@ -1,3 +1,13 @@
+    <div id="Shadow"><!-- Hello darkness my old friend --></div>
+    <nav>
+    
+            <ol id="Navigation">
+            	<li data-ng-repeat="page in pages" ng-switch="page.link">
+            	   <a ng-switch-when="" href="{{page.url}}">{{page.title}}</a>
+            	   <a ng-switch-default target="_empty" href="{{page.link}}">{{page.title}}</a>
+                </li>
+            </ol>    
+    
             <a id="Logo" href="/">
             
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -28,11 +38,6 @@
             <!-- ! -->
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
             
-            
             </a>
-            <ol id="Navigation">
-            	<li data-ng-repeat="page in pages" ng-switch="page.link">
-            	   <a ng-switch-when="" href="{{page.url}}">{{page.title}}</a>
-            	   <a ng-switch-default target="_empty" href="{{page.link}}">{{page.title}}</a>
-                </li>
-            </ol>
+            
+    </nav>            

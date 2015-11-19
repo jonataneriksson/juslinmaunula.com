@@ -12,6 +12,8 @@
     </head>
     <body ng-class="bodyClass">
     
+        <section data-ui-view="overlay" data-ng-class="overlayClass"></section>
+    
         <main data-ui-view="main" data-ng-class="wrapperClass" autoscroll="false"></main>
         
         <footer data-ui-view="footer"></footer>
