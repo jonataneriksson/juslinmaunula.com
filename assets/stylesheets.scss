@@ -156,7 +156,6 @@ article {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	padding-bottom: 5.6em;
 }
 
 #Navigation {
@@ -497,7 +496,8 @@ img {
     footer {top: 0; bottom: auto; padding: 6%; background-image: none !important; color: black !important;}
     main {margin-top: 6em !important; padding-bottom: 6em !important;}
     ol {margin: 0 !important; float: left !important;}
-    #Logo {position: fixed; width: 100% !important; bottom: 2em; padding: 2em;}
+    footer, footer nav {height: 100%;}
+    #Logo {position: absolute; width: 100% !important; padding: 2em;}
     #Logo svg {position: static; width: 100% !important; fill: black !important;}
     div, p {margin-right: 0 !important; padding-right: 0 !important;}
     .portrait {width: 100% !important;}
@@ -512,4 +512,5 @@ img {
     footer nav {padding: 0;}
     .column {width: 100%; float: none;}
     .menu.composition .item {padding: 5% 0;}
+    body.Black #Logo #Graphic {fill: #000;}
 }
