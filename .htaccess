@@ -46,11 +46,11 @@ RewriteRule ^(.*) index.php [L]
 
 # Caching
 
-# <IfModule mod_expires.c>
+<IfModule mod_expires.c>
 # Enable expirations
-# ExpiresActive On
+ExpiresActive On
 # Default directive
-# ExpiresDefault "access plus 1 month"
+ExpiresDefault "access plus 1 month"
 # Images, video and favicon
 # ExpiresByType image/x-icon "access plus 1 year"
 # ExpiresByType image/gif "access plus 1 month"
@@ -65,7 +65,7 @@ RewriteRule ^(.*) index.php [L]
 # ExpiresByType text/css "access 1 month"
 # Javascript
 # ExpiresByType application/javascript "access plus 1 year"
-# </IfModule>
+</IfModule>
 
 # Compressing
 
