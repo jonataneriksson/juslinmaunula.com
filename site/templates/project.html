@@ -7,6 +7,7 @@
                                 <img ng-src="{{item.url}}"/>
                             </a>                    
                             <video data-ng-switch-when="video" preload="auto" poster="{{item.thumbnail}}" controls="true">
+                                {{item}}
                                 <source ng-src="{{item.mp4}}" type="video/mp4">
                                 <source ng-src="{{item.webm}}" type="video/webm">                           
                                 Your browser does not support the video tag.
