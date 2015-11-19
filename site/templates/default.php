@@ -3,6 +3,7 @@
     <head>
     <title>Juslin Maunula</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">    
     <!-- bower:css -->
     <link rel="stylesheet" href="../../assets/components/normalize.css/normalize.min.css" />
