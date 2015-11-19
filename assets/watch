@@ -1,6 +1,6 @@
 #!/bin/sh
 
 # --style compressed
-sass --watch ./:./ 
+sass --watch ./:./ --style compressed
 
 exit 0

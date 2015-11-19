@@ -451,4 +451,5 @@ footer {
     .cover.composition .large a, .cover.composition .small a {padding: 12%; width: 100%;}
     .cover.composition .item {@include transform(translate(0%, 0%) !important);}
     .black {color: black !important; background-color: white !important;}
+    header {display: none;}
 }
