@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <base href="/">    
     <!-- bower:css -->
-    <link rel="stylesheet" href="../../assets/components/normalize.css/normalize.min.css" />
-    <!--<link rel="stylesheet" href="../../assets/components/animate-css/animate.css" />-->
+    <link rel="stylesheet" href="assets/components/normalize.css/normalize.min.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="assets/stylesheets.css" />    
     </head>
@@ -22,13 +21,13 @@
            
         <!-- bower:js -->
         <!--[if lte IE 9]>
-            <script src="../../assets/components/es5-shim/es5-sham.min.js"></script>
-            <script src="../../assets/components/es5-shim/es5-shim.min.js"></script>            
+            <script src="assets/components/es5-shim/es5-sham.min.js"></script>
+            <script src="assets/components/es5-shim/es5-shim.min.js"></script>            
         <![endif]-->
-        <script src="../../assets/components/angular/angular.min.js"></script>
-        <script src="../../assets/components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="../../assets/components/angular-sanitize/angular-sanitize.min.js"></script>          
-        <script src="../../assets/components/angular-columnify/angular-columnify.js"></script>        
+        <script src="assets/components/angular/angular.min.js"></script>
+        <script src="assets/components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="assets/components/angular-sanitize/angular-sanitize.min.js"></script>          
+        <script src="assets/components/angular-columnify/angular-columnify.js"></script>        
         <!-- endbower -->
         <script src="assets/app.js"></script>
         <script defer>
