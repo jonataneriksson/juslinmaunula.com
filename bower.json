@@ -12,7 +12,8 @@
     "modernizr": "*",
     "vega-lite": "*",
     "angular-columnify": "~0.1.2",
-    "angular-sanitize": "~1.4.7"
+    "angular-sanitize": "~1.4.7",
+    "es5-shim": "~4.3.1"
   },
   "authors": [
     "Jonatan Eriksson <jonatan@projectprojects.com>"

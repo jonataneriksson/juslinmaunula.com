@@ -11,7 +11,7 @@
     <!-- endbower -->
     <link rel="stylesheet" href="assets/stylesheets.css" />    
     </head>
-    <body ng-class="bodyClass">
+    <body data-ng-class="bodyClass">
     
         <section data-ui-view="overlay" data-ng-class="overlayClass"></section>
     
@@ -20,6 +20,10 @@
         <footer data-ui-view="footer"></footer>
            
         <!-- bower:js -->
+        <!--[if lte IE 9]>
+            <script src="../../assets/components/es5-shim/es5-sham.min.js"></script>
+            <script src="../../assets/components/es5-shim/es5-shim.min.js"></script>            
+        <![endif]-->
         <script src="../../assets/components/angular/angular.min.js"></script>
         <script src="../../assets/components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="../../assets/components/angular-sanitize/angular-sanitize.min.js"></script>          
