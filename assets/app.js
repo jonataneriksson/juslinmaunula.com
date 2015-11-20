@@ -26,32 +26,32 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
     .state('root', {
       url: '/',
       views: {
-        'main' : { templateUrl: 'site/templates/cover.html', controller: 'cover-controller'}
-        ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}           
+        'main' : { templateUrl: 'assets/views/cover.html', controller: 'cover-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}           
       },
       onExit: function($document, $rootScope){angular.element($document).unbind('scroll');}
     }).state('about', {
       url: '/about',
       views: {
-        'main' : { templateUrl: 'site/templates/about.html', controller: 'about-controller'}
-        ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}        
+        'main' : { templateUrl: 'assets/views/about.html', controller: 'about-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}        
       }
     }).state('archive', {
       url: '/archive',
       views: {
-        'main' : { templateUrl: 'site/templates/archive.html', controller: 'archive-controller'}
-        ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}        
+        'main' : { templateUrl: 'assets/views/archive.html', controller: 'archive-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}        
       }
     }).state('project', {
       url: '/archive/:project',
       views: {
-        'main' : { templateUrl: 'site/templates/project.html', controller: 'project-controller'}
-        ,'footer' : { templateUrl: 'site/templates/footer.html', controller: 'footer-controller'}                
+        'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}                
       }
     }).state('project.image', {
       params: { item : null },
       views: {
-        'overlay@' : { templateUrl: 'site/templates/image.html', controller: 'image-controller'}
+        'overlay@' : { templateUrl: 'assets/views/image.html', controller: 'image-controller'}
       }
     });
     
