@@ -1,9 +1,0 @@
-Title: Accessories S/S 2016
-
-----
-
-Description: Accessories designed as part of the the Juslin Maunula S/S 16  collection. Thank You Jarmo Saarekas for collaborating with us and exploring experimental casting techniques.  Photo: Otto Virtanen
-
-----
-
-Gallery: [{"orientation":"landscape","thumbnail":"http://local.juslinmaunula.com/content/2-archive/8-accessories-s-s-2016/accessories-2015-web-res-1.jpg","width":"957","height":"900","type":"image","jpg":"http://local.juslinmaunula.com/content/2-archive/8-accessories-s-s-2016/accessories-2015-web-res-1.jpg","url":"http://local.juslinmaunula.com/content/2-archive/8-accessories-s-s-2016/accessories-2015-web-res-1.jpg","name":"accessories-2015-web-res-1"}]

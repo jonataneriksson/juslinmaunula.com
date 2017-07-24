@@ -1,9 +1,0 @@
-Title: Pre Helsinki 2015 Show
-
-----
-
-Description: A pilot project by Laura Juslin and Lilli Maunula that lead to the founding of Juslin Maunula Creative Collaboration.  The presentation was held as part of the annual Pre Helsinki event in Helsinki / May 2015. The fashion collection was designed by Laura Juslin in collaboration with Huan-Ting Yun.  The spatial installation was designed by Lilli Maunula and sponsored by 3M Dichroic Glass Films. We want to express out thanks to Päivi Kovanen for her invaluable work on the knitwear and thank Otto Virtanen for lighting design and video production.
-
-----
-
-Gallery: [{"orientation":"landscape","thumbnail":"http://local.juslinmaunula.com/content/2-archive/6-pre-helsinki/prehelsinkishow.jpg","width":"700","height":"394","type":"video","jpg":"http://local.juslinmaunula.com/content/2-archive/6-pre-helsinki/prehelsinkishow.jpg","url":"http://local.juslinmaunula.com/content/2-archive/6-pre-helsinki/prehelsinkishow.webm","name":"prehelsinkishow","mp4":"http://local.juslinmaunula.com/content/2-archive/6-pre-helsinki/prehelsinkishow.mp4","webm":"http://local.juslinmaunula.com/content/2-archive/6-pre-helsinki/prehelsinkishow.webm"}]
