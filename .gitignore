@@ -11,3 +11,4 @@ assets/.sass-cache/*
 panel/assets/scss/*
 assets/components/bourbon/app/assets/stylesheets/*
 node_modules/*
+site/accounts/*
