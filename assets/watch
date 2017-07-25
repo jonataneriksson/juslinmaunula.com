@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# --style compressed
+sass --watch ./:./ --style compressed
+
+exit 0
