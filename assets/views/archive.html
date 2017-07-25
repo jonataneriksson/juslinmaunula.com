@@ -3,7 +3,14 @@
     <div class="item">
       <a href="{{item.url}}">
         <h4 class="title">{{item.strings.title}}</h4>
-        <img ng-src="{{item.files[item.strings.thumbnail].image}}">
+        <picture picturefill>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source ng-attr-srcset="{{item.files[item.strings.thumbnail].thumbnails.h1400}}" pf-media="retina"/>
+            <source ng-attr-srcset="{{item.files[item.strings.thumbnail].thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
+            <source ng-attr-srcset="{{item.files[item.strings.thumbnail].thumbnails.h350}}" pf-media="(min-height: 400px)"/>
+            <!--[if IE 9]></video><![endif]-->
+            <img ng-class="class"/>
+        </picture>
       </a>
     </div>
   </div>

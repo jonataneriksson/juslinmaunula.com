@@ -1,10 +1,17 @@
     <header><nav><a class="back-button" ng-click="back()">Back</a><nav></header>
     <aside><h4>{{project.title}}</h4><div ng-bind-html="page.content.description.kirbytext"></div></aside>
     <div class="gallery composition">
-        <div class="item" ng-repeat="item in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.25" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
-            <ng-switch on="item.type">
+        <div class="item" ng-repeat="file in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.25" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : file.margin + '%' }">
+            <ng-switch on="file.type">
               <a ng-click="image()" data-ng-switch-when="image">
-                  <img ng-src="{{item.image}}"/>
+                <picture picturefill>
+                    <!--[if IE 9]><video style="display: none;"><![endif]-->
+                    <source ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
+                    <source ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
+                    <source ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
+                    <!--[if IE 9]></video><![endif]-->
+                    <img ng-class="class"/>
+                </picture>
               </a>
             </ng-switch>
         </div>

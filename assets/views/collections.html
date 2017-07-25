@@ -5,11 +5,18 @@
   </nav>
 </aside>
 <div class="collection gallery composition">
-  <div class="item" ng-repeat="item in (page.children | first).content.images.yaml | imagesfrom : (page.children | first) | uniheight : 2 : 2" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
-    <ng-switch on="item.type">
-      <a ng-click="image()" data-ng-switch-when="image">
-          <img ng-src="{{item.image}}"/>
-      </a>
+  <div class="item" ng-repeat="file in (page.children | first).content.images.yaml | imagesfrom : (page.children | first) | uniheight : 2 : 2" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : file.margin + '%' }">
+    <ng-switch on="file.type">
+        <a ng-click="image()" data-ng-switch-when="image">
+            <picture picturefill>
+                <!--[if IE 9]><video style="display: none;"><![endif]-->
+                <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
+                <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
+                <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
+                <!--[if IE 9]></video><![endif]-->
+                <img ng-class="class"/>
+            </picture>
+        </a>
     </ng-switch>
 </div>
 </div>

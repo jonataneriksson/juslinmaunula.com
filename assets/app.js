@@ -38,7 +38,7 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
     }).state('collections', {
       url: '/collections',
       views: {
-        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collections-controller'}
+        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collection-controller'}
         ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('collection', {
@@ -50,7 +50,7 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
     }).state('accessories', {
       url: '/accessories',
       views: {
-        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collections-controller'}
+        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collection-controller'}
         ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('accessoriescollection', {
@@ -122,16 +122,18 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
       });
     });
 
+    $scope.$on('imgloaded', function(event, args){
+      if(queue.current==0){
+        $scope.switchSlide(2000);
+      }
+    });
+
     $scope.$on('imgcreated', function(event, args){
       queue.add(args);
       args.scope.class = 'waiting';
     });
 
     $scope.$on('imgloaded', function(event, args){
-      console.info('Image No.'+queue.current+' is loaded');
-      if(queue.current==0){
-        $scope.switchSlide(2000);
-      }
       args.scope.$apply(function(){
         args.scope.class = 'visible';
       });
@@ -168,7 +170,7 @@ app.controller('about-controller', function ($scope, $rootScope, api, $location)
 /* !Collection controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('collections-controller', function ($scope, $rootScope, api, $location, $timeout) {
+app.controller('collections-controller', function ($scope, $rootScope, api, $location, $timeout, queue) {
     $scope.mainClass = 'Collection';
     $rootScope.bodyClass = 'White';
     api.load($location.path()).then(function(){
@@ -176,14 +178,18 @@ app.controller('collections-controller', function ($scope, $rootScope, api, $loc
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
       $scope.site = api.loaded.site;
       $timeout(function(){api.extend($scope.page.children)});
+      queue.ready().then(function(){queue.start();});
     });
+
+
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Collection controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('collection-controller', function ($scope, $rootScope, api, $location, $timeout) {
+app.controller('collection-controller', function ($scope, $rootScope, api, $location, $timeout, queue) {
+    queue.init();
     $scope.mainClass = 'Collection';
     $rootScope.bodyClass = 'White';
     api.load($location.path()).then(function(){
@@ -192,6 +198,25 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
       $scope.parent = getObjectFromChildrenByPath(api.loaded.pages, $scope.page.parentuid);
       $scope.site = api.loaded.site;
       $timeout(function(){api.extend($scope.page.children)});
+      queue.ready().then(function(){queue.start();});
+    });
+
+    $scope.$on('imgcreated', function(event, args){
+      queue.add(args);
+      args.scope.class = 'waiting';
+    });
+
+    $scope.$on('imgloaded', function(event, args){
+      args.scope.$apply(function(){
+        args.scope.class = 'visible';
+      });
+      queue.next();
+    });
+
+    $scope.$on('imgload', function(event, args){
+      $timeout(function(){
+        args.scope.$parent.load = true;
+      });
     });
 });
 
