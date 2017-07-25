@@ -1,12 +1,10 @@
-<aside>
+<aside class="collection">
   <h4>{{parent.strings.title}}</h4>
-  <div>
-    <nav class="sidemenu">
-        <a ng-repeat="collection in parent.children" href="{{collection.url}}">{{collection.strings.title}}</a>
-    </nav>
-  </div>
+  <nav class="collection sidemenu">
+      <a ng-repeat="collection in parent.children" href="{{collection.url}}">{{collection.strings.title}}</a>
+  </nav>
 </aside>
-<div class="gallery composition">
+<div class="collection  gallery composition">
   <div class="item" ng-repeat="item in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 2" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
     <ng-switch on="item.type">
       <a ng-click="image()" data-ng-switch-when="image">
