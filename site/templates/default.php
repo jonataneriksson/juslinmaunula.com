@@ -5,29 +5,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <base href="/">    
+    <base href="/">
     <!-- bower:css -->
     <link rel="stylesheet" href="assets/components/normalize.css/normalize.min.css" />
     <!-- endbower -->
-    <link rel="stylesheet" href="assets/stylesheets.css" />    
+    <link rel="stylesheet" href="assets/stylesheets.css" />
     </head>
     <body data-ng-class="bodyClass">
-    
+
         <section data-ui-view="overlay" data-ng-class="overlayClass"></section>
-    
+
         <main data-ui-view="main" data-ng-class="wrapperClass" autoscroll="false"></main>
-        
+
         <footer data-ui-view="footer"></footer>
-           
+
         <!-- bower:js -->
         <!--[if lte IE 9]>
             <script src="assets/components/es5-shim/es5-sham.min.js"></script>
-            <script src="assets/components/es5-shim/es5-shim.min.js"></script>            
+            <script src="assets/components/es5-shim/es5-shim.min.js"></script>
         <![endif]-->
-        <script src="assets/components/angular/angular.min.js"></script>
-        <script src="assets/components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="assets/components/angular-sanitize/angular-sanitize.min.js"></script>          
-        <script src="assets/components/angular-columnify/angular-columnify.js"></script>        
+        <?php echo js('/assets/components/angular/angular.min.js'); ?>
+        <?php echo js('/assets/components/angular-ui-router/release/angular-ui-router.min.js'); ?>
+        <?php echo js('/assets/components/picturefill/dist/picturefill.min.js'); ?>
+        <?php echo js('/assets/components/angular-picture/src/angular-picture.js'); ?>
+        <?php echo js('/assets/components/angular-sanitize/angular-sanitize.min.js'); ?>
+        <?php echo js('/assets/components/angular-columnify/angular-columnify.js'); ?>
         <!-- endbower -->
         <script src="assets/app.js"></script>
         <script defer>

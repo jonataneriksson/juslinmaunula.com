@@ -1,10 +1,8 @@
     <header><nav><a class="back-button" ng-click="back()">Back</a><nav></header>
     <aside><h4>{{project.title}}</h4><div ng-bind-html="page.content.description.kirbytext"></div></aside>
     <div class="gallery composition">
-        <div class="item" ng-repeat="item in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.5" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
+        <div class="item" ng-repeat="item in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.25" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
             <ng-switch on="item.type">
-              {{item.width / item.height}}
-              {{item.ratio}}
               <a ng-click="image()" data-ng-switch-when="image">
                   <img ng-src="{{item.image}}"/>
               </a>

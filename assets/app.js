@@ -2,7 +2,7 @@
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize', 'hj.columnify']); //, 'ngAnimate'
+var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize', 'ngPicturefill']); //, 'ngAnimate'
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
@@ -33,6 +33,30 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
       url: '/about',
       views: {
         'main' : { templateUrl: 'assets/views/about.html', controller: 'about-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+      }
+    }).state('collections', {
+      url: '/collections',
+      views: {
+        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collections-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+      }
+    }).state('collection', {
+      url: '/collections/:collection',
+      views: {
+        'main' : { templateUrl: 'assets/views/collection.html', controller: 'collection-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+      }
+    }).state('accessories', {
+      url: '/accessories',
+      views: {
+        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collections-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+      }
+    }).state('accessoriescollection', {
+      url: '/accessories/:collection',
+      views: {
+        'main' : { templateUrl: 'assets/views/collection.html', controller: 'collection-controller'}
         ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('projects', {
@@ -82,12 +106,50 @@ app.controller('footer-controller', function (api, $rootScope, $scope, $state, $
 /* !Cover controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('cover-controller', function ($scope, $window, $document, $rootScope, api) {
+app.controller('cover-controller', function ($scope, $location, $timeout, $rootScope, api, queue) {
+    //Init
+    queue.init();
     $rootScope.bodyClass = 'White';
     $scope.wrapperClass = 'Cover';
-    api.load('/cover').then(function(){
-      $scope.cover = api.loaded.cover;
+
+    api.load('cover').then(function(){
+      $scope.pages = api.loaded.pages;
+      $scope.page = getObjectFromChildrenByPath(api.loaded.pages, 'cover');
+      $scope.site = api.loaded.site;
+      //Start
+      queue.ready().then(function(){
+        queue.start();
+      });
     });
+
+    $scope.$on('imgcreated', function(event, args){
+      queue.add(args);
+      args.scope.class = 'waiting';
+    });
+
+    $scope.$on('imgloaded', function(event, args){
+      console.info('Image No.'+queue.current+' is loaded');
+      if(queue.current==0){
+        $scope.switchSlide(2000);
+      }
+      args.scope.$apply(function(){
+        args.scope.class = 'visible';
+      });
+      queue.next();
+    });
+
+    $scope.$on('imgload', function(event, args){
+      $timeout(function(){
+        args.scope.$parent.load = true;
+      });
+    });
+
+    $scope.switchSlide = function(interval){
+      $timeout(function() {
+        $scope.current = ($scope.current < $scope.last) ? $scope.current +  1 : 0;
+        $scope.switchSlide(interval);
+      }, interval);
+    }
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -103,13 +165,43 @@ app.controller('about-controller', function ($scope, $rootScope, api, $location)
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Collection controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('collections-controller', function ($scope, $rootScope, api, $location, $timeout) {
+    $scope.mainClass = 'Collection';
+    $rootScope.bodyClass = 'White';
+    api.load($location.path()).then(function(){
+      $scope.pages = api.loaded.pages;
+      $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
+      $scope.site = api.loaded.site;
+      $timeout(function(){api.extend($scope.page.children)});
+    });
+});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Collection controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('collection-controller', function ($scope, $rootScope, api, $location, $timeout) {
+    $scope.mainClass = 'Collection';
+    $rootScope.bodyClass = 'White';
+    api.load($location.path()).then(function(){
+      $scope.pages = api.loaded.pages;
+      $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
+      $scope.parent = getObjectFromChildrenByPath(api.loaded.pages, $scope.page.parentuid);
+      $scope.site = api.loaded.site;
+      $timeout(function(){api.extend($scope.page.children)});
+    });
+});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Archive controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 app.controller('archive-controller', function ($scope, $rootScope, api, $location, $timeout) {
     $scope.mainClass = 'Archive';
     $rootScope.bodyClass = 'Black';
-    $scope.items = [];
     api.load($location.path()).then(function(){
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
@@ -181,7 +273,6 @@ app.factory('api', function($http, $rootScope, $q){
         Object.assign(storedpage, loadedpage);
         api.loading[currentpath].resolve(api.loaded);
         api.resolve(api.loaded);
-        console.log('resolved:' + currentpath);
       });
     }
     //Return a promise
@@ -247,7 +338,6 @@ app.filter('uniheight', function($filter) { return function(array, margin, tresh
     layout.rownumber = 1;
     //Loop through items
     Object.keys(array).map(function(key) {
-      console.log(array[key].ratio);
       if(!array[key].ratio) return '';
       //Init the current item
       var current = array[key];
@@ -320,6 +410,9 @@ app.filter('imagesfrom', function($filter) { return function(array, page) {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 app.directive('img', function ($rootScope) { return function ($scope, $element) {
+    //Init
+    var args = { element: $element,  scope: $scope }
+    $scope.$emit('imgcreated', args);
 
     //Hide first
     $element.addClass('hidden-until-loaded');
@@ -330,8 +423,9 @@ app.directive('img', function ($rootScope) { return function ($scope, $element) 
 
     //Show when loaded
 	$element.bind("load", function (event){
+    $scope.$emit('imgloaded', args);
 		if(event.target.complete){
-		    $element.removeAttr('style');
+		  $element.removeAttr('style');
 			$element.removeClass('hidden-until-loaded');
 		}
 	});
@@ -360,9 +454,82 @@ app.filter('visible', function() {
 
 app.filter('first', function() { return function(input) {
   if(input){
-    console.log(input);
     return input[Object.keys(input)[0]]
   } else {
     return '';
   };
 }});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Slide */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.directive('slide', ['$rootScope', function ($rootScope) {
+  return {
+    templateUrl: '/assets/views/slide.html',
+    link: function ($scope, $element) {
+      //
+      $scope.$watch('filenames', function(val){
+        $scope.files = (!$scope.filenames) ? [] : $scope.filenames.split(',').map(function(filename){
+          return $scope.page.files[filename];
+        });
+      }, true);
+    }
+  }
+}]);
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Slideshow */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.directive('slideshow', ['$rootScope', function ($rootScope) {
+  return {
+    templateUrl: '/assets/views/slideshow.html',
+    link: function ($scope, $element) {
+      //From string to array
+
+      $scope.$watch('page', function(val){
+        $scope.current = 0;
+        $scope.last = ($scope.page) ? $scope.page.content.slides.length-1 : 0;
+      }, true);
+
+    }
+  }
+}]);
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+var queue = {};
+
+//Welcome to our factory
+app.factory('queue', function($q){
+  //Init
+  queue.init = function(){
+    queue.imgs = [];
+    queue.current = 0;
+    queue.initiated = $q.defer();
+  }
+  //Add
+  queue.add = function(args){
+    queue.initiated.resolve();
+    queue.imgs.push(args);
+  }
+  //Ready
+  queue.ready = function(){
+    return queue.initiated.promise;
+  }
+  //Start
+  queue.start = function(){
+    queue.imgs[0].scope.$emit('imgload', queue.imgs[0]);
+  }
+  //Next
+  queue.next = function(){
+    if(queue.imgs[queue.current+1]){
+      queue.current++;
+      queue.imgs[queue.current].scope.$emit('imgload', queue.imgs[queue.current]);
+    }
+  }
+  //Return self
+  return queue;
+});

@@ -1,18 +1,3 @@
-            <div>
-            <ul class="cover composition">        
-                <li class="item {{item.className}}" data-ng-repeat="item in cover">
-                    <a href="{{item.permalink}}">
-                        <img ng-src="{{item.url}}">
-                    </a>
-                </li>                             
-            </ul>
-            </div>           
-            <div class="shadow">
-            <ul class="cover composition">        
-                <li class="item {{item.className}}" data-ng-repeat="item in cover">
-                    <a href="{{item.permalink}}">
-                        <img ng-src="{{item.url}}">
-                    </a>
-                </li>                             
-            </ul>            
-            </div>          
+<a class="cover" ui-sref="root.index">
+  <div class="slideshow" slideshow ng-init="counter=false"></div>
+</a>

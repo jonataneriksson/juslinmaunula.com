@@ -1,5 +1,5 @@
 title: Project Template
-pages: true
+pages: false
 files: true
 fields:
   title:

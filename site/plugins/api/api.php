@@ -215,6 +215,7 @@
          $pageitem->uid = (string)$page->uid();
          $pageitem->parenttitle = (string)$page->parent()->title();
          $pageitem->parenturl = (string)$page->parent()->url();
+         $pageitem->parentuid = (string)$page->parent()->uid();
 
          if($next = $page->next()):
            $pageitem->nexturi = (string)$next->uri();
@@ -229,7 +230,7 @@
          endif;
 
          //Setup children
-         if($page->hasChildren()):
+         if($page->hasChildren() && !get('structure')):
            $pageitem->children = getpages($page->children());
          endif;
 

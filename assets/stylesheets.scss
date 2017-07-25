@@ -233,6 +233,15 @@ img, video {
     @include column-gap(3rem);
 }
 
+.slides .hidden {
+  display: none;
+}
+
+.slides .current {
+  display: block;
+}
+
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

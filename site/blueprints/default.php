@@ -1,5 +1,5 @@
 title: Project Template
-pages: true
+pages: false
 files: true
 fields:
   title:
@@ -10,4 +10,4 @@ fields:
     type:  textarea
   gallery:
     label: Media Gallery
-    type:  images   
+    type:  images
