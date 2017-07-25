@@ -1,8 +1,10 @@
-<div class="item" ng-repeat="item in items | uniheight : 2 : 1" ng-init="file = item.thumbnail" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
-  <div class="item {{item.orientation}}">
-    <a href="{{item.url}}">
-      <h4 class="title">{{item.title}}</h4>
-      <img ng-src="{{item.thumbnail}}" width="{{item.height}}" height="{{item.width}}">
-    </a>
+<div class="items">
+  <div class="item" ng-repeat="item in page.children | visible | addratios | uniheight : 2 : 1.25" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
+    <div class="item">
+      <a href="{{item.url}}">
+        <h4 class="title">{{item.strings.title}}</h4>
+        <img ng-src="{{item.files[item.strings.thumbnail].image}}">
+      </a>
+    </div>
   </div>
 </div>

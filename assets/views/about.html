@@ -1,10 +1,10 @@
-            <div class="two-columns">
-            <article>
-                <div class="description" ng-bind-html="about.description"></div>
-                <div class="contact" ng-bind-html="about.contact"></div>
-            </article>
-            <article class="two-columns">
-                <div class="bio" ng-bind-html="about.lillibio"></div>                
-                <div class="bio" ng-bind-html="about.laurabio"></div>                
-            </article>
-            </div>                  
+<div class="two-columns">
+<article>
+    <div class="description" ng-bind-html="about.content.description.kirbytext"></div>
+    <div class="contact" ng-bind-html="about.content.contact.kirbytext"></div>
+</article>
+<article class="two-columns">
+    <div class="bio" ng-bind-html="about.content.lillibio.kirbytext"></div>
+    <div class="bio" ng-bind-html="about.content.laurabio.kirbytext"></div>
+</article>
+</div>

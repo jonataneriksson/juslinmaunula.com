@@ -1,0 +1,15 @@
+<aside class="collection">
+  <h4>{{page.strings.title}}</h4>
+  <nav class="collection sidemenu">
+      <a ng-repeat="collection in page.children" href="{{collection.url}}">{{collection.strings.title}}</a>
+  </nav>
+</aside>
+<div class="collection gallery composition">
+  <div class="item" ng-repeat="item in (page.children | first).content.images.yaml | imagesfrom : (page.children | first) | uniheight : 2 : 2" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
+    <ng-switch on="item.type">
+      <a ng-click="image()" data-ng-switch-when="image">
+          <img ng-src="{{item.image}}"/>
+      </a>
+    </ng-switch>
+</div>
+</div>

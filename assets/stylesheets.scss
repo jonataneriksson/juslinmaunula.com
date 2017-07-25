@@ -233,6 +233,15 @@ img, video {
     @include column-gap(3rem);
 }
 
+.slides .hidden {
+  display: none;
+}
+
+.slides .current {
+  display: block;
+}
+
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -340,12 +349,48 @@ aside {
     float: right;
 }
 
-.product aside, .Product aside {
+.collection.sidemenu a {
+    display: block;
+}
+
+.product aside, .Product aside, aside.collection {
     width: 18%;
     float: right;
     position: fixed;
     top: 4em;
     right: 6%;
+}
+
+aside.collection {
+  padding-top: 0.5rem;
+  padding-left: 3rem;
+}
+
+main.Cover {
+  height: 100vh;
+}
+
+.slide, .slideshow, .slides {
+  height: 100vh;
+  width: 100vw;
+}
+
+.half {
+  height: 100%;
+  width: 50%;
+}
+
+.left.half {
+  text-align: right;
+}
+
+.right.half {
+  text-align: left;
+}
+
+.collection.gallery.composition {
+    padding-top: 0%;
+    width: 80%;
 }
 
 .gallery.composition {
