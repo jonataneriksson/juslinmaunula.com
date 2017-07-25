@@ -41,9 +41,9 @@ main {
 
 body {
 	font: normal 14px/18px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
-    text-rendering: optimizeLegibility;	
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;    
+    -moz-osx-font-smoothing: grayscale;
 }
 
 dl {
@@ -79,7 +79,7 @@ footer a:not(#Logo):hover, header a:hover {
     opacity: 1;
 }
 
-ol { 
+ol {
     counter-reset: item;
     list-style-type: none;
     text-align: left;
@@ -92,7 +92,7 @@ ol li {
     text-indent: -3em;
 }
 
-ol li:before { 
+ol li:before {
     content: counter(item) "  ";
     counter-increment: item;
     width: 3em;
@@ -178,7 +178,7 @@ article {
 
 .White footer #Shadow {
     @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
-    opacity: 0;    
+    opacity: 0;
 }
 
 #Sub-Navigation {
@@ -193,7 +193,7 @@ article {
 
 main {
     min-width: 100%;
-    padding: 3% 6% 12%;    
+    padding: 3% 6% 12%;
 }
 
 main.Cover {
@@ -245,7 +245,7 @@ img, video {
 
 .cover.composition .item {
     display: inline-block;
-    vertical-align: top;    
+    vertical-align: top;
 }
 
 .cover.composition .item:nth-child(odd) {
@@ -287,27 +287,13 @@ img, video {
 
 /* Archive */
 
-.menu.composition {
-    word-spacing: 0;
-    text-align: justify;
+.item {
+  display: inline-block;
 }
 
-.menu.composition .item {
-    padding: 0 5% 5%;
-}
-
-.menu.composition .item:nth-child(2n-1), {
-      
-}
-
-.menu.composition .item .title {
+.item .title {
     display: inline-block;
     word-spacing: 0.1em;
-}
-
-.column {
-    width: 48%;
-    float: left;
 }
 
 /* Shop */
@@ -316,7 +302,7 @@ img, video {
 .shop.composition {
   word-spacing: 0;
   text-align: justify;
-  width: 100%;  
+  width: 100%;
 }
 
 .shop.composition .item {
@@ -373,19 +359,19 @@ aside {
 .gallery.composition .item {
     display: inline-block;
     margin-bottom: 4%;
-    width: 48%;    
+    width: 48%;
 }
 
 .gallery.composition .landscape {
-    width: 100%;    
+    width: 100%;
 }
 
 .gallery.composition .item:nth-child(2n-1), {
-    margin-right: 4%;    
+    margin-right: 4%;
 }
 
 .back-button, .close-button {
-    cursor: pointer; 
+    cursor: pointer;
     float: left;
     clear: both;
     margin-bottom: 1em;
@@ -402,7 +388,7 @@ aside {
 .close-button:before {
     content: '×';
     position: absolute;
-    left: -3em;    
+    left: -3em;
 }
 
 .Overlay {
@@ -459,12 +445,12 @@ body {
 
 body.Black {
   background-color: black;
-  color: white;  
+  color: white;
 }
 
 body.White {
   background-color: white;
-  color: black;   
+  color: black;
 }
 
 body.Black #Logo #Graphic {
@@ -484,7 +470,7 @@ img.hidden-until-loaded {
 }
 
 img {
-  @include transition(opacity 0.5s ease);    
+  @include transition(opacity 0.5s ease);
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -499,7 +485,6 @@ img {
     footer, footer nav {height: 100%;}
     #Logo {position: absolute; width: 100% !important; padding: 2em;}
     #Logo svg {position: static; width: 100% !important; fill: black !important;}
-    div, p {margin-right: 0 !important; padding-right: 0 !important;}
     .portrait {width: 100% !important;}
     .two-columns { @include columns(1);}
     .gallery.composition {width: 100%;}
