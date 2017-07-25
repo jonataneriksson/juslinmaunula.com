@@ -5,9 +5,14 @@ fields:
   title:
     label: Title
     type:  text
+  thumbnail:
+    label: Thumbnail
+    type:  images
+    width: 1/2
   description:
     label: Description
     type:  textarea
-  gallery:
-    label: Media Gallery
-    type:  gallery   
+    width: 1/2
+  images:
+    label: Images & Videos
+    type:  images

@@ -1,72 +1,58 @@
 <?php
 
-class GalleryField extends InputField {
+class GalleryField extends BaseField {
+
+  public $type = 'text';
+  public $displayFilename = true;
+
+  public function __construct(){
+    // Build translation file path
+    $baseDir = __DIR__ . DS . 'localization' . DS;
+    $lang = panel()->language();
+    if (file_exists($baseDir . $lang . '.php')) {
+      require $baseDir . $lang . '.php';
+    } else {
+      require $baseDir . 'en.php';
+    }
+  }
 
   static public $assets = array(
     'js' => array(
       'gallery.js'
     ),
     'css' => array(
-      'gallery.css'   // /path/to/field/assets/css/styles.css
+      'gallery.css'
     )
   );
-  
-  public function input() {
-  
-    $input = parent::input();    
 
-    if(isset($this->data)) {
-    
-      $input->data('url', html(json_encode($this->data), false));
-      
-    } else if($page = $this->page()):
-
-        foreach($page->files() as $file):
-
-            if($file->type() == 'image'):
-                $media[$file->name()]['orientation'] = (string)$file->orientation();
-                $media[$file->name()]['thumbnail'] = (string)$file->url();
-                $media[$file->name()]['width'] = (string)$file->width(); 
-                $media[$file->name()]['height'] = (string)$file->height();
-            endif;
-            
-            if($media[$file->name()]['type'] != 'video'):
-                $media[$file->name()]['type'] = (string)$file->type();
-            endif;
-                  
-            $media[$file->name()][$file->extension()] = (string)$file->url();                    
-            $media[$file->name()]['url'] = (string)$file->url();
-            $media[$file->name()]['name'] = (string)$file->name();            
-            
-        endforeach;
-
-        $mediajson = html(json_encode($media));
-        
-        $input->data(array('media' => $mediajson, 'field' => 'gallery' ));
-        
-    endif;
-
-    //$input->tag('div');
-    //$input->removeAttr('type');
-    //$input->removeAttr('value');
-    return $input;
-
-  } 
-  
-  //public function content() { return 'This overrides input'; }   
-
-  public function result() {
-    // Convert all line-endings to UNIX format
-    return str_replace(array("\r\n", "\r"), "\n", parent::result());
+  public function getImage($image, $width){
+    if(!empty($this->aspectRatio)){
+      return $image->crop($width, $width * $this->calcAspectRatio($this->aspectRatio));
+    }
+    return $image->width($width);
   }
 
-  /*public function element() {
+  public function getRetinaImage($image){
+    return $image->width($this->size);
+  }
 
-    $element = parent::element();
-    $element->addClass('field-with-textarea');
-    
-    return $element;
+  public function calcAspectRatio($ratioString){
+    $ratios = explode(':', $ratioString);
+    return ((int) $ratios[1]) / ((int) $ratios[0]);
+  }
 
-  }*/
+  public function content() {
+    return tpl::load(__DIR__ . DS . 'template.php', array('field' => $this, 'page' => $this->page));
+  }
+
+  public function result() {
+    $result = parent::result();
+    return yaml::encode($result);
+  }
+
+  public function value() {
+    $value = parent::value();
+    return yaml::decode($value);  
+  }
 
 }

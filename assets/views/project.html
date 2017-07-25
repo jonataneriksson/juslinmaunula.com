@@ -1,18 +1,13 @@
-            <header><nav><a class="back-button" ng-click="back()">Back</a><nav></header>
-            <aside><h4>{{project.title}}</h4><div ng-bind-html="project.description"></div></aside>
-            <div class="gallery composition">
-                <div class="item" ng-repeat="item in project.gallery | uniheight : 2 : 1" ng-init="file = item.thumbnail" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
-                    <ng-switch on="item.type">
-                      <a ng-click="image()" data-ng-switch-when="image">
-                          <img ng-src="{{item.url}}"/>
-                      </a>
-                      <video data-ng-switch-when="video" preload="auto" poster="{{item.thumbnail}}" controls="true">
-                          {{item}}
-                          <source ng-src="{{item.mp4}}" type="video/mp4">
-                          <source ng-src="{{item.webm}}" type="video/webm">
-                          Your browser does not support the video tag.
-                          <img ng-src="{{item.tumbnail}}"/>
-	                    </video>
-                    </ng-switch>
-                </div>
-            </div>
+    <header><nav><a class="back-button" ng-click="back()">Back</a><nav></header>
+    <aside><h4>{{project.title}}</h4><div ng-bind-html="page.content.description.kirbytext"></div></aside>
+    <div class="gallery composition">
+        <div class="item" ng-repeat="item in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.5" ng-style="{ 'width' : item.relativewidth + '%', 'margin' : item.margin + '%' }">
+            <ng-switch on="item.type">
+              {{item.width / item.height}}
+              {{item.ratio}}
+              <a ng-click="image()" data-ng-switch-when="image">
+                  <img ng-src="{{item.image}}"/>
+              </a>
+            </ng-switch>
+        </div>
+    </div>

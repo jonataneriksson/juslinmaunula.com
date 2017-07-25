@@ -28,22 +28,33 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
       views: {
         'main' : { templateUrl: 'assets/views/cover.html', controller: 'cover-controller'}
         ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
-      },
-      onExit: function($document, $rootScope){angular.element($document).unbind('scroll');}
+      }
     }).state('about', {
       url: '/about',
       views: {
         'main' : { templateUrl: 'assets/views/about.html', controller: 'about-controller'}
         ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
-    }).state('archive', {
-      url: '/archive',
+    }).state('projects', {
+      url: '/projects',
       views: {
         'main' : { templateUrl: 'assets/views/archive.html', controller: 'archive-controller'}
         ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
+    }).state('installations', {
+      url: '/installations',
+      views: {
+        'main' : { templateUrl: 'assets/views/archive.html', controller: 'archive-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+      }
+    }).state('installation', {
+      url: '/installations/:installation',
+      views: {
+        'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'}
+        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+      }
     }).state('project', {
-      url: '/archive/:project',
+      url: '/projects/:project',
       views: {
         'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'}
         ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
@@ -58,67 +69,14 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ! */
+/* !Footer controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-var api;
-app.factory('api', function($http, $q){
-  api = {};
-  api.load = function(url){
-    var waiter = $q.defer();
-      $http.get(url).success(function(data) {
-        waiter.resolve(api);
-        api.loaded = data;
-      });
-    return waiter.promise;
-  }
-  return api
+app.controller('footer-controller', function (api, $rootScope, $scope, $state, $stateParams, $location) {
+  api.load($location.path()).then(function(data){
+    $scope.data = data;
+  });
 });
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* !Transitions */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-/*app.run(function($rootScope, $state, $urlRouter, $timeout){
-
-    $rootScope.readyToLoad = false
-
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        if(fromState.name && !$rootScope.readyToLoad){
-            event.preventDefault();
-            event.targetScope.wrapperClass = 'exit';
-            $timeout(function(){
-                $rootScope.readyToLoad = true;
-                $rootScope.wrapperClass = '';
-                $state.go(toState.name)
-            },1000)
-        }
-    });
-
-});*/
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* !Image loader */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-app.directive('img', function ($rootScope) { return function ($scope, $element) {
-
-    //Hide first
-    $element.addClass('hidden-until-loaded');
-
-    //Reserve space first
-    var ratio = 0.5//$scope.item.height / $scope.item.width * 100;
-    $element.attr('style', 'padding-bottom: '+ratio+'%;height:0 !important;');
-
-    //Show when loaded
-	$element.bind("load", function (event){
-		if(event.target.complete){
-		    $element.removeAttr('style');
-			$element.removeClass('hidden-until-loaded');
-		}
-	});
-
-}});
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Cover controller */
@@ -127,18 +85,8 @@ app.directive('img', function ($rootScope) { return function ($scope, $element) 
 app.controller('cover-controller', function ($scope, $window, $document, $rootScope, api) {
     $rootScope.bodyClass = 'White';
     $scope.wrapperClass = 'Cover';
-    api.load('/api/').then(function(){
-        $scope.cover = api.loaded.cover;
-    });
-    angular.element($document).bind("scroll", function(){
-        zero = this.body.scrollTop;
-        one = this.body.scrollTop + angular.element($window)[0].innerHeight;
-        two = this.body.offsetHeight;
-        if(one >= two){
-            this.body.scrollTop = 1;
-        } else if(zero < 0){
-            this.body.scrollTop = this.height - angular.element($window)[0].innerHeight-2;
-        }
+    api.load('/cover').then(function(){
+      $scope.cover = api.loaded.cover;
     });
 });
 
@@ -146,12 +94,11 @@ app.controller('cover-controller', function ($scope, $window, $document, $rootSc
 /* !About controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('about-controller', function ($scope, $rootScope, api, $anchorScroll) {
-    //$anchorScroll();
+app.controller('about-controller', function ($scope, $rootScope, api, $location) {
     $scope.mainClass = 'About two-columns';
     $rootScope.bodyClass = 'White';
-    api.load('/api/').then(function(){
-        $scope.about = api.loaded.pages.about;
+    api.wait($location.path()).then(function(data){
+      $scope.about = api.loaded.pages.about;
     });
 });
 
@@ -159,33 +106,30 @@ app.controller('about-controller', function ($scope, $rootScope, api, $anchorScr
 /* !Archive controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('archive-controller', function ($scope, $rootScope, api, $anchorScroll) {
-    //$anchorScroll();
+app.controller('archive-controller', function ($scope, $rootScope, api, $location, $timeout) {
     $scope.mainClass = 'Archive';
     $rootScope.bodyClass = 'Black';
     $scope.items = [];
-    api.load('/api/').then(function(){
-        $scope.items = api.loaded.pages.archive.items;
+    api.load($location.path()).then(function(){
+      $scope.pages = api.loaded.pages;
+      $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
+      $scope.site = api.loaded.site;
+      $timeout(function(){api.extend($scope.page.children)});
     });
-    //$scope.items = api.loaded.pages.archive.items;
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Project controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('project-controller', function ($scope, $rootScope, api, $state, $stateParams, $anchorScroll) {
-    $anchorScroll();
+app.controller('project-controller', function ($scope, $rootScope, api, $location, $timeout) {
     $rootScope.bodyClass = 'Black';
     $scope.mainClass = 'Project';
-    $scope.currentUrl = window.location.pathname;
     $scope.back = function(){window.history.back();}
-    $scope.image = function(){
-        $state.go('project.image' , { item : this.$parent.item });
-    };
-    api.load('/api/?name='+$stateParams.project).then(function(){
-        $scope.project = api.loaded.project;
-        console.log($scope);
+    api.load($location.path()).then(function(){
+      $scope.pages = api.loaded.pages;
+      $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
+      $scope.site = api.loaded.site;
     });
 });
 
@@ -202,19 +146,89 @@ app.controller('image-controller', function ($scope, $rootScope, $state, $stateP
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* !Footer controller */
+/* !API Factory */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('footer-controller', function (api, $rootScope, $scope, $state, $stateParams) {
-    if(Object.keys($stateParams).length > 0){
-        api.load('/api/?name='+$stateParams.project).then(function(){
-            $scope.pages = api.loaded.pages;
-        });
-    } else {
-        api.load('/api/').then(function(){
-            $scope.pages = api.loaded.pages;
-        });
+//Let's save this outside so we can inspect it
+var api = {};
+
+var getObjectFromChildrenByPath = function(object, currentpath) {
+    if(currentpath == '/') return object;
+    currentpath = (currentpath.indexOf('/') === 0) ? currentpath.replace('/','') : currentpath;
+    var parts = currentpath ? currentpath.split('/') : [];
+    while(parts.length && (object = ('children' in object) ? object.children[parts.shift()] : object[parts.shift()]));
+    return object;
+}
+
+//Welcome to our factory
+app.factory('api', function($http, $rootScope, $q){
+  api.loading = {};
+  api.loaded = {};
+  api.promises = [];
+  //The load function
+  api.load = function(currentpath){
+    //Clean up.
+    currentpath = (currentpath.indexOf('/') === 0) ? currentpath.replace('/','') : currentpath;
+    //if the url has not been added to the loading
+    if(!(currentpath in api.loading)){
+      //Let's add a universal listener for the url
+      api.loading[currentpath] = $q.defer();
+      //The actual get.
+      $http.get('api.json?path='+currentpath+'&structure='+(api.loaded.pages ? 1 : 0)).success(function(data) {
+        api.loaded = (!api.loaded.pages) ? data : api.loaded;
+        storedpage = getObjectFromChildrenByPath(api.loaded.pages, currentpath);
+        loadedpage = (typeof data.pages !== 'object') ? data.page : getObjectFromChildrenByPath(data.pages, currentpath);
+        Object.assign(storedpage, loadedpage);
+        api.loading[currentpath].resolve(api.loaded);
+        api.resolve(api.loaded);
+        console.log('resolved:' + currentpath);
+      });
     }
+    //Return a promise
+    return api.loading[currentpath].promise;
+  }
+
+  //Wait for someone else to load the content.
+  api.wait = function(){
+    var promise = $q.defer();
+    api.promises.push(promise);
+    if(Object.keys(api.loaded).length){
+      for (first in api.loaded) break;
+      api.resolve(api.loaded);
+    }
+    return promise.promise;
+  }
+
+  //Tell the waiting parties to get their data
+  api.resolve = function(data){
+    api.promises.forEach(function(promise) {
+      promise.resolve(data)
+    });
+  }
+
+  //Tell the waiting parties to get their data
+  api.extend = function(pages){
+    if(pages){
+      if(Object.keys(pages).length){
+        Object.keys(pages).map(function(key) {
+          if(!pages[key].extended){
+            api.load(pages[key].uri).then(function(data){
+              if(pages[key].children){
+                api.extend(pages[key].children);
+              }
+            });
+          } else {
+            if(pages[key].children){
+              api.extend(pages[key].children);
+            }
+          }
+        });
+      }
+    }
+  }
+
+  //Return object
+  return api
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -223,7 +237,7 @@ app.controller('footer-controller', function (api, $rootScope, $scope, $state, $
 
 var layout = {};
 app.filter('uniheight', function($filter) { return function(array, margin, treshold) {
-  if(array.length){
+  if(array){
     //Initialize
     layout.treshold = (window.innerWidth > 600) ? treshold : 1;
     layout.treshold = (window.innerWidth > 2000) ? 4  : treshold;
@@ -233,10 +247,11 @@ app.filter('uniheight', function($filter) { return function(array, margin, tresh
     layout.rownumber = 1;
     //Loop through items
     Object.keys(array).map(function(key) {
+      console.log(array[key].ratio);
+      if(!array[key].ratio) return '';
       //Init the current item
       var current = array[key];
       current.margin = margin;
-      current.ratio = current.width / current.height;
       //Find current rows & If row doesn't exist create a new array
       layout.rows[layout.rownumber] = layout.rows[layout.rownumber] || {};
       //Setup a row to be calculated.
@@ -268,4 +283,86 @@ app.filter('uniheight', function($filter) { return function(array, margin, tresh
     });
   }
   return array;
+}});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Uniheight Helper */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.filter('addratios', function($filter) { return function(array) {
+  Object.keys(array).map(function(key) {
+    if(!array[key].files) return '';
+    array[key].ratio = array[key].files[array[key].strings.thumbnail].ratio;
+  });
+  return array;
+}});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Uniheight Helper */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.filter('imagesfrom', function($filter) { return function(array, page) {
+  if(page){
+    if('files' in page){
+      var object = {};
+      Object.keys(array).map(function(key) {
+        object[key] = page.files[array[key]];
+      });
+    }
+    return object;
+  } else {
+    return '';
+  }
+}});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Image loader */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.directive('img', function ($rootScope) { return function ($scope, $element) {
+
+    //Hide first
+    $element.addClass('hidden-until-loaded');
+
+    //Reserve space first
+    var ratio = 0.5//$scope.item.height / $scope.item.width * 100;
+    $element.attr('style', 'padding-bottom: '+ratio+'%;height:0 !important;');
+
+    //Show when loaded
+	$element.bind("load", function (event){
+		if(event.target.complete){
+		    $element.removeAttr('style');
+			$element.removeClass('hidden-until-loaded');
+		}
+	});
+
+}});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Filter: Visible */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.filter('visible', function() {
+  return function(items) {
+    var filtered = [];
+    angular.forEach(items, function(item) {
+      if(item.visible) {
+        filtered.push(item);
+      }
+    });
+    return filtered;
+  };
+});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Filter: First */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.filter('first', function() { return function(input) {
+  if(input){
+    console.log(input);
+    return input[Object.keys(input)[0]]
+  } else {
+    return '';
+  };
 }});
