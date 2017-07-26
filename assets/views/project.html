@@ -4,7 +4,7 @@
         <div class="item" ng-repeat="file in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.25" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : file.margin + '%' }">
             <ng-switch on="file.type">
               <a ng-click="image()" data-ng-switch-when="image">
-                <picture picturefill>
+                <picture picturefill ng-style="{'width' : '100%', 'padding-bottom' : (100 / file.ratio) + '%'}">
                     <!--[if IE 9]><video style="display: none;"><![endif]-->
                     <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
                     <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>

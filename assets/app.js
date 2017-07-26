@@ -377,7 +377,7 @@ app.filter('uniheight', function($filter) { return function(array, margin, tresh
       row.ratiosadded += parseFloat(current.ratio);
       row.totalwidth = row.totalwidth || 100;
       row.totalwidth -= margin*2;
-      row.relativeheight = row.totalwidth/row.ratiosadded;
+      row.rowheight = row.totalwidth/row.ratiosadded;
       //Make sure item array exists.
       row.items = row.items || {};
       //Add the item
@@ -389,12 +389,12 @@ app.filter('uniheight', function($filter) { return function(array, margin, tresh
     Object.keys(layout.rows).map(function(row) {
       Object.keys(layout.rows[row].items).map(function(key) {
         if(layout.rows[row-1]){ //If previous row exists.
-          var delta = (layout.rows[row-1].relativeheight / layout.rows[row].relativeheight);
-          array[key].relativeheight = (delta > 0.5) ? layout.rows[row].relativeheight: layout.rows[row-1].relativeheight;
-          array[key].relativewidth = (delta > 0.5) ? layout.rows[row].relativeheight * array[key].ratio : layout.rows[row-1].relativeheight * array[key].ratio;
+          var delta = (layout.rows[row-1].rowheight / layout.rows[row].rowheight);
+          array[key].rowheight = (delta > 0.5) ? layout.rows[row].rowheight: layout.rows[row-1].rowheight;
+          array[key].relativewidth = (delta > 0.5) ? layout.rows[row].rowheight * array[key].ratio : layout.rows[row-1].rowheight * array[key].ratio;
         } else {
-          array[key].relativeheight = layout.rows[row].relativeheight;
-          array[key].relativewidth = layout.rows[row].relativeheight * array[key].ratio;
+          array[key].rowheight = layout.rows[row].rowheight;
+          array[key].relativewidth = layout.rows[row].rowheight * array[key].ratio;
         }
       });
     });

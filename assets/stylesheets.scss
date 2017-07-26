@@ -263,58 +263,30 @@ img, video {
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-/* Cover */
-
-.cover.composition {
-    word-spacing: -0.3em;
-}
-
-.cover.composition .item {
-    display: inline-block;
-    vertical-align: top;
-}
-
-.cover.composition .item:nth-child(odd) {
-    @include transform(translate(0, -60%));
-    position: relative;
-}
-
-.cover.composition .item {
-    width: 50%;
-    height: 75vw;
-}
-
-.shadow {
-    height: 100vh !important;
-    overflow: visible;
-    position: relative;
-    top: 0;
-}
-
-.shadow .composition{
-    position: relative;
-    top: 0;
-}
-
-.cover.composition a {
-    padding: 12%;
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.cover.composition .small a {
-    padding: 27%;
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-
 /* Archive */
 
 .item {
+  width: 100%;
   display: inline-block;
+}
+
+.item a {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.item picture {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.item picture img{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: block;
 }
 
 .item .title {
