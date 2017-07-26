@@ -361,12 +361,6 @@ img, video {
     display: inline-block;
   }
 
-  .item a {
-    width: 100%;
-    display: block;
-    position: relative;
-  }
-
   .item picture {
     width: 100%;
     display: block;
@@ -648,13 +642,96 @@ main.Cover {
 .overlayFooter .next::after {
   content: '→';
   position: absolute;
-  right: -2em;
+  right: -2rem;
 }
 
 .overlayFooter .prev::before {
   content: '←';
   position: absolute;
-  left: -2em;
+  left: -2rem;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Press */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.press.item {
+  margin-bottom: 6rem;
+}
+
+.press.header h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.press .slides {
+  width: 100%;
+  height: 60vh;
+}
+
+.press .slide {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+}
+
+.press.items .item {
+  position: relative;
+  top: 0;
+}
+
+.press .slide picture {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.press.items .item .slide img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 60vh;
+  width: auto;
+  height: auto;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.press.footer {
+  position: relative;
+  padding: 3% 12% 3.5rem;
+}
+
+.press.footer nav {
+  position: absolute;
+}
+
+.press.footer nav.center {
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 9rem;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.press.footer .next, .overlayFooter .prev {
+  position: relative;
+}
+
+.press.footer .next::after {
+  content: '→';
+  position: absolute;
+  right: -2rem;
+}
+
+.press.footer .prev::before {
+  content: '←';
+  position: absolute;
+  left: -2rem;
 }
 
 

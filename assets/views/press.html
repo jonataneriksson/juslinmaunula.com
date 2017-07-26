@@ -1,0 +1,31 @@
+<div class="press items">
+  <div class="press item" ng-repeat="press in page.children | visible">
+    <div class="press header">
+      <h2>{{press.content.title.value}}</h2>
+    </div>
+    <ul class="slides" ng-init="press.length = press.content.gallery.yaml.length">
+      <li ng-init="press.current = 0" ng-repeat="file in press.content.gallery.yaml | imagesfrom : press" ng-class="($index == press.current) ? 'current' : 'hidden'">
+        <div class="slide">
+          <picture picturefill>
+              <!--[if IE 9]><video style="display: none;"><![endif]-->
+              <!-- Displays with 2 device pixels per CSS pixel -->
+              <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
+              <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 1000px)"/>
+              <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h700}}" pf-media="(min-height: 800px)"/>
+              <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
+              <!--[if IE 9]></video><![endif]-->
+              <img ng-class="class"/>
+          </picture>
+
+        </div>
+      </li>
+    </ul>
+
+    <div class="press footer noselect">
+      <nav class="center" ng-if="1 < press.length">
+        <a class="prev" ng-click="press.current = (0 < press.current) ? press.current - 1 : press.length - 1">Prev</a>&emsp;&emsp;&emsp;&emsp;{{press.current + 1}} / {{press.length}} &emsp;&emsp;&emsp;&emsp;<a class="next" ng-click="press.current = (press.current < press.length - 1) ? press.current + 1 : 0">Next</a>
+      </nav>
+    </div>
+
+  </div>
+</div>

@@ -89,6 +89,12 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
         'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'},
         'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
+    }).state('press', {
+      url: '/press',
+      views: {
+        'main' : { templateUrl: 'assets/views/press.html', controller: 'press-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+      }
     });
 
 });
@@ -282,6 +288,38 @@ app.controller('project-controller', function ($scope, $rootScope, api, $locatio
       $rootScope.overlayCurrent = (0 <= $rootScope.overlayCurrent - 1) ? $rootScope.overlayCurrent - 1 : $rootScope.overlayTotal - 1;
     }
 
+});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Archive controller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.controller('press-controller', function ($scope, $rootScope, api, $location, queue) {
+    queue.init();
+    $scope.mainClass = 'Press';
+    $rootScope.bodyClass = 'White';
+    $rootScope.overlayClass = 'hidden';
+    api.load($location.path()).then(function(){
+      $scope.site = api.loaded.site;
+      $scope.pages = api.loaded.pages;
+      $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
+      api.extend($scope.page.children);
+      queue.ready().then(function(){
+        queue.start();
+      });
+    });
+
+    $scope.$on('imgcreated', function(event, args){
+      queue.add(args);
+      args.scope.class = 'waiting';
+    });
+
+    $scope.$on('imgloaded', function(event, args){
+      args.scope.$apply(function(){
+        args.scope.class = 'visible';
+      });
+      queue.next();
+    });
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -509,6 +547,15 @@ app.filter('first', function() { return function(input) {
   } else {
     return '';
   };
+}});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+app.filter('keylength', function(){ return function(input){
+  if(input){
+    return Object.keys(input).length;
+  }
 }});
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
