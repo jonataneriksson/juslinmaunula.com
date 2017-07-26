@@ -117,7 +117,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
     api.load('cover').then(function(){
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, 'cover');
-      $rootScope.currentSlide = $scope.page.content.slides[$scope.current];
+      $rootScope.currentSlide = $scope.page.content.slides[0];
       $scope.site = api.loaded.site;
       //Start
       queue.ready().then(function(){
