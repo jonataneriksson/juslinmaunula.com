@@ -60,6 +60,10 @@ h1 {
     font: normal 30px/36px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;
 }
 
+h2 {
+    text-transform: uppercase;
+}
+
 h2, h3, h4 {
     font: inherit;
     margin: 0 0 1em;
@@ -376,7 +380,7 @@ aside {
 
 aside.collection {
   padding-top: 0.5rem;
-  padding-left: 3rem;
+  padding-left: 4rem;
 }
 
 main.Cover {
@@ -490,6 +494,12 @@ main.Cover {
 .contact {
     font: normal 21px/28px 'Maison Neue Light', Verdana, Arial, sans-serif;
     padding-right: 2em;
+}
+
+.collection.sidemenu .active::before {
+  content: '→';
+  position: absolute;
+  left: 2em
 }
 
 /* About */

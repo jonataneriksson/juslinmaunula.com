@@ -1,7 +1,7 @@
 <aside class="collection">
-  <h4>{{page.strings.title}}</h4>
+  <h2>{{page.strings.title}}</h2>
   <nav class="collection sidemenu">
-      <a ng-repeat="collection in page.children" href="{{collection.url}}">{{collection.strings.title}}</a>
+      <a ng-repeat="collection in page.children" href="{{collection.url}}" ng-class="{'active' : (collection.uid == (page.children | first).uid)}">{{collection.strings.title}}</a>
   </nav>
 </aside>
 <div class="collection gallery composition">
