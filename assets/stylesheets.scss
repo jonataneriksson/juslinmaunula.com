@@ -142,7 +142,7 @@ header {
     left: 0;
     right: 0;
     text-align: left;
-    padding: 2.5rem 12% 0;
+    padding: 2.5rem 10.5rem 0;
 }
 
 article {
@@ -620,7 +620,7 @@ main.Cover {
   left: 0;
   right: 0;
   margin: auto;
-  width: 9rem;
+  width: 18rem;
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
@@ -713,13 +713,13 @@ main.Cover {
   left: 0;
   right: 0;
   margin: auto;
-  width: 9rem;
+  width: 18rem;
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
 }
 
-.press.footer .next, .overlayFooter .prev {
+.press.footer .next, .press.footer .prev {
   position: relative;
 }
 
@@ -778,18 +778,32 @@ img {
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-@media only screen and (max-width : 667px) {
+@media only screen and (max-width : 1200px) {
+  main {
+      padding: 2.5rem 6% 12%;
+  }
+  footer nav {
+      padding: 2rem 3rem 6rem;
+  }
+
+  header {
+      padding: 2.5rem 3rem 0;
+  }
+
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+@media only screen and (max-width : 960px) {
+    aside {width: 92% !important; position: relative !important; float: none !important; top: 0 !important; margin-bottom: 2rem;}
     body {font: normal 16px/21px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;}
-    footer {top: 0; bottom: auto; padding: 6%; background-image: none !important; color: black !important;}
-    main {margin-top: 6em !important; padding-bottom: 6em !important;}
-    ol {margin: 0 !important; float: left !important;}
-    footer, footer nav {height: 100%;}
-    #Logo {position: absolute; width: 100% !important; padding: 2em;}
-    #Logo svg {position: static; width: 100% !important; fill: black !important;}
+    .gallery.composition {width: 100% !important;}
+    #Logo {margin-right: auto; margin-left: auto;}
+    #Navigation {display: none;}
     .portrait {width: 100% !important;}
     .two-columns { @include columns(1);}
-    .gallery.composition {width: 100%;}
-    aside {width: 100%; margin-bottom: 2rem;}
     .cover.composition .large a, .cover.composition .small a {padding: 12%; width: 100%;}
     /*.cover.composition .item {@include transform(translate(0%, 0%) !important);}*/
     .black {color: black !important; background-color: white !important;}

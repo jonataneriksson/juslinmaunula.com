@@ -416,7 +416,6 @@ app.filter('uniheight', function($filter) { return function(array, margin, tresh
   if(array){
     //Initialize
     layout.treshold = (window.innerWidth > 600) ? treshold : 1;
-    layout.treshold = (window.innerWidth > 2000) ? 4  : treshold;
     layout.maxitems = 4;
     layout.ratiosadded = 0;
     layout.rows = {};

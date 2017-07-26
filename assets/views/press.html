@@ -6,7 +6,7 @@
     <ul class="slides" ng-init="press.length = press.content.gallery.yaml.length">
       <li ng-init="press.current = 0" ng-repeat="file in press.content.gallery.yaml | imagesfrom : press" ng-class="($index == press.current) ? 'current' : 'hidden'">
         <div class="slide">
-          <picture picturefill>
+          <picture picturefill ng-click="press.current = (press.current < press.length - 1) ? press.current + 1 : 0">
               <!--[if IE 9]><video style="display: none;"><![endif]-->
               <!-- Displays with 2 device pixels per CSS pixel -->
               <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
