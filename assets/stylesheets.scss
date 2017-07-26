@@ -422,35 +422,6 @@ main.Cover {
     left: -3em;
 }
 
-.close-button:before {
-    content: '×';
-    position: absolute;
-    left: -3em;
-}
-
-.Overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: black;
-  z-index: 1;
-}
-
-.Overlay img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: auto;
-  height: auto;
-  max-height: 90%;
-  margin: auto;
-  background-color: black;
-  z-index: 1
-}
 
 /* About */
 
@@ -478,7 +449,71 @@ main.Cover {
   left: 2em
 }
 
-/* About */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Overlay */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.close-button:before {
+    content: '×';
+    position: absolute;
+    left: -3em;
+}
+
+.White .overlay {
+  background-color: white;
+}
+
+.Black .overlay {
+  background-color: black;
+}
+
+
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.overlay header {
+  z-index: 99;
+}
+
+.overlay .item.wrapper {
+  position: absolute;
+  top: 5rem;
+  bottom: 5rem;
+  left: 5rem;
+  right: 5rem;
+}
+
+.overlay .item picture {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.overlay .item img {
+  width: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-height: 100%;
+}
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

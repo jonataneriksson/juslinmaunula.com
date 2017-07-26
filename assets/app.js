@@ -26,67 +26,68 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
     .state('root', {
       url: '/',
       views: {
-        'main' : { templateUrl: 'assets/views/cover.html', controller: 'cover-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'main' : { templateUrl: 'assets/views/cover.html', controller: 'cover-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('about', {
       url: '/about',
       views: {
-        'main' : { templateUrl: 'assets/views/about.html', controller: 'about-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'main' : { templateUrl: 'assets/views/about.html', controller: 'about-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('collections', {
       url: '/collections',
       views: {
-        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collection-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'overlay' : { templateUrl: 'assets/views/zoom.html'},
+        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collection-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('collection', {
       url: '/collections/:collection',
       views: {
-        'main' : { templateUrl: 'assets/views/collection.html', controller: 'collection-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'overlay' : { templateUrl: 'assets/views/zoom.html'},
+        'main' : { templateUrl: 'assets/views/collection.html', controller: 'collection-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('accessories', {
       url: '/accessories',
       views: {
-        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collection-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'overlay' : { templateUrl: 'assets/views/zoom.html'},
+        'main' : { templateUrl: 'assets/views/collections.html', controller: 'collection-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('accessoriescollection', {
       url: '/accessories/:collection',
       views: {
-        'main' : { templateUrl: 'assets/views/collection.html', controller: 'collection-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'overlay' : { templateUrl: 'assets/views/zoom.html'},
+        'main' : { templateUrl: 'assets/views/collection.html', controller: 'collection-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('projects', {
       url: '/projects',
       views: {
-        'main' : { templateUrl: 'assets/views/archive.html', controller: 'archive-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'main' : { templateUrl: 'assets/views/archive.html', controller: 'archive-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('installations', {
       url: '/installations',
       views: {
-        'main' : { templateUrl: 'assets/views/archive.html', controller: 'archive-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'main' : { templateUrl: 'assets/views/archive.html', controller: 'archive-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('installation', {
       url: '/installations/:installation',
       views: {
-        'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
+        'overlay' : { templateUrl: 'assets/views/zoom.html'},
+        'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     }).state('project', {
       url: '/projects/:project',
       views: {
-        'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'}
-        ,'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
-      }
-    }).state('project.image', {
-      params: { item : null },
-      views: {
-        'overlay@' : { templateUrl: 'assets/views/image.html', controller: 'image-controller'}
+        'overlay' : { templateUrl: 'assets/views/zoom.html'},
+        'main' : { templateUrl: 'assets/views/project.html', controller: 'project-controller'},
+        'footer' : { templateUrl: 'assets/views/footer.html', controller: 'footer-controller'}
       }
     });
 
@@ -111,6 +112,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
     queue.init();
     $rootScope.bodyClass = 'White';
     $scope.wrapperClass = 'Cover';
+    $rootScope.overlayClass = 'hidden';
 
     api.load('cover').then(function(){
       $scope.pages = api.loaded.pages;
@@ -155,27 +157,10 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
 app.controller('about-controller', function ($scope, $rootScope, api, $location) {
     $scope.mainClass = 'About two-columns';
     $rootScope.bodyClass = 'White';
+    $rootScope.overlayClass = 'hidden';
     api.wait($location.path()).then(function(data){
       $scope.about = api.loaded.pages.about;
     });
-});
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* !Collection controller */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-app.controller('collections-controller', function ($scope, $rootScope, api, $location, $timeout, queue) {
-    $scope.mainClass = 'Collection';
-    $rootScope.bodyClass = 'White';
-    api.load($location.path()).then(function(){
-      $scope.pages = api.loaded.pages;
-      $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
-      $scope.site = api.loaded.site;
-      $timeout(function(){api.extend($scope.page.children)});
-      queue.ready().then(function(){queue.start();});
-    });
-
-
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -186,6 +171,7 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
     queue.init();
     $scope.mainClass = 'Collection';
     $rootScope.bodyClass = 'White';
+    $rootScope.overlayClass = 'hidden';
     api.load($location.path()).then(function(){
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
@@ -206,6 +192,22 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
       });
       queue.next();
     });
+
+    $scope.gallery = function(index, files) {
+      $rootScope.overlayClass = 'visible';
+      $rootScope.overlayFiles = files;
+      $rootScope.overlayCurrent = index;
+      console.log(files);
+    }
+
+    $rootScope.overlayBack = function() {
+      $rootScope.overlayClass = 'hidden';
+    }
+
+    $rootScope.next = function() {
+      var last = (Object.keys($rootScope.overlayFiles).length-1);
+      $rootScope.overlayCurrent = ($rootScope.overlayCurrent < last) ? $rootScope.overlayCurrent + 1 : 0;
+    }
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -215,6 +217,7 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
 app.controller('archive-controller', function ($scope, $rootScope, api, $location, $timeout) {
     $scope.mainClass = 'Archive';
     $rootScope.bodyClass = 'Black';
+    $rootScope.overlayClass = 'hidden';
     api.load($location.path()).then(function(){
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
@@ -230,8 +233,8 @@ app.controller('archive-controller', function ($scope, $rootScope, api, $locatio
 app.controller('project-controller', function ($scope, $rootScope, api, $location, $timeout, queue) {
     queue.init();
     $rootScope.bodyClass = 'Black';
+    $rootScope.overlayClass = 'hidden';
     $scope.mainClass = 'Project';
-    $scope.back = function(){window.history.back();}
     api.load($location.path()).then(function(){
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
@@ -250,17 +253,21 @@ app.controller('project-controller', function ($scope, $rootScope, api, $locatio
       });
       queue.next();
     });
-});
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* !Image controller */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    $scope.gallery = function(index, files) {
+      $rootScope.overlayClass = 'visible';
+      $rootScope.overlayFiles = files;
+      $rootScope.overlayCurrent = index;
+      console.log(files);
+    }
 
-app.controller('image-controller', function ($scope, $rootScope, $state, $stateParams) {
-    $scope.overlayClass = 'Overlay';
-    $scope.item = $state.params.item;
-    $scope.back = function(){
-        $state.go('project');
+    $rootScope.overlayBack = function() {
+      $rootScope.overlayClass = 'hidden';
+    }
+
+    $rootScope.next = function() {
+      var last = (Object.keys($rootScope.overlayFiles).length-1);
+      $rootScope.overlayCurrent = ($rootScope.overlayCurrent < last) ? $rootScope.overlayCurrent + 1 : 0;
     }
 });
 
