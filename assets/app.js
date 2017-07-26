@@ -117,6 +117,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
     api.load('cover').then(function(){
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, 'cover');
+      $rootScope.currentSlide = $scope.page.content.slides[$scope.current];
       $scope.site = api.loaded.site;
       //Start
       queue.ready().then(function(){
@@ -145,6 +146,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
     $scope.switchSlide = function(interval){
       $timeout(function() {
         $scope.current = ($scope.current < $scope.last) ? $scope.current +  1 : 0;
+        $rootScope.currentSlide = $scope.page.content.slides[$scope.current];
         $scope.switchSlide(interval);
       }, interval);
     }

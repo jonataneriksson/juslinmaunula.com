@@ -21,3 +21,19 @@ fields:
             label: Right Side
             type: images
             width: 1/2
+          leftsidecolor:
+            label: Left Side Color
+            type: radio
+            default: black
+            options:
+              white: White
+              black: Black
+            width: 1/2
+          rightsidecolor:
+            label: Right Side Color
+            type: radio
+            default: black
+            options:
+              white: White
+              black: Black
+            width: 1/2

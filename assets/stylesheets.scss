@@ -28,6 +28,10 @@ main {
   -webkit-backface-visibility: hidden;
 }
 
+a {
+  cursor: pointer;
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Typography */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -71,11 +75,6 @@ h2, h3, h4 {
 
 a, a:link, a:visited {
     color: inherit;
-    text-decoration: none;
-}
-
-footer a:not(#Logo):hover, header a:hover {
-    border-bottom: 1px solid rgba(200,200,200,0.5);
     text-decoration: none;
 }
 
@@ -163,10 +162,39 @@ article {
   word-spacing: 0rem;
 }
 
-#Logo svg {
+#Logo .left {
   width: 50%;
-  display: inline-block;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
+
+#Logo .right {
+  width: 50%;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#Logo .right svg {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#Logo .white svg path, #Logo .white svg rect {
+  fill: white;
+}
+
+#Logo .black svg path, #Logo .black svg rect {
+  fill: black;
+}
+
+
+
 
 #Navigation {
     pointer-events: all;
@@ -175,6 +203,14 @@ article {
     @include column-gap(0rem);
     position:absolute;
     width: 20rem;
+}
+
+#Navigation.white {
+  color: white;
+}
+
+#Navigation.black {
+  color: black;
 }
 
 #Shadow {
@@ -229,7 +265,6 @@ main.Cover {
 button {
   background-color: transparent;
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   display: block;
   width: 100%;
   padding: 0.5em;
