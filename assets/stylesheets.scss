@@ -160,6 +160,12 @@ article {
 	left: 0;
 	right: 0;
   bottom: 2.5rem;
+  word-spacing: 0rem;
+}
+
+#Logo svg {
+  width: 50%;
+  display: inline-block;
 }
 
 #Navigation {
@@ -493,8 +499,8 @@ main.Cover {
 
 .overlay .item.wrapper {
   position: absolute;
-  top: 4rem;
-  bottom: 6rem;
+  top: 4.75rem;
+  bottom: 5.25rem;
   left: 5rem;
   right: 5rem;
 }

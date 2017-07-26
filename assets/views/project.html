@@ -1,7 +1,7 @@
-    <header><nav><a class="back-button" ng-click="back()">Back</a><nav></header>
+    <!--<header><nav><a class="back-button" ng-click="back()">Back</a><nav></header>-->
     <aside><h4>{{page.strings.title}}</h4><div ng-bind-html="page.content.description.kirbytext"></div></aside>
     <div class="gallery composition">
-        <div class="item" ng-repeat="file in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.25" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : file.margin + '%' }">
+        <div class="item" ng-repeat="file in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.25" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : '0 ' + file.margin + '% 2rem' }">
             <ng-switch on="file.type">
               <a ng-click="gallery($index, (page.content.images.yaml | imagesfrom : page))" data-ng-switch-when="image">
                 <picture picturefill ng-style="{'width' : '100%', 'padding-bottom' : (100 / file.ratio) + '%'}">

@@ -5,7 +5,7 @@
   </nav>
 </aside>
 <div class="collection gallery composition">
-  <div class="item" ng-repeat="file in (page.children | first).content.images.yaml | imagesfrom : (page.children | first) | uniheight : 2 : 2" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : file.margin + '%' }">
+  <div class="item" ng-repeat="file in (page.children | first).content.images.yaml | imagesfrom : (page.children | first) | uniheight : 2 : 2" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : '0 ' + file.margin + '% 2rem' }">
     <ng-switch on="file.type">
         <a ng-click="gallery($index, ((page.children | first).content.images.yaml | imagesfrom : (page.children | first)))" data-ng-switch-when="image">
           <picture picturefill ng-style="{'width' : '100%', 'padding-bottom' : (100 / file.ratio) + '%'}">
