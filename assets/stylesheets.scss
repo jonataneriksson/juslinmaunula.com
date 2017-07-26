@@ -88,14 +88,14 @@ ol {
 }
 
 ol li {
-    padding: 0 3em;
-    text-indent: -3em;
+    padding: 0 1.5rem;
+    text-indent: -1.5rem;
 }
 
 ol li:before {
     content: counter(item) "  ";
     counter-increment: item;
-    width: 3em;
+    width: 1.5rem;
     display: inline-block;
     text-indent: 0em;
 }
@@ -129,7 +129,7 @@ footer {
 
 footer nav {
     position: relative;
-    margin: 10% 12% 3%;
+    padding: 2rem 10.5rem 6rem;
 }
 
 
@@ -147,20 +147,24 @@ article {
 }
 
 #Logo {
-    pointer-events: all;
-    position: absolute;
-    width: 405px;
-    height: 35px;
+  pointer-events: all;
+  position: absolute;
+  display: block;
+  width: 405px;
+  height: 35px;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
-	bottom: -5px;
-	display: block;
+  bottom: 2.5rem;
 }
 
 #Navigation {
     pointer-events: all;
     display: inline-block;
+    @include columns(2);
+    @include column-gap(0rem);
+    position:absolute;
+    width: 20rem;
 }
 
 #Shadow {
@@ -177,9 +181,15 @@ article {
 }
 
 .White footer #Shadow {
-    @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    @include linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1));
+    opacity: 1;
+}
+
+
+.Cover ~ footer #Shadow {
     opacity: 0;
 }
+
 
 #Sub-Navigation {
     margin-right: 0em;
