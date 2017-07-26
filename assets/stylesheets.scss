@@ -823,7 +823,7 @@ body.Black .mobile.menu svg {
     body {font: normal 16px/21px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;}
     .gallery.composition {width: 100% !important;}
     footer nav {padding: 0;}
-    #Logo {margin-right: auto; margin-left: auto; @include transform(scale(0.7)); @include transform-origin(center bottom);}
+    #Logo {background-color: red; margin-right: auto; margin-left: auto; @include transform(scale(0.7)); @include transform-origin(center bottom);}
     #Navigation { @include columns(1); bottom: auto; top: 0; margin: 3rem; font-size: 1.5rem; line-height: 1.33em;}
     .portrait {width: 100% !important;}
     .two-columns { @include columns(1);}
