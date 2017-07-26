@@ -817,7 +817,7 @@ body.Black .mobile.menu svg {
     footer {padding: 0; margin: 0;}
     footer nav {padding: 0;}
     .overlay .item.wrapper {left: 2rem; right: 2rem;}
-    .mobile.menu { pointer-events: all; display: block; position: fixed; top: 2rem; left: 2rem; width: 2rem; z-index: 1;}
+    .mobile.menu {@include transform(scale(0.99)); pointer-events: all; display: block; position: fixed; top: 2rem; left: 2rem; width: 2rem; z-index: 1;}
     nav:not(.mobile) #Navigation {display: none;}
     nav.mobile #Logo rect, nav.mobile #Logo path {fill: white !important;}
     nav.mobile {color: white !important; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: black; z-index: 99;}
