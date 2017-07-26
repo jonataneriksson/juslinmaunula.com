@@ -127,7 +127,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
 
     $scope.$on('imgloaded', function(event, args){
       if(queue.current==0){
-        $scope.switchSlide(2000);
+        $scope.switchSlide(3000);
       }
     });
 
@@ -144,12 +144,16 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
     });
 
     $scope.switchSlide = function(interval){
-      $timeout(function() {
+      $scope.slideShow = $timeout(function() {
         $scope.current = ($scope.current < $scope.last) ? $scope.current +  1 : 0;
         $rootScope.currentSlide = $scope.page.content.slides[$scope.current];
         $scope.switchSlide(interval);
       }, interval);
     }
+
+    $scope.$on('$destroy', function() {
+      $timeout.cancel($scope.slideShow);
+    });
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

@@ -193,6 +193,17 @@ article {
   fill: black;
 }
 
+body.White main:not(.Cover) ~ footer #Logo svg path, body.White main:not(.Cover) ~ footer #Logo svg rect, body.White main:not(.Cover) ~ footer #Navigation {
+  fill: black !important;
+  color: black !important;
+}
+
+body.Black main:not(.Cover) ~ footer #Logo svg path, body.Black main:not(.Cover) ~ footer #Logo svg rect, body.Black main:not(.Cover) ~ footer #Navigation {
+  fill: white !important;
+  color: white !important;
+}
+
+
 
 
 
@@ -256,6 +267,43 @@ main.Cover {
     margin: 0%;
     padding: 0;
     overflow: hidden;
+}
+
+main.Cover .half {
+  position: relative;
+}
+
+main.Cover .item.wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+main.Cover picture {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+main.Cover img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-height: 100%;
+  width: auto;
+}
+
+main.Cover .left img {
+  right: 0;
+}
+
+main.Cover .right img {
+  left: 0;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
