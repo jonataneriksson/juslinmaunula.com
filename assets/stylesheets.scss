@@ -473,6 +473,11 @@ main.Cover {
   pointer-events: none;
 }
 
+.overlay.active ~ main {
+  height: 0;
+  overflow: hidden;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -488,8 +493,8 @@ main.Cover {
 
 .overlay .item.wrapper {
   position: absolute;
-  top: 5rem;
-  bottom: 5rem;
+  top: 4rem;
+  bottom: 6rem;
   left: 5rem;
   right: 5rem;
 }

@@ -194,7 +194,7 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
     });
 
     $scope.gallery = function(index, files) {
-      $rootScope.overlayClass = 'visible';
+      $rootScope.overlayClass = 'active';
       $rootScope.overlayFiles = files;
       $rootScope.overlayCurrent = index;
       $rootScope.overlayTotal = (Object.keys(files).length);
@@ -258,7 +258,7 @@ app.controller('project-controller', function ($scope, $rootScope, api, $locatio
     });
 
     $scope.gallery = function(index, files) {
-      $rootScope.overlayClass = 'visible';
+      $rootScope.overlayClass = 'active';
       $rootScope.overlayFiles = files;
       $rootScope.overlayCurrent = index;
       $rootScope.overlayTotal = (Object.keys(files).length);
