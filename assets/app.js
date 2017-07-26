@@ -140,12 +140,6 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
       queue.next();
     });
 
-    $scope.$on('imgload', function(event, args){
-      $timeout(function(){
-        args.scope.$parent.load = true;
-      });
-    });
-
     $scope.switchSlide = function(interval){
       $timeout(function() {
         $scope.current = ($scope.current < $scope.last) ? $scope.current +  1 : 0;
@@ -212,12 +206,6 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
       });
       queue.next();
     });
-
-    $scope.$on('imgload', function(event, args){
-      $timeout(function(){
-        args.scope.$parent.load = true;
-      });
-    });
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -230,8 +218,8 @@ app.controller('archive-controller', function ($scope, $rootScope, api, $locatio
     api.load($location.path()).then(function(){
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
+      api.extend($scope.page.children);
       $scope.site = api.loaded.site;
-      $timeout(function(){api.extend($scope.page.children)});
     });
 });
 
@@ -239,7 +227,8 @@ app.controller('archive-controller', function ($scope, $rootScope, api, $locatio
 /* !Project controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.controller('project-controller', function ($scope, $rootScope, api, $location, $timeout) {
+app.controller('project-controller', function ($scope, $rootScope, api, $location, $timeout, queue) {
+    queue.init();
     $rootScope.bodyClass = 'Black';
     $scope.mainClass = 'Project';
     $scope.back = function(){window.history.back();}
@@ -247,6 +236,19 @@ app.controller('project-controller', function ($scope, $rootScope, api, $locatio
       $scope.pages = api.loaded.pages;
       $scope.page = getObjectFromChildrenByPath(api.loaded.pages, $location.path());
       $scope.site = api.loaded.site;
+      queue.ready().then(function(){queue.start();});
+    });
+
+    $scope.$on('imgcreated', function(event, args){
+      queue.add(args);
+      args.scope.class = 'waiting';
+    });
+
+    $scope.$on('imgloaded', function(event, args){
+      args.scope.$apply(function(){
+        args.scope.class = 'visible';
+      });
+      queue.next();
     });
 });
 
@@ -434,7 +436,7 @@ app.filter('imagesfrom', function($filter) { return function(array, page) {
 /* !Image loader */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.directive('img', function ($rootScope) { return function ($scope, $element) {
+app.directive('img', function ($rootScope, $timeout) { return function ($scope, $element) {
     //Init
     var args = { element: $element,  scope: $scope }
     $scope.$emit('imgcreated', args);
@@ -443,17 +445,21 @@ app.directive('img', function ($rootScope) { return function ($scope, $element) 
     $element.addClass('hidden-until-loaded');
 
     //Reserve space first
-    var ratio = 0.5//$scope.item.height / $scope.item.width * 100;
-    $element.attr('style', 'padding-bottom: '+ratio+'%;height:0 !important;');
+    //var ratio = 0.5//$scope.item.height / $scope.item.width * 100;
+    //$element.attr('style', 'padding-bottom: '+ratio+'%;height:0 !important;');
 
     //Show when loaded
-	$element.bind("load", function (event){
-    $scope.$emit('imgloaded', args);
-		if(event.target.complete){
-		  $element.removeAttr('style');
-			$element.removeClass('hidden-until-loaded');
-		}
-	});
+  	$element.bind("load", function (event){
+      $scope.$emit('imgloaded', args);
+  		if(event.target.complete) $element.removeClass('hidden-until-loaded');
+  	});
+
+    //This one is launched from Queue
+    $scope.$on('imgload', function(event, args){
+      $timeout(function(){
+        $scope.file.load = true;
+      });
+    });
 
 }});
 

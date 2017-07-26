@@ -5,9 +5,9 @@
       <div class="item wrapper" data-ng-repeat="file in slide.leftside.yaml | imagesfrom : page">
         <picture picturefill>
             <!--[if IE 9]><video style="display: none;"><![endif]-->
-            <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
-            <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
-            <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
+            <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
+            <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
+            <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
             <!--[if IE 9]></video><![endif]-->
             <img ng-class="class"/>
         </picture>
@@ -17,9 +17,9 @@
       <div class="item wrapper" data-ng-repeat="file in slide.rightside.yaml | imagesfrom : page">
         <picture picturefill>
             <!--[if IE 9]><video style="display: none;"><![endif]-->
-            <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
-            <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
-            <source ng-if="load" ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
+            <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
+            <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
+            <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
             <!--[if IE 9]></video><![endif]-->
             <img ng-class="class"/>
         </picture>
