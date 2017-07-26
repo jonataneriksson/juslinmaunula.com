@@ -91,14 +91,14 @@ ol {
 }
 
 ol li {
-    padding: 0 1.5rem;
-    text-indent: -1.5rem;
+    padding: 0 1.5em;
+    text-indent: -1.5em;
 }
 
 ol li:before {
     content: counter(item) "  ";
     counter-increment: item;
-    width: 1.5rem;
+    width: 1.5em;
     display: inline-block;
     text-indent: 0em;
 }
@@ -193,12 +193,12 @@ article {
   fill: black;
 }
 
-body.White main:not(.Cover) ~ footer #Logo svg path, body.White main:not(.Cover) ~ footer #Logo svg rect, body.White main:not(.Cover) ~ footer #Navigation {
+body.White main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.White main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg rect, body.White main:not(.Cover) ~ footer nav:not(.mobile) #Navigation {
   fill: black !important;
   color: black !important;
 }
 
-body.Black main:not(.Cover) ~ footer #Logo svg path, body.Black main:not(.Cover) ~ footer #Logo svg rect, body.Black main:not(.Cover) ~ footer #Navigation {
+body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg rect, body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Navigation {
   fill: white !important;
   color: white !important;
 }
@@ -602,6 +602,7 @@ main.Cover {
   right: 0;
   margin: auto;
   max-height: 100%;
+  max-width: 100%;
 }
 
 .overlayFooter {
@@ -796,18 +797,38 @@ img {
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+@media only screen and (min-width : 960px) {
+  .mobile.menu {
+    display: none;
+  }
+}
+
+
+body.Black .mobile.menu svg {
+  fill:white;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 @media only screen and (max-width : 960px) {
-    aside {width: 92% !important; position: relative !important; float: none !important; top: 0 !important; margin-bottom: 2rem;}
+    main {margin-top: 4rem; margin-bottom: 4rem; }
+    .overlay .item.wrapper {left: 2rem; right: 2rem;}
+    .mobile.menu { pointer-events: all; display: block; position: fixed; top: 2.5rem; left: 2.5rem; width: 2rem; z-index: 1;}
+    nav:not(.mobile) #Navigation {display: none;}
+    nav.mobile #Logo rect, nav.mobile #Logo path {fill: white !important;}
+    nav.mobile {color: white !important; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: black; z-index: 99;}
+    aside {width: 92% !important; margin: 2%; position: relative !important; float: none !important; top: 0 !important; margin-bottom: 2rem;}
     body {font: normal 16px/21px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;}
     .gallery.composition {width: 100% !important;}
     #Logo {margin-right: auto; margin-left: auto;}
-    #Navigation {display: none;}
+    #Navigation { @include columns(1); bottom: auto; top: 0; margin: 3rem; font-size: 1.5rem; line-height: 1.33em;}
     .portrait {width: 100% !important;}
     .two-columns { @include columns(1);}
     .cover.composition .large a, .cover.composition .small a {padding: 12%; width: 100%;}
     /*.cover.composition .item {@include transform(translate(0%, 0%) !important);}*/
-    .black {color: black !important; background-color: white !important;}
-    header {display: none;}
+    .black {color: black !important;}
     #Shadow {display: none;}
     footer nav {padding: 0;}
     .column {width: 100%; float: none;}
