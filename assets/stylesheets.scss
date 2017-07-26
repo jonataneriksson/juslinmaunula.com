@@ -814,25 +814,22 @@ body.Black .mobile.menu svg {
 
 @media only screen and (max-width : 960px) {
     main {margin-top: 4rem; margin-bottom: 4rem; }
+    footer {padding: 0; margin: 0;}
+    footer nav {padding: 0;}
     .overlay .item.wrapper {left: 2rem; right: 2rem;}
-    .mobile.menu { pointer-events: all; display: block; position: fixed; top: 2.5rem; left: 2.5rem; width: 2rem; z-index: 1;}
+    .mobile.menu { pointer-events: all; display: block; position: fixed; top: 2rem; left: 2rem; width: 2rem; z-index: 1;}
     nav:not(.mobile) #Navigation {display: none;}
     nav.mobile #Logo rect, nav.mobile #Logo path {fill: white !important;}
     nav.mobile {color: white !important; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: black; z-index: 99;}
     aside {width: 92% !important; margin: 2%; position: relative !important; float: none !important; top: 0 !important; margin-bottom: 2rem;}
     body {font: normal 16px/21px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;}
     .gallery.composition {width: 100% !important;}
-    footer nav {padding: 0;}
     #Logo {background-color: red; margin-right: auto; margin-left: auto; @include transform(scale(0.7)); @include transform-origin(center bottom);}
     #Navigation { @include columns(1); bottom: auto; top: 0; margin: 3rem; font-size: 1.5rem; line-height: 1.33em;}
     .portrait {width: 100% !important;}
     .two-columns { @include columns(1);}
     .cover.composition .large a, .cover.composition .small a {padding: 12%; width: 100%;}
-    /*.cover.composition .item {@include transform(translate(0%, 0%) !important);}*/
-    .black {color: black !important;}
     #Shadow {display: none;}
-    footer nav {padding: 0;}
     .column {width: 100%; float: none;}
-    .menu.composition .item {padding: 5% 0;}
     body.Black #Logo #Graphic {fill: #000;}
 }
