@@ -1,5 +1,5 @@
     <header><nav><a class="back-button" ng-click="back()">Back</a><nav></header>
-    <aside><h4>{{project.title}}</h4><div ng-bind-html="page.content.description.kirbytext"></div></aside>
+    <aside><h4>{{page.strings.title}}</h4><div ng-bind-html="page.content.description.kirbytext"></div></aside>
     <div class="gallery composition">
         <div class="item" ng-repeat="file in page.content.images.yaml | imagesfrom : page | uniheight : 2 : 1.25" ng-style="{ 'width' : file.relativewidth + '%', 'margin' : file.margin + '%' }">
             <ng-switch on="file.type">
