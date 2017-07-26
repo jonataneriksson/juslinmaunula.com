@@ -213,6 +213,7 @@ body.Black main:not(.Cover) ~ footer #Logo svg path, body.Black main:not(.Cover)
     @include columns(2);
     @include column-gap(0rem);
     position:absolute;
+    bottom: 2.666rem;
     width: 20rem;
 }
 
