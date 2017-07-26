@@ -1,6 +1,9 @@
-<header><nav><a class="close-button" ng-click="overlayBack()">Close</a><nav></header>
+<header>
+  <nav><a class="close-button noselect left" ng-click="overlayBack()">Close</a><nav>
+  <h2>{{overlayTitle}}</h2>
+</header>
 
-<div ng-click="next()" class="item wrapper">
+<div ng-click="next()" class="item wrapper noselect">
   <picture picturefill>
       <!--[if IE 9]><video style="display: none;"><![endif]-->
       <source ng-attr-srcset="{{overlayFiles[overlayCurrent].thumbnails.h1400}}" pf-media="retina"/>
@@ -8,4 +11,11 @@
       <!--[if IE 9]></video><![endif]-->
       <img ng-class="class"/>
   </picture>
+</div>
+
+<div class="overlayFooter noselect">
+  <nav class="bottom left">{{overlayCurrent+1}} / {{overlayTotal}}</nav>
+  <nav class="center">
+    <a class="prev" ng-click="prev()">Prev</a>&emsp;&emsp;&emsp;&emsp;&emsp;<a class="next" ng-click="next()">Next</a>
+  </nav>
 </div>

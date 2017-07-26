@@ -197,7 +197,7 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
       $rootScope.overlayClass = 'visible';
       $rootScope.overlayFiles = files;
       $rootScope.overlayCurrent = index;
-      console.log(files);
+      $rootScope.overlayTotal = (Object.keys(files).length);
     }
 
     $rootScope.overlayBack = function() {
@@ -205,8 +205,11 @@ app.controller('collection-controller', function ($scope, $rootScope, api, $loca
     }
 
     $rootScope.next = function() {
-      var last = (Object.keys($rootScope.overlayFiles).length-1);
-      $rootScope.overlayCurrent = ($rootScope.overlayCurrent < last) ? $rootScope.overlayCurrent + 1 : 0;
+      $rootScope.overlayCurrent = ($rootScope.overlayCurrent < $rootScope.overlayTotal - 1) ? $rootScope.overlayCurrent + 1 : 0;
+    }
+
+    $rootScope.prev = function() {
+      $rootScope.overlayCurrent = (0 <= $rootScope.overlayCurrent - 1) ? $rootScope.overlayCurrent - 1 : $rootScope.overlayTotal - 1;
     }
 });
 
@@ -258,7 +261,7 @@ app.controller('project-controller', function ($scope, $rootScope, api, $locatio
       $rootScope.overlayClass = 'visible';
       $rootScope.overlayFiles = files;
       $rootScope.overlayCurrent = index;
-      console.log(files);
+      $rootScope.overlayTotal = (Object.keys(files).length);
     }
 
     $rootScope.overlayBack = function() {
@@ -266,9 +269,13 @@ app.controller('project-controller', function ($scope, $rootScope, api, $locatio
     }
 
     $rootScope.next = function() {
-      var last = (Object.keys($rootScope.overlayFiles).length-1);
-      $rootScope.overlayCurrent = ($rootScope.overlayCurrent < last) ? $rootScope.overlayCurrent + 1 : 0;
+      $rootScope.overlayCurrent = ($rootScope.overlayCurrent < $rootScope.overlayTotal - 1) ? $rootScope.overlayCurrent + 1 : 0;
     }
+
+    $rootScope.prev = function() {
+      $rootScope.overlayCurrent = (0 <= $rootScope.overlayCurrent - 1) ? $rootScope.overlayCurrent - 1 : $rootScope.overlayTotal - 1;
+    }
+
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
