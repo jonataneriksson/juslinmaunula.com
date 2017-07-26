@@ -265,33 +265,37 @@ img, video {
 
 /* Archive */
 
-.item {
-  width: 100%;
-  display: inline-block;
-}
+.collection, .gallery, .items {
 
-.item a {
-  width: 100%;
-  display: block;
-  position: relative;
-}
-
-.item picture {
-  width: 100%;
-  display: block;
-  position: relative;
-}
-
-.item picture img{
-  position: absolute;
-  top: 0;
-  width: 100%;
-  display: block;
-}
-
-.item .title {
+  .item {
+    width: 100%;
     display: inline-block;
-    word-spacing: 0.1em;
+  }
+
+  .item a {
+    width: 100%;
+    display: block;
+    position: relative;
+  }
+
+  .item picture {
+    width: 100%;
+    display: block;
+    position: relative;
+  }
+
+  .item picture img{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: block;
+  }
+
+  .item .title {
+      display: inline-block;
+      word-spacing: 0.1em;
+  }
+
 }
 
 /* Shop */
