@@ -577,13 +577,17 @@ main.About {
 }
 
 
-.overlay.hidden {
-  opacity: 0;
+.overlay, .overlay.hidden {
+  display: none;
   pointer-events: none;
 }
 
+.overlay.active {
+  display: block;
+}
+
 .overlay.active ~ main {
-  height: 0;
+  display: block;
   overflow: hidden;
 }
 
