@@ -7,7 +7,7 @@ var PARSERS = {
   integer: util.number,
   number:  util.number,
   date:    util.date,
-  string:  function(x) { return x==='' ? null : x; }
+  string:  function(x) { return x == null || x === '' ? null : x + ''; }
 };
 
 var TESTS = {
@@ -22,7 +22,16 @@ function annotation(data, types) {
   data[TYPES] = types;
 }
 
+function fieldNames(datum) {
+  return util.keys(datum);
+}
+
+function bracket(fieldName) {
+  return '[' + fieldName + ']';
+}
+
 function type(values, f) {
+  values = util.array(values);
   f = util.$(f);
   var v, i, n;
 
@@ -44,13 +53,14 @@ function type(values, f) {
 
 function typeAll(data, fields) {
   if (!data.length) return;
-  fields = fields || util.keys(data[0]);
+  var get = fields ? util.identity : (fields = fieldNames(data[0]), bracket);
   return fields.reduce(function(types, f) {
-    return (types[f] = type(data, f), types);
+    return (types[f] = type(data, get(f)), types);
   }, {});
 }
 
-function infer(values, f) {
+function infer(values, f, ignore) {
+  values = util.array(values);
   f = util.$(f);
   var i, j, v;
 
@@ -62,7 +72,7 @@ function infer(values, f) {
     v = f ? f(values[i]) : values[i];
     // test value against remaining types
     for (j=0; j<types.length; ++j) {
-      if (util.isValid(v) && !TESTS[types[j]](v)) {
+      if ((!ignore || !ignore.test(v)) && util.isValid(v) && !TESTS[types[j]](v)) {
         types.splice(j, 1);
         j -= 1;
       }
@@ -74,10 +84,10 @@ function infer(values, f) {
   return types[0];
 }
 
-function inferAll(data, fields) {
-  fields = fields || util.keys(data[0]);
+function inferAll(data, fields, ignore) {
+  var get = fields ? util.identity : (fields = fieldNames(data[0]), bracket);
   return fields.reduce(function(types, f) {
-    types[f] = infer(data, f);
+    types[f] = infer(data, get(f), ignore);
     return types;
   }, {});
 }

@@ -32,13 +32,13 @@ var dl = require('datalib');
 var data = dl.csv('http://vega.github.io/datalib/data/stocks.csv');
 
 // Show summary statistics for each column of the data table.
-console.log(dl.print.summary(data));
+console.log(dl.format.summary(data));
 
 // Compute mean and standard deviation by ticker symbol.
 var rollup = dl.groupby('symbol')
   .summarize({'price': ['mean', 'stdev']})
   .execute(data);
-console.log(dl.print.table(rollup));
+console.log(dl.format.table(rollup));
 
 // Compute correlation measures between price and date.
 console.log(
@@ -61,6 +61,18 @@ To use datalib in the browser, you need to build the datalib.js and datalib.min.
 1. Run `npm install` in the datalib folder to install dependencies.
 2. Run `npm run build`. This will invoke [browserify](http://browserify.org/) to bundle the source files into datalib.js, and then [uglify-js](http://lisperator.net/uglifyjs/) to create the minified datalib.min.js.
 
-## Dependencies
 
-When used in the browser, datalib has one (weak) dependency to note. The [TopoJSON library](https://github.com/mbostock/topojson) is expected to reside in the global scope if [dl.topojson](https://github.com/uwdata/datalib/wiki/Import#dl_topojson) is used to parse TopoJSON data. Otherwise, errors will result.
+### Webpack 1
+
+If you are using Webpack 1, you need to enable a JSON-loader. To do so, first `npm install --save json-loader`, then add the loader to your webpack config:
+
+```js
+{
+  module: {
+    loaders: [{
+      test: /\.json$/,
+      loader: 'json-loader'
+    }]
+  }
+}
+```

@@ -1,6 +1,6 @@
 {
   "name": "angular-picture",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "AngularJS directive for the Picturefill responsive image polyfill",
   "main": "src/angular-picture.js",
   "scripts": {

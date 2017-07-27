@@ -1,3 +1,5 @@
+var util = require('../util');
+
 // Matches absolute URLs with optional protocol
 //   https://...    file://...    //...
 var protocol_re = /^([A-Za-z]+:)?\/\//;
@@ -62,6 +64,10 @@ function sanitizeUrl(opt) {
 }
 
 function load(opt, callback) {
+  return load.loader(opt, callback);
+}
+
+function loader(opt, callback) {
   var error = callback || function(e) { throw e; }, url;
 
   try {
@@ -75,16 +81,16 @@ function load(opt, callback) {
     error('Invalid URL: ' + opt.url);
   } else if (load.useXHR) {
     // on client, use xhr
-    return xhr(url, callback);
+    return load.xhr(url, opt, callback);
   } else if (startsWith(url, fileProtocol)) {
     // on server, if url starts with 'file://', strip it and load from file
-    return file(url.slice(fileProtocol.length), callback);
+    return load.file(url.slice(fileProtocol.length), opt, callback);
   } else if (url.indexOf('://') < 0) { // TODO better protocol check?
     // on server, if no protocol assume file
-    return file(url, callback);
+    return load.file(url, opt, callback);
   } else {
     // for regular URLs on server
-    return http(url, callback);
+    return load.http(url, opt, callback);
   }
 }
 
@@ -95,11 +101,11 @@ function xhrHasResponse(request) {
     request.responseText; // '' on error
 }
 
-function xhr(url, callback) {
+function xhr(url, opt, callback) {
   var async = !!callback;
   var request = new XMLHttpRequest();
   // If IE does not support CORS, use XDomainRequest (copied from d3.xhr)
-  if (this.XDomainRequest &&
+  if (typeof XDomainRequest !== 'undefined' &&
       !('withCredentials' in request) &&
       /^(http(s)?:)?\/\//.test(url)) request = new XDomainRequest();
 
@@ -123,6 +129,13 @@ function xhr(url, callback) {
   }
 
   request.open('GET', url, async);
+  /* istanbul ignore else */
+  if (request.setRequestHeader) {
+    var headers = util.extend({}, load.headers, opt.headers);
+    for (var name in headers) {
+      request.setRequestHeader(name, headers[name]);
+    }
+  }
   request.send();
 
   if (!async && xhrHasResponse(request)) {
@@ -130,7 +143,7 @@ function xhr(url, callback) {
   }
 }
 
-function file(filename, callback) {
+function file(filename, opt, callback) {
   var fs = require('fs');
   if (!callback) {
     return fs.readFileSync(filename, 'utf8');
@@ -138,12 +151,13 @@ function file(filename, callback) {
   fs.readFile(filename, callback);
 }
 
-function http(url, callback) {
-  if (!callback) {
-    return require('sync-request')('GET', url).getBody();
-  }
+function http(url, opt, callback) {
+  var headers = util.extend({}, load.headers, opt.headers);
 
-  var options = {url: url, encoding: null, gzip: true};
+  var options = {url: url, encoding: null, gzip: true, headers: headers};
+  if (!callback) {
+    return require('sync-request')('GET', url, options).getBody();
+  }
   require('request')(options, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       callback(null, body);
@@ -159,8 +173,15 @@ function startsWith(string, searchString) {
   return string == null ? false : string.lastIndexOf(searchString, 0) === 0;
 }
 
+// Allow these functions to be overriden by the user of the library
+load.loader = loader;
 load.sanitizeUrl = sanitizeUrl;
+load.xhr = xhr;
+load.file = file;
+load.http = http;
 
+// Default settings
 load.useXHR = (typeof XMLHttpRequest !== 'undefined');
+load.headers = {};
 
 module.exports = load;

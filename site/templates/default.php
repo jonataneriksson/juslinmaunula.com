@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <base href="/">
     <!-- bower:css -->
-    <link rel="stylesheet" href="assets/components/normalize.css/normalize.min.css" />
+    <link rel="stylesheet" href="assets/components/normalize.css/normalize.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="assets/stylesheets.css" />
     </head>
@@ -24,6 +24,7 @@
             <script src="assets/components/es5-shim/es5-sham.min.js"></script>
             <script src="assets/components/es5-shim/es5-shim.min.js"></script>
         <![endif]-->
+        <?php echo js('/assets/components/babel-polyfill/browser-polyfill.js'); ?>
         <?php echo js('/assets/components/angular/angular.min.js'); ?>
         <?php echo js('/assets/components/angular-ui-router/release/angular-ui-router.min.js'); ?>
         <?php echo js('/assets/components/picturefill/dist/picturefill.min.js'); ?>

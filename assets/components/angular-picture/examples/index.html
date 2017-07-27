@@ -14,12 +14,11 @@
       <h1><code>angular-picture</code> demo</h1>
     </header>
     <div class="row">
-      <div class="col-md-4" title="Resize me!">
+      <div class="col-md-4" title="Resize me!" ng-controller="TestController">
         <h2>Media queries</h2>
         <picture picturefill>
-          <!-- Preset media queries -->
-          <source srcset="http://www.webkit.org/demos/srcset/image-4x.png" pf-media="screen-lg"/>
-          <source srcset="http://www.webkit.org/demos/srcset/image-3x.png" pf-media="screen-md"/>
+          <source ng-attr-srcset="{{unexisting_image || 'http://i.imgur.com/RN6rors.png'}}" pf-media="screen-lg"/>
+          <source ng-attr-srcset="{{i3x}}" pf-media="screen-md"/>
           <source srcset="http://www.webkit.org/demos/srcset/image-2x.png" pf-media="screen-sm"/>
           <source srcset="http://www.webkit.org/demos/srcset/image-1x.png" pf-media="screen-xs"/>
 
@@ -49,9 +48,15 @@
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../src/angular-picture.js"></script>
     <script>
-    angular.module('app', [
+    var app = angular.module('app', [
       'ngPicturefill'
     ]);
+    app.controller('TestController', function($scope) {
+      'use strict';
+      $scope.i3x = 'http://www.webkit.org/demos/srcset/image-3x.png';
+      $scope.i2x = 'http://www.webkit.org/demos/srcset/image-2x.png';
+      $scope.i1x = 'http://www.webkit.org/demos/srcset/image-1x.png';
+    });
     </script>
   </body>
 </html>

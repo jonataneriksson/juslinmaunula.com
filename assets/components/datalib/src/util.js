@@ -1,8 +1,4 @@
-var buffer = require('buffer'),
-    time = require('./time'),
-    utc = time.utc;
-
-var u = module.exports = {};
+var u = module.exports;
 
 // utility functions
 
@@ -102,7 +98,7 @@ u.isValid = function(obj) {
   return obj != null && obj === obj;
 };
 
-u.isBuffer = (buffer.Buffer && buffer.Buffer.isBuffer) || u.false;
+u.isBuffer = (typeof Buffer === 'function' && Buffer.isBuffer) || u.false;
 
 // type coercion functions
 
@@ -114,8 +110,10 @@ u.boolean = function(s) {
   return s == null || s === '' ? null : s==='false' ? false : !!s;
 };
 
-u.date = function(s) {
-  return s == null || s === '' ? null : Date.parse(s);
+// parse a date with optional d3.time-format format
+u.date = function(s, format) {
+  var d = format ? format : Date;
+  return s == null || s === '' ? null : d.parse(s);
 };
 
 u.array = function(x) {
@@ -124,15 +122,12 @@ u.array = function(x) {
 
 u.str = function(x) {
   return u.isArray(x) ? '[' + x.map(u.str) + ']'
-    : u.isObject(x) ? JSON.stringify(x)
-    : u.isString(x) ? ('\''+util_escape_str(x)+'\'') : x;
+    : u.isObject(x) || u.isString(x) ?
+      // Output valid JSON and JS source strings.
+      // See http://timelessrepo.com/json-isnt-a-javascript-subset
+      JSON.stringify(x).replace('\u2028','\\u2028').replace('\u2029', '\\u2029')
+    : x;
 };
-
-var escape_str_re = /(^|[^\\])'/g;
-
-function util_escape_str(x) {
-  return x.replace(escape_str_re, '$1\\\'');
-}
 
 // data access functions
 
@@ -147,12 +142,9 @@ u.field = function(f) {
 };
 
 u.accessor = function(f) {
-  var s;
+  /* jshint evil: true */
   return f==null || u.isFunction(f) ? f :
-    u.namedfunc(f, (s = u.field(f)).length > 1 ?
-      function(x) { return s.reduce(function(x,f) { return x[f]; }, x); } :
-      function(x) { return x[f]; }
-    );
+    u.namedfunc(f, Function('x', 'return x[' + u.field(f).map(u.str).join('][') + '];'));
 };
 
 // short-cut for accessor
@@ -186,22 +178,6 @@ u.$in = function(f, values) {
   return function(d) { return !!map[f(d)]; };
 };
 
-u.$year   = u.$func('year', time.year.unit);
-u.$month  = u.$func('month', time.months.unit);
-u.$date   = u.$func('date', time.dates.unit);
-u.$day    = u.$func('day', time.weekdays.unit);
-u.$hour   = u.$func('hour', time.hours.unit);
-u.$minute = u.$func('minute', time.minutes.unit);
-u.$second = u.$func('second', time.seconds.unit);
-
-u.$utcYear   = u.$func('utcYear', utc.year.unit);
-u.$utcMonth  = u.$func('utcMonth', utc.months.unit);
-u.$utcDate   = u.$func('utcDate', utc.dates.unit);
-u.$utcDay    = u.$func('utcDay', utc.weekdays.unit);
-u.$utcHour   = u.$func('utcHour', utc.hours.unit);
-u.$utcMinute = u.$func('utcMinute', utc.minutes.unit);
-u.$utcSecond = u.$func('utcSecond', utc.seconds.unit);
-
 // comparison / sorting functions
 
 u.comparator = function(sort) {
@@ -214,30 +190,23 @@ u.comparator = function(sort) {
     sign.push(s);
     return u.accessor(f);
   });
-  return function(a,b) {
-    var i, n, f, x, y;
+  return function(a, b) {
+    var i, n, f, c;
     for (i=0, n=sort.length; i<n; ++i) {
-      f = sort[i]; x = f(a); y = f(b);
-      if (x < y) return -1 * sign[i];
-      if (x > y) return sign[i];
+      f = sort[i];
+      c = u.cmp(f(a), f(b));
+      if (c) return c * sign[i];
     }
     return 0;
   };
 };
 
 u.cmp = function(a, b) {
-  if (a < b) {
-    return -1;
-  } else if (a > b) {
-    return 1;
-  } else if (a >= b) {
-    return 0;
-  } else if (a === null) {
-    return -1;
-  } else if (b === null) {
-    return 1;
-  }
-  return NaN;
+  return (a < b || a == null) && b != null ? -1 :
+    (a > b || b == null) && a != null ? 1 :
+    ((b = b instanceof Date ? +b : b),
+     (a = a instanceof Date ? +a : a)) !== a && b === b ? -1 :
+    b !== b && a === a ? 1 : 0;
 };
 
 u.numcmp = function(a, b) { return a - b; };
@@ -257,6 +226,19 @@ u.stablesort = function(array, sortBy, keyFn) {
   return array;
 };
 
+// permutes an array using a Knuth shuffle
+u.permute = function(a) {
+  var m = a.length,
+      swap,
+      i;
+
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    swap = a[m];
+    a[m] = a[i];
+    a[i] = swap;
+  }
+};
 
 // string functions
 

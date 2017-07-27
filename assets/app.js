@@ -365,10 +365,10 @@ app.factory('api', function($http, $rootScope, $q){
       //Let's add a universal listener for the url
       api.loading[currentpath] = $q.defer();
       //The actual get.
-      $http.get('api.json?path='+currentpath+'&structure='+(api.loaded.pages ? 1 : 0)).success(function(data) {
-        api.loaded = (!api.loaded.pages) ? data : api.loaded;
+      $http.get('api.json?path='+currentpath+'&structure='+(api.loaded.pages ? 1 : 0)).then(function(response) {
+        api.loaded = (!api.loaded.pages) ? response.data : api.loaded;
         storedpage = getObjectFromChildrenByPath(api.loaded.pages, currentpath);
-        loadedpage = (typeof data.pages !== 'object') ? data.page : getObjectFromChildrenByPath(data.pages, currentpath);
+        loadedpage = (typeof response.data.pages !== 'object') ? response.data.page : getObjectFromChildrenByPath(response.data.pages, currentpath);
         Object.assign(storedpage, loadedpage);
         api.loading[currentpath].resolve(api.loaded);
         api.resolve(api.loaded);

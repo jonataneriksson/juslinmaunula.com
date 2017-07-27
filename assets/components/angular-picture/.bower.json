@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "name": "angular-picture",
   "description": "AngularJS directive for Picturefill 2",
   "keywords": [
@@ -11,18 +11,18 @@
   ],
   "homepage": "https://github.com/rebelliard/angular-picture",
   "main": "src/angular-picture.js",
+  "license": "MIT",
   "dependencies": {
     "picturefill": "^3.0.2",
     "angular": "^1.2.0"
   },
-  "_release": "0.3.0",
+  "_release": "0.3.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.3.0",
-    "commit": "ac88d92636458152d5711661900e2227c3633b84"
+    "tag": "v0.3.1",
+    "commit": "fc6011cab7dc505b18d57ede6bb64d974c1bfb13"
   },
   "_source": "https://github.com/rebelliard/angular-picture.git",
   "_target": "^0.3.0",
-  "_originalSource": "angular-picture",
-  "_direct": true
+  "_originalSource": "angular-picture"
 }

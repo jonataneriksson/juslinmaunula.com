@@ -1,20 +1,12 @@
-var d3_time = require('d3-time'),
+var util = require('./util'),
+    d3_time = require('d3-time'),
     d3_timeF = require('d3-time-format'),
     d3_numberF = require('d3-format'),
     numberF = d3_numberF, // defaults to EN-US
-    timeF = d3_timeF;     // defaults to EN-US
+    timeF = d3_timeF,     // defaults to EN-US
+    tmpDate = new Date(2000, 0, 1),
+    monthFull, monthAbbr, dayFull, dayAbbr;
 
-function numberLocale(l) {
-  var f = d3_numberF.localeFormat(l);
-  if (f == null) throw Error('Unrecognized locale: ' + l);
-  numberF = f;
-}
-
-function timeLocale(l) {
-  var f = d3_timeF.localeFormat(l);
-  if (f == null) throw Error('Unrecognized locale: ' + l);
-  timeF = f;
-}
 
 module.exports = {
   // Update number formatter to use provided locale configuration.
@@ -34,17 +26,48 @@ module.exports = {
 
   // automatic formatting functions
   auto: {
-    number:   numberAutoFormat,
+    number:   autoNumberFormat,
+    linear:   linearNumberFormat,
     time:     function() { return timeAutoFormat(); },
     utc:      function() { return utcAutoFormat(); }
-  }
+  },
+
+  month:      monthFormat,      // format month name from integer code
+  day:        dayFormat,        // format week day name from integer code
+  quarter:    quarterFormat,    // format quarter name from timestamp
+  utcQuarter: utcQuarterFormat  // format quarter name from utc timestamp
 };
+
+// -- Locales ----
+
+// transform 'en-US' style locale string to match d3-format v0.4+ convention
+function localeRef(l) {
+  return l.length > 4 && 'locale' + (
+    l[0].toUpperCase() + l[1].toLowerCase() +
+    l[3].toUpperCase() + l[4].toLowerCase()
+  );
+}
+
+function numberLocale(l) {
+  var f = util.isString(l) ? d3_numberF[localeRef(l)] : d3_numberF.locale(l);
+  if (f == null) throw Error('Unrecognized locale: ' + l);
+  numberF = f;
+}
+
+function timeLocale(l) {
+  var f = util.isString(l) ? d3_timeF[localeRef(l)] : d3_timeF.locale(l);
+  if (f == null) throw Error('Unrecognized locale: ' + l);
+  timeF = f;
+  monthFull = monthAbbr = dayFull = dayAbbr = null;
+}
+
+// -- Number Formatting ----
 
 var e10 = Math.sqrt(50),
     e5 = Math.sqrt(10),
     e2 = Math.sqrt(2);
 
-function intervals(domain, count) {
+function linearRange(domain, count) {
   if (!domain.length) domain = [0];
   if (count == null) count = 10;
 
@@ -70,46 +93,72 @@ function intervals(domain, count) {
   ];
 }
 
-function significantDigits(domain) {
-  return domain.map(function(x) {
-    // determine significant digits based on exponential format
-    var s = x.toExponential(),
-        e = s.indexOf('e'),
-        d = s.indexOf('.');
-    return d < 0 ? 1 : (e-d);
-  }).reduce(function(max, p) {
-    // return the maximum sig digit count
-    return Math.max(max, p);
-  }, 0);
+function trimZero(f, decimal) {
+  return function(x) {
+    var s = f(x),
+        n = s.indexOf(decimal);
+    if (n < 0) return s;
+
+    var idx = rightmostDigit(s, n),
+        end = idx < s.length ? s.slice(idx) : '';
+
+    while (--idx > n) {
+      if (s[idx] !== '0') { ++idx; break; }
+    }
+    return s.slice(0, idx) + end;
+  };
 }
 
-function numberAutoFormat(domain, count, f) {
-  var range = intervals(domain, count);
-  if (f == null) {
-    f = ',.' + d3_numberF.precisionFixed(range[2]) + 'f';
-  } else {
-    switch (f = d3_numberF.formatSpecifier(f), f.type) {
-      case 's': {
-        if (f.precision == null) f.precision = significantDigits(domain);
-        return numberF.format(f);
-      }
-      case '':
-      case 'e':
-      case 'g':
-      case 'p':
-      case 'r': {
-        if (f.precision == null) f.precision = d3_numberF.precisionRound(range[2], Math.max(Math.abs(range[0]), Math.abs(range[1]))) - (f.type === 'e');
-        break;
-      }
-      case 'f':
-      case '%': {
-        if (f.precision == null) f.precision = d3_numberF.precisionFixed(range[2]) - (f.type === '%') * 2;
-        break;
-      }
+function rightmostDigit(s, n) {
+  var i = s.lastIndexOf('e'), c;
+  if (i > 0) return i;
+  for (i=s.length; --i > n;) {
+    c = s.charCodeAt(i);
+    if (c >= 48 && c <= 57) return i+1; // is digit
+  }
+}
+
+function autoNumberFormat(f) {
+  var decimal = numberF.format('.1f')(1)[1]; // get decimal char
+  if (f == null) f = ',';
+  f = d3_numberF.formatSpecifier(f);
+  if (f.precision == null) f.precision = 12;
+  switch (f.type) {
+    case '%': f.precision -= 2; break;
+    case 'e': f.precision -= 1; break;
+  }
+  return trimZero(numberF.format(f), decimal);
+}
+
+function linearNumberFormat(domain, count, f) {
+  var range = linearRange(domain, count);
+
+  if (f == null) f = ',f';
+
+  switch (f = d3_numberF.formatSpecifier(f), f.type) {
+    case 's': {
+      var value = Math.max(Math.abs(range[0]), Math.abs(range[1]));
+      if (f.precision == null) f.precision = d3_numberF.precisionPrefix(range[2], value);
+      return numberF.formatPrefix(f, value);
+    }
+    case '':
+    case 'e':
+    case 'g':
+    case 'p':
+    case 'r': {
+      if (f.precision == null) f.precision = d3_numberF.precisionRound(range[2], Math.max(Math.abs(range[0]), Math.abs(range[1]))) - (f.type === 'e');
+      break;
+    }
+    case 'f':
+    case '%': {
+      if (f.precision == null) f.precision = d3_numberF.precisionFixed(range[2]) - 2 * (f.type === '%');
+      break;
     }
   }
   return numberF.format(f);
 }
+
+// -- Datetime Formatting ----
 
 function timeAutoFormat() {
   var f = timeF.format,
@@ -157,4 +206,26 @@ function utcAutoFormat() {
         : d3_time.utcYear(date) < d ? formatMonth
         : formatYear)(date);
   };
+}
+
+function monthFormat(month, abbreviate) {
+  var f = abbreviate ?
+    (monthAbbr || (monthAbbr = timeF.format('%b'))) :
+    (monthFull || (monthFull = timeF.format('%B')));
+  return (tmpDate.setMonth(month), f(tmpDate));
+}
+
+function dayFormat(day, abbreviate) {
+  var f = abbreviate ?
+    (dayAbbr || (dayAbbr = timeF.format('%a'))) :
+    (dayFull || (dayFull = timeF.format('%A')));
+  return (tmpDate.setMonth(0), tmpDate.setDate(2 + day), f(tmpDate));
+}
+
+function quarterFormat(date) {
+  return Math.floor(date.getMonth() / 3) + 1;
+}
+
+function utcQuarterFormat(date) {
+  return Math.floor(date.getUTCMonth() / 3) + 1;
 }

@@ -31,5 +31,8 @@
     "/assets/components/",
     "test",
     "tests"
-  ]
+  ],
+  "resolutions": {
+    "angular": "1.6.5"
+  }
 }
