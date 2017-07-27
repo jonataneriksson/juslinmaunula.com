@@ -199,7 +199,7 @@
          global $language;
 
          //Get structured fields
-         if(get('path')== $page ? (string)$page->uri() : '/'):
+         if(get('path') == property_exists('$page', 'uri') ? (string)$page->uri() : '/'):
            $pageitem->content = getfields($page);
          endif;
 
