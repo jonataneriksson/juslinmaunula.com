@@ -581,6 +581,7 @@ main.About {
 
 .overlay.active {
   display: block;
+  pointer-events: all;
 }
 
 .overlay.active ~ main {
