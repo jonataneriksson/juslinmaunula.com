@@ -147,7 +147,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
 
     $scope.$on('imgloaded', function(event, args){
       if(queue.current==0){
-        $scope.switchSlide(3000);
+        //$scope.switchSlide(3000);
       }
     });
 
