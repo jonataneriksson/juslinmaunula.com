@@ -301,6 +301,7 @@
        elseif(get('path')):
          $json->page = getpage(site()->pages()->findByURI(get('path')));
        else:
+         //TODO: Cover is not an universal frontpage
          $json->page = getpage(site()->pages()->find('cover'));
        endif;
 
