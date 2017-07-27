@@ -14,5 +14,5 @@ fields:
     type:  textarea
     width: 1/2
   images:
-    label: Images & Videos
+    label: Media Gallery
     type:  images

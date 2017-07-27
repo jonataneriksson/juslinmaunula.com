@@ -132,7 +132,7 @@ footer {
 
 footer nav {
     position: relative;
-    padding: 2rem 10.5rem 6rem;
+    padding: 5rem 10.5rem 6rem;
 }
 
 
@@ -202,9 +202,6 @@ body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.Black
   fill: white !important;
   color: white !important;
 }
-
-
-
 
 
 #Navigation {
@@ -338,6 +335,12 @@ img, video {
     -webkit-column-break-inside: avoid;
           page-break-inside: avoid;
                break-inside: avoid;
+}
+
+article {
+  -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+                 break-inside: avoid;
 }
 
 .slides .hidden {
@@ -508,6 +511,23 @@ main.Cover {
 
 
 /* About */
+
+main.About ~ footer nav {
+  padding: 8rem 10.5rem 6rem;
+}
+
+main.About ~ footer #Shadow {
+    @include linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,1));
+    opacity: 1;
+}
+
+main.About .description {
+  padding-top: 1.25rem;
+}
+
+main.About {
+  margin-bottom: 4rem;
+}
 
 .bio {
   display: block;

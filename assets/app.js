@@ -100,6 +100,17 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Scroller */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+app.run(function ($rootScope) {
+  $rootScope.$on('$stateChangeSuccess', function() {
+     document.body.scrollTop = document.documentElement.scrollTop = 0;
+  });
+});
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* !Footer controller */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -170,7 +181,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 app.controller('about-controller', function ($scope, $rootScope, api, $location) {
-    $scope.mainClass = 'About two-columns';
+    $scope.wrapperClass = 'About';
     $rootScope.bodyClass = 'White';
     $rootScope.overlayClass = 'hidden';
     api.wait($location.path()).then(function(data){

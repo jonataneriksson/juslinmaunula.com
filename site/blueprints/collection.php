@@ -6,5 +6,5 @@ fields:
     label: Title
     type:  text
   images:
-    label: Images & Videos
+    label: Images
     type:  images
