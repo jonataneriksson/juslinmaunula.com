@@ -198,8 +198,10 @@
          $pageitem = (object) '';
          global $language;
 
+         $pageitem->uri = (string)$page->uri();
+
          //Get structured fields
-         if(get('path') == is_object($page) ? (string)$page->uri() : ''):
+         if(get('path') == (string)$pageitem->uri):
            $pageitem->content = getfields($page);
          endif;
 
