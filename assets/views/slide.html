@@ -9,7 +9,7 @@
             <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
             <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h700}}" pf-media="(min-height: 400px)"/>
             <!--[if IE 9]></video><![endif]-->
-            <img ng-class="class"/>
+            <img ng-if="file.load" ng-src="{{file.thumbnails.h700}}" ng-class="class"/>
         </picture>
       </div>
     </td>
@@ -21,7 +21,7 @@
             <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
             <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h700}}" pf-media="(min-height: 400px)"/>
             <!--[if IE 9]></video><![endif]-->
-            <img ng-class="class"/>
+            <img ng-if="file.load" ng-src="{{file.thumbnails.h700}}" ng-class="class"/>
         </picture>
       </div>
     </td>
