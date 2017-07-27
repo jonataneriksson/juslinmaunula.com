@@ -332,14 +332,11 @@ img, video {
 
 
 .two-columns {
-    @include columns(2);
+    @include columns(3);
     @include column-gap(3rem);
-    -webkit-column-break-inside: avoid;
-          page-break-inside: avoid;
-               break-inside: avoid;
 }
 
-article {
+.two-columns p {
   -webkit-column-break-inside: avoid;
             page-break-inside: avoid;
                  break-inside: avoid;
@@ -527,10 +524,6 @@ main.About ~ footer #Shadow {
     opacity: 1;
 }
 
-main.About .description {
-  padding-top: 1.25rem;
-}
-
 main.About {
   margin-bottom: 4rem;
 }
@@ -543,14 +536,17 @@ main.About {
 }
 
 .description {
-    font: normal 21px/28px 'Maison Neue Light', Verdana, Arial, sans-serif;
+    font: normal 1rem/1.4em 'Maison Neue Light', Verdana, Arial, sans-serif;
     padding-right: 2em;
     margin-bottom: 2em;
 }
 
 .contact {
-    font: normal 21px/28px 'Maison Neue Light', Verdana, Arial, sans-serif;
+  font: normal 1rem/1.4em 'Maison Neue Light', Verdana, Arial, sans-serif;
     padding-right: 2em;
+    -webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+               break-inside: avoid;
 }
 
 .collection.sidemenu .active::before {
