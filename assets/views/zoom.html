@@ -9,7 +9,7 @@
       <source ng-attr-srcset="{{overlayFiles[overlayCurrent].thumbnails.h1400}}" pf-media="retina"/>
       <source ng-attr-srcset="{{overlayFiles[overlayCurrent].thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
       <!--[if IE 9]></video><![endif]-->
-      <img ng-class="class"/>
+      <img ng-src="{{file.load ? file.thumbnails.h350 : ''}}" ng-class="class"/>
   </picture>
 </div>
 

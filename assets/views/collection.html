@@ -14,7 +14,7 @@
               <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1000}}" pf-media="(min-height: 800px)"/>
               <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h350}}" pf-media="(min-height: 400px)"/>
               <!--[if IE 9]></video><![endif]-->
-              <img ng-src="{{file.thumbnails.h350}}" ng-class="class"/>
+              <img ng-src="{{file.load ? file.thumbnails.h350 : ''}}" ng-class="class"/>
           </picture>
       </a>
     </ng-switch>
