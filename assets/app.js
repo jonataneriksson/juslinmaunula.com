@@ -426,7 +426,7 @@ app.factory('api', function($http, $rootScope, $q){
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 var layout = {};
-app.filter('uniheight', function($filter) { return function(array, margin, treshold) {
+app.filter('uniheight', function($filter) { return function(array, margin, treshold, stretchtreshold = 0.5) {
   if(array){
     //Initialize
     layout.treshold = (window.innerWidth > 720) ? treshold : 0;
@@ -461,8 +461,8 @@ app.filter('uniheight', function($filter) { return function(array, margin, tresh
       Object.keys(layout.rows[row].items).map(function(key) {
         if(layout.rows[row-1]){ //If previous row exists.
           var delta = (layout.rows[row-1].rowheight / layout.rows[row].rowheight);
-          array[key].rowheight = (delta > 0.5) ? layout.rows[row].rowheight: layout.rows[row-1].rowheight;
-          array[key].relativewidth = (delta > 0.5) ? layout.rows[row].rowheight * array[key].ratio : layout.rows[row-1].rowheight * array[key].ratio;
+          array[key].rowheight = (delta > stretchtreshold) ? layout.rows[row].rowheight: layout.rows[row-1].rowheight;
+          array[key].relativewidth = (delta > stretchtreshold) ? layout.rows[row].rowheight * array[key].ratio : layout.rows[row-1].rowheight * array[key].ratio;
         } else {
           array[key].rowheight = layout.rows[row].rowheight;
           array[key].relativewidth = layout.rows[row].rowheight * array[key].ratio;
