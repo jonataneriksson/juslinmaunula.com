@@ -298,8 +298,10 @@
        if(!get('structure')):
          $json->site = getsite();
          $json->pages = getpages(site()->pages());
-       else:
+       elseif(get('path')):
          $json->page = getpage(site()->pages()->findByURI(get('path')));
+       else:
+         $json->page = getpage(site()->pages()->find('cover'));
        endif;
 
        $after = microtime(true);
