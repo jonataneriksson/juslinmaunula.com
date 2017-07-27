@@ -118,7 +118,7 @@ app.controller('footer-controller', function (api, $rootScope, $scope, $state, $
   api.load($location.path()).then(function(data){
     $scope.data = data;
   });
-  $scope.open = function(){
+  $rootScope.open = function(){
     $scope.menuClass = 'mobile';
   }
 });
@@ -147,7 +147,7 @@ app.controller('cover-controller', function ($scope, $location, $timeout, $rootS
 
     $scope.$on('imgloaded', function(event, args){
       if(queue.current==0){
-        //$scope.switchSlide(3000);
+        $scope.switchSlide(3000);
       }
     });
 
@@ -429,7 +429,7 @@ var layout = {};
 app.filter('uniheight', function($filter) { return function(array, margin, treshold) {
   if(array){
     //Initialize
-    layout.treshold = (window.innerWidth > 600) ? treshold : 1;
+    layout.treshold = (window.innerWidth > 720) ? treshold : 0;
     layout.maxitems = 4;
     layout.ratiosadded = 0;
     layout.rows = {};

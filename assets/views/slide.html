@@ -1,8 +1,8 @@
 <table class="slide">
   <tbody>
   <tr>
-    <td class="left half">
-      <div class="item wrapper" data-ng-repeat="file in slide.leftside.yaml | imagesfrom : page">
+    <td class="left half" ng-class="{'empty' : (slide.leftside.yaml.length < 1) }">
+      <div  class="item wrapper" data-ng-repeat="file in slide.leftside.yaml | imagesfrom : page">
         <picture picturefill>
             <!--[if IE 9]><video style="display: none;"><![endif]-->
             <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>
@@ -13,8 +13,8 @@
         </picture>
       </div>
     </td>
-    <td class="right half">
-      <div class="item wrapper" data-ng-repeat="file in slide.rightside.yaml | imagesfrom : page">
+    <td class="right half" ng-class="{'empty' : (slide.rightside.yaml.length < 1) }">
+      <div  class="item wrapper" data-ng-repeat="file in slide.rightside.yaml | imagesfrom : page">
         <picture picturefill>
             <!--[if IE 9]><video style="display: none;"><![endif]-->
             <source ng-if="file.load" ng-attr-srcset="{{file.thumbnails.h1400}}" pf-media="retina"/>

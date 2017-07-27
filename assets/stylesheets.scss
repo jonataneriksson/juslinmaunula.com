@@ -842,23 +842,30 @@ body.Black .mobile.menu svg {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 @media only screen and (max-width : 960px) {
-    main {margin-top: 4rem; margin-bottom: 4rem; }
+    #Logo {width: 100vw; bottom: 1.2rem;}
+    #Logo .left {width: 85vw; left: 0; right: 0; margin: auto;}
+    #Logo .left svg {width: 85vw;}
+    #Logo .right {display: none;}
+    #Logo svg path, #Logo svg rect {fill: white !important;}
+    .Cover ~ .mobile.menu {fill: white !important;}
+    main {padding-top: 4rem; padding-bottom: 4rem; }
     footer {padding: 0; margin: 0;}
     footer nav {padding: 0;}
     .overlay .item.wrapper {left: 2rem; right: 2rem;}
-    .mobile.menu {@include transform(scale(0.99)); pointer-events: all; display: block; position: fixed; top: 2rem; left: 2rem; width: 2rem; z-index: 1;}
+    .mobile.menu {@include transform(scale(1)); pointer-events: all; display: block; position: fixed; top: 1.5rem; left: 1.5rem; width: 2rem; z-index: 0;}
     nav:not(.mobile) #Navigation {display: none;}
     nav.mobile #Logo rect, nav.mobile #Logo path {fill: white !important;}
     nav.mobile {color: white !important; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: black; z-index: 99;}
     aside {width: 92% !important; margin: 2%; position: relative !important; float: none !important; top: 0 !important; margin-bottom: 2rem;}
     body {font: normal 16px/21px 'Maison Neue Light', Helvetica, Verdana, Arial, sans-serif;}
     .gallery.composition {width: 100% !important;}
-    #Logo {margin-right: auto; margin-left: auto; @include transform(scale(0.65)); @include transform-origin(center bottom);}
-    body footer #Navigation {color: white !important;  @include columns(1); bottom: auto; top: 0; margin: 3rem; font-size: 1.5rem; line-height: 1.33em;}
+    main.About ~ footer nav {padding: 0;}
+    body footer #Navigation {color: white !important;  @include columns(1); bottom: auto; top: 0; margin: 4rem 1.5rem; font-size: 1.5rem; line-height: 1.33em;}
     .portrait {width: 100% !important;}
     .two-columns { @include columns(1);}
     .cover.composition .large a, .cover.composition .small a {padding: 12%; width: 100%;}
-    #Shadow {display: none;}
     .column {width: 100%; float: none;}
     body.Black #Logo #Graphic {fill: #000;}
+    .slide .half {width: 100%;}
+    td.empty {display: none;}
 }
