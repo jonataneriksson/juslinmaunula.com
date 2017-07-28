@@ -426,7 +426,8 @@ app.factory('api', function($http, $rootScope, $q){
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 var layout = {};
-app.filter('uniheight', function($filter) { return function(array, margin, treshold, stretchtreshold = 0.5) {
+app.filter('uniheight', function($filter) { return function(array, margin, treshold, stretchtreshold) {
+  stretchtreshold = (typeof stretchtreshold !== 'undefined') ?  stretchtreshold : 0.5;
   if(array){
     //Initialize
     layout.treshold = (window.innerWidth > 720) ? treshold : 0;
