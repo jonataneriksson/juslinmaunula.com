@@ -2,7 +2,7 @@
 <nav ng-class="menuClass">
   <ol id="Navigation" ng-class="currentSlide.leftsidecolor.value">
   	<li data-ng-repeat="page in data.pages | visible" ng-switch="page.strings.link || 'nolink'">
-  	   <a ng-switch-when="nolink" href="{{page.url}}">{{page.strings.title}}</a>
+  	   <a ng-click="close()" ng-switch-when="nolink" href="{{page.url}}">{{page.strings.title}}</a>
   	   <a ng-switch-default target="_empty" href="{{page.strings.link}}">{{page.strings.title}}</a>
       </li>
   </ol>

@@ -118,8 +118,13 @@ app.controller('footer-controller', function (api, $rootScope, $scope, $state, $
   api.load($location.path()).then(function(data){
     $scope.data = data;
   });
+
   $rootScope.open = function(){
     $scope.menuClass = 'mobile';
+  }
+
+  $rootScope.close = function(){
+    $scope.menuClass = '';
   }
 });
 
