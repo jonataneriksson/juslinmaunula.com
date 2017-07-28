@@ -1,16 +1,56 @@
 <!DOCTYPE html>
-<html data-ng-app="juslinmaunulacom">
-    <head>
-    <title>Juslin Maunula</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <base href="/">
-    <!-- bower:css -->
-    <link rel="stylesheet" href="assets/components/normalize.css/normalize.css" />
-    <!-- endbower -->
-    <link rel="stylesheet" href="assets/stylesheets.css" />
-    </head>
+<html data-ng-app="juslinmaunulacom" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+	<title><?php echo $site->title()->html(); ?></title>
+	<meta charset="utf-8" />
+	<meta name="fragment" content="!" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="description" content="<?php echo $site->description()->html() ?>">
+	<meta name="keywords" content="<?php echo $site->keywords()->html() ?>">
+	<base href="/">
+	<?php echo css("assets/stylesheets.css"); ?>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ! -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<meta property="og:title" content="<?php echo $site->title()->value(); ?>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="<?php echo $site->description()->html(); ?>" />
+	<meta property="og:url" content="<?php echo $site->url(); ?>" />
+	<meta property="og:image" content="<?php echo $site->url(); ?>/content/<?php echo $site->avatar(); ?>" />
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- !Icons -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!--<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/assets/icons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/assets/icons/favicon-194x194.png" sizes="194x194">
+	<link rel="icon" type="image/png" href="/assets/icons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/assets/icons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/assets/icons/manifest.json">
+	<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#4e008b">
+	<meta name="msapplication-TileImage" content="/assets/icons/mstile-144x144.png">
+	<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+	<meta name="theme-color" content="#4e008b">-->
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ! -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</head>
     <body data-ng-class="bodyClass">
 
         <section class="overlay" data-ui-view="overlay" data-ng-class="overlayClass"></section>

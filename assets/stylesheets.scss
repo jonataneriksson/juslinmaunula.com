@@ -1,4 +1,5 @@
 @import "components/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "components/normalize.css/normalize.css";
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
@@ -270,6 +271,7 @@ main.Cover {
 
 main.Cover .half {
   position: relative;
+  background-color: red;
 }
 
 main.Cover .item.wrapper {
