@@ -1,6 +1,7 @@
 title: Press Template
 pages: false
 files: true
+preview: parent
 fields:
   title:
     label: Title
