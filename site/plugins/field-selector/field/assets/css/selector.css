@@ -1,5 +1,9 @@
 .selector {}
 
+.item {
+  width: 100%;
+}
+
     .selector .item-image {
         border-right: 1px solid #efefef;
     }
