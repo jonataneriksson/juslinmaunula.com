@@ -9,6 +9,32 @@ fields:
     label: Slides
     type: builder
     fieldsets:
+      videoslide:
+        label: Video Slide
+        fields:
+          video:
+            label: Left Side
+            type: selector
+            mode: single
+            width: 1/1
+            types:
+              - video
+          leftsidecolor:
+            label: Left Side Color
+            type: radio
+            default: black
+            options:
+              white: White
+              black: Black
+            width: 1/2
+          rightsidecolor:
+            label: Right Side Color
+            type: radio
+            default: black
+            options:
+              white: White
+              black: Black
+            width: 1/2
       slide:
         snippet: slide
         label: Slide

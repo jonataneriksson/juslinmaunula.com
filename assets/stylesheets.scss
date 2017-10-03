@@ -361,6 +361,29 @@ img, video {
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+.video.slide  {
+  position: relative;
+  background-color: black;
+}
+
+video.fullscreen {
+  position: absolute;
+  left: -200%;
+  right: -200%;
+  top: -200%;
+  bottom: -200%;
+  margin: auto;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ! */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 /* Archive */
 
 .collection, .gallery, .items {

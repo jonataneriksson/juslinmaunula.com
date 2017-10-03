@@ -569,6 +569,16 @@ app.filter('first', function() { return function(input) {
 }});
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* !Filter: Trust a URL */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+app.filter('trusted', ['$sce', function ($sce) {
+  return function(url) {
+    return $sce.trustAsResourceUrl(url);
+  };
+}]);
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 app.filter('keylength', function(){ return function(input){

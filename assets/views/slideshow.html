@@ -1,5 +1,10 @@
 <ul class="slides">
   <li ng-repeat="slide in page.content.slides" ng-class="($index == current) ? 'current' : 'hidden'">
-    <div class="slide" slide></div>
+    <div ng-if="slide._fieldset.value == 'slide'" class="slide" slide></div>
+    <div ng-if="slide._fieldset.value == 'videoslide'" class="video slide">
+      <video class="fullscreen" autoplay="autoplay" loop muted preload="auto">
+        <source ng-src="{{(slide.video.yaml | imagesfrom : page)[0].src | trusted}}" type="video/mp4"/>
+      </video>
+    </div>
   </li>
 </ul>
