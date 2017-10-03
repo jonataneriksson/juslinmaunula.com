@@ -12,3 +12,4 @@ panel/assets/scss/*
 assets/components/bourbon/app/assets/stylesheets/*
 node_modules/*
 site/accounts/*
+site/config/config.php
