@@ -31,4 +31,5 @@ of the system, please check out http://getkirby.com/docs/advanced/options
 
 c::set('home', 'cover');
 
-c::set('debug', true);
+c::set('cdn.content', 'http://juslinmaunulacom-6592.kxcdn.com/content');
+c::set('cdn.thumbs', 'http://juslinmaunulacom-6592.kxcdn.com/thumbs');
