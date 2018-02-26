@@ -1,5 +1,7 @@
 @import "components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "components/normalize.css/normalize.css";
+@import "components/font-awesome/web-fonts-with-css/css/fontawesome.css";
+@import "components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css";
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
@@ -96,11 +98,18 @@ ol li {
     text-indent: -1.5em;
 }
 
-ol li:before {
+ol li:not(.nonumber):before {
     content: counter(item) "  ";
     counter-increment: item;
     width: 1.5em;
     display: inline-block;
+    text-indent: 0em;
+}
+
+ol li.nonumber i {
+    font-size: 0.85em;
+    width: 1.4rem;
+    display: inline-block !important;
     text-indent: 0em;
 }
 
@@ -230,6 +239,53 @@ body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.Black
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#Newsletter {
+  position: fixed;
+  padding: 3.5rem 4rem;
+  height: 100vh;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  background-color: black;
+  color: white;
+  z-index: 999;
+}
+
+#Newsletter button {
+  display: inline;
+  width: inherit;
+  border: none;
+  outline: none;
+}
+
+#Newsletter form {
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  position: absolute;
+  bottom: 4rem;
+  width: 40vw;
+}
+
+#Newsletter label {
+  max-width: 22em;
+  display: block;
+}
+
+
+#Newsletter input {
+  font-family: "Maison Neue Light";
+  font-style: normal;
+  font-weight: light;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+}
+
+#Newsletter input[type=email] {
+  color: white;
+  border-bottom: 1px solid white;
 }
 
 .Black footer #Shadow {

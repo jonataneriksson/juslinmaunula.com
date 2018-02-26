@@ -78,7 +78,9 @@
         <?php echo js('/assets/components/angular-ui-router/release/angular-ui-router.min.js'); ?>
         <?php echo js('/assets/components/picturefill/dist/picturefill.min.js'); ?>
         <?php echo js('/assets/components/angular-picture/src/angular-picture.js'); ?>
-        <?php echo js('/assets/components/angular-sanitize/angular-sanitize.min.js'); ?>
+				<?php echo js('/assets/components/angular-sanitize/angular-sanitize.js'); ?>
+				<?php echo js('/assets/components/angular-resource/angular-resource.min.js'); ?>
+				<?php echo js('/assets/components/angular-mailchimp/angular-mailchimp.js'); ?>
         <?php echo js('/assets/components/angular-columnify/angular-columnify.js'); ?>
         <!-- endbower -->
         <script src="assets/app.js"></script>

@@ -1,10 +1,52 @@
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ! -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div ng-if="shownewsletter" id="Newsletter">
+  <a ng-click="shownewsletter = !shownewsletter">×&emsp;CLOSE</a>
+
+  <form name="MailchimpSubscriptionForm" ng-controller="MailchimpSubscriptionCtrl">
+
+    <label>Sign up to our newsletter to follow our latest collections and projects.</label>
+
+    <div ng-hide="mailchimp.result === 'success'">
+      <input class="hidden" type="hidden" ng-model="mailchimp.username" ng-init="mailchimp.username='juslinmaunula'">
+      <input class="hidden" type="hidden" ng-model="mailchimp.dc" ng-init="mailchimp.dc='us17'">
+      <input class="hidden" type="hidden" ng-model="mailchimp.u" ng-init="mailchimp.u='a51b555069e1d06dc421010af'">
+      <input class="hidden" type="hidden" ng-model="mailchimp.id" ng-init="mailchimp.id='df68b05626'">
+      <input type="email" name="email" ng-model="mailchimp.EMAIL" placeholder="Email address" required>
+      <button ng-disabled="MailchimpSubscriptionForm.$invalid" ng-click="addSubscription(mailchimp)">→</button>
+    </div>
+
+    <!-- Show error message if MailChimp unsuccessfully added the email to the list. -->
+    <div ng-show="mailchimp.result === 'error'" ng-cloak>
+      <span ng-bind-html="mailchimp.errorMessage"></span>
+    </div>
+
+    <!-- Show success message if MailChimp returned successfully. -->
+    <div ng-show="mailchimp.result === 'success'" ng-cloak>
+      <span ng-bind-html="mailchimp.successMessage"></span>
+    </div>
+  </form>
+</div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ! -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div id="Shadow"><!-- Hello darkness my old friend --></div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ! -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <nav ng-class="menuClass">
   <ol id="Navigation" ng-class="currentSlide.leftsidecolor.value">
   	<li data-ng-repeat="page in data.pages | visible" ng-switch="page.strings.link || 'nolink'">
   	   <a ng-click="close()" ng-switch-when="nolink" href="{{page.url}}">{{page.strings.title}}</a>
   	   <a ng-switch-default target="_empty" href="{{page.strings.link}}">{{page.strings.title}}</a>
-      </li>
+    </li>
+    <li class="instagram nonumber">
+      <a href="https://www.instagram.com/juslinmaunula/" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i>Instagram</a>
+    </li>
+    <li class="newsletter nonumber">
+      <a ng-click="shownewsletter = !shownewsletter"><i class="far fa-envelope" aria-hidden="true"></i>Newsletter</a>
+    </li>
   </ol>
   <a id="Logo" href="/">
 

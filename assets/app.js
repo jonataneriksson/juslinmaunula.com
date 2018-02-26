@@ -2,13 +2,13 @@
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize', 'ngPicturefill']); //, 'ngAnimate'
+var app = angular.module('juslinmaunulacom', ['ui.router', 'ngSanitize', 'ngResource', 'ngPicturefill', 'mailchimp']); //, 'ngAnimate'
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ! */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $locationProvider, $urlRouterProvider, $sceDelegateProvider) {
 
     /* !Fix the trailing slash */
     $urlRouterProvider.rule(function($injector, $location) {
@@ -17,6 +17,15 @@ app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
             return path.substr(0, path.length - 1);
         }
     });
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+      // Allow same origin resource loads.
+      'self',
+      // Allow loading from our assets domain.  Notice the difference between * and **.
+      '//juslinmaunula.us17.list-manage.com/subscribe/post-json',
+      'http://juslinmaunula.us17.list-manage.com/subscribe/post-json',
+      'https://juslinmaunula.us17.list-manage.com/subscribe/post-json'
+    ]);
 
     /* !Clean permalinks */
     $locationProvider.html5Mode(true);
