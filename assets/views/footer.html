@@ -1,8 +1,7 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <!-- ! -->
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<div ng-if="shownewsletter" id="Newsletter">
-  <a ng-click="shownewsletter = !shownewsletter">×&emsp;CLOSE</a>
+<div id="Newsletter" ng-show="shownewsletter">
 
   <form name="MailchimpSubscriptionForm" ng-controller="MailchimpSubscriptionCtrl">
 
@@ -32,6 +31,10 @@
 <!-- ! -->
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div id="Shadow"><!-- Hello darkness my old friend --></div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ! -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<a id="Close-Newsletter" ng-show="shownewsletter" ng-click="shownewsletter = !shownewsletter">×&emsp;CLOSE</a>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <!-- ! -->
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

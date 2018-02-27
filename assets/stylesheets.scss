@@ -108,7 +108,7 @@ ol li:not(.nonumber):before {
 
 ol li.nonumber i {
     font-size: 0.85em;
-    width: 1.4rem;
+    width: 2.1em;
     display: inline-block !important;
     text-indent: 0em;
 }
@@ -241,8 +241,24 @@ body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.Black
     right: 0;
 }
 
+#Close-Newsletter {
+  @include user-select(none);
+  pointer-events: all;
+  position: absolute;
+  padding: 3.5rem 4rem;
+  left: 50%;
+  bottom: 90vh;
+  height: 10vh;
+  right: 0;
+  background-color: black;
+  color: white;
+  z-index: 1001;
+}
+
 #Newsletter {
-  position: fixed;
+  @include user-select(none);
+  pointer-events: all;
+  position: absolute;
   padding: 3.5rem 4rem;
   height: 100vh;
   bottom: 0;
@@ -250,7 +266,11 @@ body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.Black
   right: 0;
   background-color: black;
   color: white;
-  z-index: 999;
+  z-index: 1000;
+}
+
+#Newsletter.hidden {
+  display: none;
 }
 
 #Newsletter button {
@@ -269,7 +289,7 @@ body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.Black
 }
 
 #Newsletter label {
-  max-width: 22em;
+  max-width: 18em;
   display: block;
 }
 
@@ -281,6 +301,9 @@ body.Black main:not(.Cover) ~ footer nav:not(.mobile) #Logo svg path, body.Black
   display: inline-block;
   background-color: transparent;
   border: none;
+  outline-style:none;
+  box-shadow:none;
+  border-color:transparent;
 }
 
 #Newsletter input[type=email] {
@@ -943,4 +966,6 @@ body.Black .mobile.menu svg {
     body.Black #Logo #Graphic {fill: #000;}
     .slide .half {width: 100%;}
     td.empty {display: none;}
+    #Newsletter, #Close-Newsletter { left: 0;}
+    #Newsletter form {width: 80vw;}
 }
